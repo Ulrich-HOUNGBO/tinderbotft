@@ -3,7 +3,6 @@
 import { PasswordInput } from "@/components/password-input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginSchema } from "@/config/validations/login-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -12,6 +11,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
+import { loginSchema } from "@/lib/validations/login-schema";
 
 type Credentials = z.infer<typeof loginSchema>;
 
@@ -24,7 +24,8 @@ export default function LoginForm() {
 		defaultValues: {
 			email: "",
 			password: "",
-		},
+    },
+    mode: "onChange",
 	});
 
 	const onSubmit = async (data: Credentials) => {
@@ -32,10 +33,10 @@ export default function LoginForm() {
 	};
 
 	return (
-		<div className="">
+		<div>
 			<Form {...form}>
-				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-6">
-					<div className="space-y-2">
+				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-7">
+					<div className="space-y-3">
 						{/* Email field */}
 						<FormField
 							control={form.control}

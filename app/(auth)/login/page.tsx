@@ -16,7 +16,7 @@ export default function LoginPage() {
 			<LoginForm />
 			<div className="flex items-center justify-center mt-3 space-x-2 text-sm">
 				<p className="text-gray-700">D&apos;ont have an account?</p>
-				<Link href="/auth/register" className="text-primary underline font-medium">
+				<Link href="/register" className="text-primary underline font-medium">
 					Create an account
 				</Link>
 			</div>

@@ -6,6 +6,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 		<div className="grid lg:grid-cols-2 h-screen">
 			<div className="container relative flex flex-col justify-center max-w-md mx-5 mb-10 md:mb-0 md:max-w-xl md:mx-auto">
 				{children}
+				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-[10px] md:text-xs text-gray-400 ">
+					© 2024 MarkSafeTo. All rights reserved.
+				</p>
 			</div>
 			<div className="hidden lg:block overflow-hidden">
 				<Image src="/images/montgolfiere.jpg" alt="auth-layout" height={2400} width={3600} className="h-full w-full" />

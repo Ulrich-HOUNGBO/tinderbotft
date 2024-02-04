@@ -25,7 +25,7 @@ export default function NavBar({ items }: NavBarProps) {
 	return (
 		<div className="flex items-center justify-between py-3">
 			<Link aria-label={siteConfig.name} href="/" className="">
-				<h3>{siteConfig.name}</h3>
+				<h3 className="font-semibold text-xl text-gray-800">{siteConfig.name}</h3>
 			</Link>
 			<div className="flex items-center">
 				<NavigationMenu className="lg:flex">
@@ -37,7 +37,7 @@ export default function NavBar({ items }: NavBarProps) {
 								<NavigationMenuItem key={item.title}>
 									<Link aria-label={item.title} href={item.href} legacyBehavior passHref>
 										<NavigationMenuLink
-											className={cn(navigationMenuTriggerStyle(), "h-auto", isActive && "text-primary hover:text-primary")}
+											className={cn(navigationMenuTriggerStyle(), "h-auto", isActive && "font-medium text-primary hover:text-primary")}
 										>
 											{item.title}
 										</NavigationMenuLink>
