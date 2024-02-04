@@ -23,7 +23,7 @@ export default function NavBar({ items }: NavBarProps) {
 	const pathname = usePathname();
 
 	return (
-		<div className="flex items-center justify-between py-3">
+		<div className="flex items-center justify-between py-7">
 			<Link aria-label={siteConfig.name} href="/">
 				<h3 className="font-semibold text-xl text-gray-800">{siteConfig.name}</h3>
 			</Link>
