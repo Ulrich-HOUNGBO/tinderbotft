@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit as FontSans } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-	title: "MarkSafeTo",
-	description: "Envoyer des SMS professionnels simplement, rapidement et avec plus de fiabilité",
+	title: {
+		default: siteConfig.name,
+		template: `%s - ${siteConfig.name}`,
+	},
+	description: siteConfig.description,
 };
 
 export default function RootLayout({
@@ -17,7 +22,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head />
-			<body className={inter.className}>
+			<body className={cn("bg-background font-sans antialiased", fontSans.variable)}>
 				<main>{children}</main>
 			</body>
 		</html>
