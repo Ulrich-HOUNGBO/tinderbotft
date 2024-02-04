@@ -35,8 +35,8 @@ export default function LoginForm() {
 	return (
 		<div>
 			<Form {...form}>
-				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-7">
-					<div className="space-y-3">
+				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-3 md:gap-y-7">
+					<div className="space-y-2 md:space-y-3">
 						{/* Email field */}
 						<FormField
 							control={form.control}
@@ -67,7 +67,7 @@ export default function LoginForm() {
 						/>
 					</div>
 
-					<Link href={"/forgot-password"} className="text-primary underline text-sm font-medium text-end">
+					<Link href={"/forgot-password"} className="text-primary underline text-sm text-end">
 						Forgot password ?
 					</Link>
 

@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
@@ -9,7 +9,12 @@ const config = {
 	theme: {
 		container: {
 			center: true,
-			padding: "2rem",
+			padding: {
+				DEFAULT: "2rem",
+				sm: "2rem",
+				lg: "3rem",
+				xl: "4rem",
+			},
 			screens: {
 				"2xl": "1400px",
 			},
@@ -77,4 +82,4 @@ const config = {
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 
-export default config
+export default config;

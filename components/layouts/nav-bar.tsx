@@ -27,7 +27,7 @@ export default function NavBar({ items }: NavBarProps) {
 			<Link aria-label={siteConfig.name} href="/" className="">
 				<h3 className="font-semibold text-xl text-gray-800">{siteConfig.name}</h3>
 			</Link>
-			<div className="flex items-center">
+			<div className="hidden md:flex items-center">
 				<NavigationMenu className="lg:flex">
 					<NavigationMenuList>
 						{items.map((item) => {
@@ -48,7 +48,7 @@ export default function NavBar({ items }: NavBarProps) {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			<div className="flex items-center space-x-3 md:space-x-4">
+			<div className="hidden md:flex items-center space-x-3 md:space-x-4">
 				<Button asChild>
 					<Link href="/login">Login</Link>
 				</Button>

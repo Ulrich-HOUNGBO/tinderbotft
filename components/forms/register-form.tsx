@@ -40,8 +40,8 @@ export default function RegisterForm() {
 	return (
 		<div>
 			<Form {...form}>
-				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-7">
-					<div className="space-y-3">
+				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-3 md:gap-y-7">
+					<div className="space-y-2 md:space-y-3">
 						{/* Email field */}
 						<FormField
 							control={form.control}
@@ -128,7 +128,7 @@ export default function RegisterForm() {
 										</FormControl>
 										<label className="text-gray-700 text-sm peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											I agree
-											<Link href="/terms" className="font-medium text-primary underline pl-1">
+											<Link href="/terms" className="text-primary underline pl-1">
 												with terms and conditions.
 											</Link>
 										</label>

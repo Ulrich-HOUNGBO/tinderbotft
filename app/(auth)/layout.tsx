@@ -4,7 +4,7 @@ import React from "react";
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="grid lg:grid-cols-2 h-screen">
-			<div className="container relative flex flex-col justify-center max-w-md mx-5 mb-10 md:mb-0 md:max-w-xl md:mx-auto">
+			<div className="container relative flex flex-col justify-center max-w-md md:max-w-xl md:mx-auto">
 				{children}
 				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-[10px] md:text-xs text-gray-400 ">
 					© 2024 MarkSafeTo. All rights reserved.
