@@ -19,3 +19,11 @@ export interface NavItemWithOptionalChildren extends NavItem {
 export type MainNavItem = NavItemWithOptionalChildren;
 
 export type SidebarNavItem = NavItemWithChildren;
+
+export interface UserInterface {
+	id: string;
+	username: string;
+	email: string;
+	phoneNumber: string;
+	creditsNumber: number;
+}

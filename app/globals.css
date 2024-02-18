@@ -65,4 +65,9 @@
 	input[type="number"] {
 		-moz-appearance: textfield;
 	}
+
+	.loader {
+		@apply block mx-auto w-40 md:w-72 h-1 md:h-[6px] rounded-2xl bg-[rgba(81,117,235,0.25)] relative before:absolute before:top-0 
+    before:left-0 before:w-0 before:h-full before:rounded-2xl before:bg-primary before:animate-moving;
+	}
 }
