@@ -11,7 +11,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
-import { loginSchema } from "@/lib/validations/login-schema";
+import { loginSchema } from "@/lib/validations/auth";
 
 type Credentials = z.infer<typeof loginSchema>;
 

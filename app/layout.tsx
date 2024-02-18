@@ -6,6 +6,8 @@ import { siteConfig } from "@/config/site";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { Toaster } from "@/components/ui/toaster";
+import AuthProvider from "@/lib/providers/auth-provider";
+import QueryProvider from "@/lib/providers/query-provider";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -26,11 +28,15 @@ export default function RootLayout({
 		<html lang="en">
 			<head />
 			<body className={cn("bg-background font-sans antialiased", fontSans.variable)}>
-				{/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
-				{children}
-				<TailwindIndicator />
-				<Toaster />
-				{/* </ThemeProvider> */}
+				<AuthProvider>
+					<QueryProvider>
+						{/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
+						{children}
+						<TailwindIndicator />
+						<Toaster />
+						{/* </ThemeProvider> */}
+					</QueryProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { registerSchema } from "@/lib/validations/register-schema";
+import { registerSchema } from "@/lib/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export default function RegisterForm() {
 			email: "",
 			phoneNumber: "",
 			password: "",
-			confirmPassword: "",
+			// confirmPassword: "",
 			acceptTerms: undefined,
 		},
 		mode: "onChange",
@@ -99,7 +99,7 @@ export default function RegisterForm() {
 							)}
 						/>
 						{/* Confirm Password field */}
-						<FormField
+						{/* <FormField
 							control={form.control}
 							name="confirmPassword"
 							render={({ field }) => (
@@ -111,7 +111,7 @@ export default function RegisterForm() {
 									<FormMessage />
 								</FormItem>
 							)}
-						/>
+						/> */}
 						{/* Accept items field */}
 						<FormField
 							control={form.control}

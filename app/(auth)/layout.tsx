@@ -10,8 +10,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 					© 2024 MarkSafeTo. All rights reserved.
 				</p>
 			</div>
-			<div className="hidden lg:block overflow-hidden">
-				<Image src="/images/montgolfiere.jpg" alt="auth-layout" height={2400} width={3600} className="h-full w-full" />
+			<div className="hidden h-screen lg:block overflow-hidden">
+				<Image
+					src="/images/montgolfiere.jpg"
+					alt="auth-layout"
+					height={3600}
+					width={2400}
+					priority
+					className="h-full w-full object-cover"
+				/>
 			</div>
 			{/* Use bellow code later on hero section */}
 			{/* 
