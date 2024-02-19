@@ -5,16 +5,10 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 const config = {
 	darkMode: ["class"],
 	content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
-	prefix: "",
 	theme: {
 		container: {
 			center: true,
-			padding: {
-				DEFAULT: "2rem",
-				sm: "2rem",
-				lg: "3rem",
-				xl: "4rem",
-			},
+			padding: "2rem",
 			screens: {
 				"2xl": "1400px",
 			},
