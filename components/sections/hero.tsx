@@ -4,37 +4,35 @@ import Image from "next/image";
 
 export default function Hero() {
 	return (
-		<div className="grid lg:grid-cols-5 gap-8">
-			<div className="space-y-5 lg:col-span-2">
-				<h1 className="font-heading text-4xl md:text-[3.2rem] leading-tight text-gray-700 font-medium">
+		<div className="grid items-center gap-8 lg:grid-cols-2">
+			<div className="space-y-5">
+				<h1 className="text-4xl font-medium leading-tight text-gray-700 md:text-[3.5rem]">
 					Send professional SMS easily, fast and reliable
 				</h1>
-				<p className="font-heading text-xl">
-					We help you send professional SMS to your customers, clients, and partners.
-				</p>
+				<p className="text-xl text-gray-500">We help you send professional SMS to your customers, clients, and partners.</p>
 				<div className="flex space-x-2">
 					<Button>Get Started</Button>
 					<Button variant="outline">Learn More</Button>
 				</div>
 			</div>
 
-			<div className="max-lg:order-first lg:col-span-3 space-y-7">
-				<div className="flex flex-col justify-center overflow-hidden px-4 h-[18rem] md:h-[28rem]">
-					<div className="-m-2 rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:-m-2 lg:rounded-2xl p-3 lg:p-4 h-full">
+			<div className="max-lg:order-first">
+				<div className="flex h-[18rem] flex-col justify-center overflow-hidden px-2 md:h-[30rem]">
+					<div className="-m-2 h-full rounded-xl bg-gray-900/5 p-3 ring-1 ring-inset ring-gray-900/10 lg:-m-2 lg:rounded-2xl lg:p-3">
 						<Image
 							src="/images/montgolfiere.jpg"
 							alt="auth-layout"
 							height={500}
 							width={800}
-							className="rounded-md bg-white	shadow-2xl ring-1 ring-gray-90/10 h-full w-full object-cover"
+							className="size-full rounded-md	bg-white object-cover shadow-2xl ring-1 ring-gray-900/10"
 						/>
 					</div>
 				</div>
-				<div className="grid md:grid-cols-3 gap-4">
-					<div className="h-32 bg-slate-100 rounded-2xl"></div>
-					<div className="h-32 bg-slate-100 rounded-2xl"></div>
-					<div className="h-32 bg-slate-100 rounded-2xl"></div>
-				</div>
+				{/* <div className="grid gap-4 rounded-2xl bg-slate-200 p-4 md:grid-cols-3">
+					<div className="h-28"></div>
+					<div className="h-28"></div>
+					<div className="h-28"></div>
+				</div> */}
 			</div>
 		</div>
 	);

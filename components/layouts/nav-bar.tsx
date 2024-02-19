@@ -25,9 +25,9 @@ export default function NavBar({ items }: NavBarProps) {
 	return (
 		<div className="flex items-center justify-between py-7">
 			<Link aria-label={siteConfig.name} href="/">
-				<h3 className="font-semibold text-xl text-gray-800">{siteConfig.name}</h3>
+				<h3 className="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
 			</Link>
-			<div className="hidden md:flex items-center">
+			<div className="hidden items-center md:flex">
 				<NavigationMenu className="lg:flex">
 					<NavigationMenuList>
 						{items.map((item) => {
@@ -52,7 +52,7 @@ export default function NavBar({ items }: NavBarProps) {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			<div className="hidden md:flex items-center space-x-3 md:space-x-4">
+			<div className="hidden items-center space-x-3 md:flex md:space-x-4">
 				<Button asChild>
 					<Link href="/login">Login</Link>
 				</Button>
