@@ -13,7 +13,7 @@ export const getMe = async (): Promise<UserInterface> => {
 export interface createAccountCredentials {
 	username: string;
 	email: string;
-	phoneNumber: string;
+	phoneNumber?: string;
 	password: string;
 }
 

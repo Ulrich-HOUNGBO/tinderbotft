@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "../ui/use-toast";
+import PhoneInput from "../ui/phone-input";
 
 type Credentials = z.infer<typeof registerSchema>;
 
@@ -38,8 +39,8 @@ export default function RegisterForm() {
 			username: "",
 			email: "",
 			phoneNumber: "",
+			prefix: "+229",
 			password: "",
-			// confirmPassword: "",
 			acceptTerms: undefined,
 		},
 		mode: "onChange",
@@ -47,6 +48,7 @@ export default function RegisterForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
+		return;
 		mutate(data);
 	};
 
@@ -91,7 +93,13 @@ export default function RegisterForm() {
 								<FormItem>
 									<FormLabel>Phone number</FormLabel>
 									<FormControl>
-										<Input type="number" placeholder="12345678" {...field} />
+										<PhoneInput
+											inputProps={field}
+											eventProps={{
+												value: form.watch("prefix"),
+												onValueChange: (value) => form.setValue("prefix", value),
+											}}
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -111,20 +119,7 @@ export default function RegisterForm() {
 								</FormItem>
 							)}
 						/>
-						{/* Confirm Password field */}
-						{/* <FormField
-							control={form.control}
-							name="confirmPassword"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Confirm your password</FormLabel>
-									<FormControl>
-										<PasswordInput placeholder="**********" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/> */}
+
 						{/* Accept items field */}
 						<FormField
 							control={form.control}
@@ -139,9 +134,9 @@ export default function RegisterForm() {
 												className="rounded border-primary"
 											/>
 										</FormControl>
-										<label className="text-gray-700 text-sm peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+										<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
 											I agree
-											<Link href="/terms" className="text-primary underline pl-1">
+											<Link href="/terms" className="pl-1 text-primary underline">
 												with terms and conditions.
 											</Link>
 										</label>
@@ -153,7 +148,7 @@ export default function RegisterForm() {
 					</div>
 
 					<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
-						{isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
+						{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
 						Create account
 						<span className="sr-only">register</span>
 					</Button>
