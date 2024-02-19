@@ -6,19 +6,31 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { registerSchema } from "@/lib/validations/auth";
+import { createAccount, createAccountCredentials } from "@/services/queries/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "../ui/use-toast";
 
 type Credentials = z.infer<typeof registerSchema>;
 
 export default function RegisterForm() {
-	const router = useRouter();
-	const [isPending, setIsPending] = React.useState(false);
+	const { mutate, isPending } = useMutation({
+		mutationKey: ["create-account"],
+		mutationFn: (credentials: createAccountCredentials) => createAccount(credentials),
+		onSuccess: () => {
+			toast({
+				title: "Account created successfully",
+				description: "We've sent you an email to verify your account.",
+			});
+		},
+		onError: (error: Error) => {
+			console.log(error);
+		},
+	});
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(registerSchema),
@@ -35,6 +47,7 @@ export default function RegisterForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
+		mutate(data);
 	};
 
 	return (

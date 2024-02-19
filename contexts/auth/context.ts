@@ -1,7 +1,8 @@
+import { UserInterface } from "@/types";
 import { createContext } from "react";
 
 type AuthContextType = {
-	user: null;
+	user: UserInterface | null;
 	refetch: () => void;
 };
 
