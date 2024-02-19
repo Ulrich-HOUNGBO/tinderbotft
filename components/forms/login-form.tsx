@@ -9,9 +9,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { Button } from "../ui/button";
 import { loginSchema } from "@/lib/validations/auth";
+import { signIn } from "next-auth/react";
+import { routes } from "@/lib/routes";
+import { toast } from "../ui/use-toast";
 
 type Credentials = z.infer<typeof loginSchema>;
 
@@ -24,12 +27,30 @@ export default function LoginForm() {
 		defaultValues: {
 			email: "",
 			password: "",
-    },
-    mode: "onChange",
+		},
+		mode: "onChange",
 	});
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
+		setIsPending(true);
+
+		const response = await signIn("credentials", {
+			email: data.email,
+			password: data.password,
+			callbackUrl: routes.dashboard.home,
+			redirect: false,
+		});
+
+		if (response?.error) {
+			console.log(response);
+			return;
+		}
+
+		setIsPending(false);
+		toast({
+			title: "Logged in successfully",
+		});
 	};
 
 	return (
@@ -67,9 +88,11 @@ export default function LoginForm() {
 						/>
 					</div>
 
-					<Link href={"/forgot-password"} className="text-primary underline text-sm text-end">
-						Forgot password ?
-					</Link>
+					<div className="flex justify-end">
+						<Link href={routes.auth.forgotPassword} className="text-primary underline text-sm">
+							Forgot password ?
+						</Link>
+					</div>
 
 					<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
 						{isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}

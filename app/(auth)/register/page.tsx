@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import AuthHeader from "@/components/auth-header";
 import RegisterForm from "@/components/forms/register-form";
 import Link from "next/link";
+import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
 	title: "Create an account",
@@ -16,7 +17,7 @@ export default function RegisterPage() {
 			<RegisterForm />
 			<div className="flex items-center justify-center mt-5 space-x-2 text-sm">
 				<p className="text-gray-700">Already have an account?</p>
-				<Link href="/login" className="text-primary underline">
+				<Link href={routes.auth.login} className="text-primary underline">
 					Login here
 				</Link>
 			</div>
