@@ -38,7 +38,7 @@ export default function RegisterForm() {
 		defaultValues: {
 			username: "",
 			email: "",
-			phoneNumber: "",
+			phoneNo: "",
 			prefix: "+229",
 			password: "",
 			acceptTerms: undefined,
@@ -48,7 +48,7 @@ export default function RegisterForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
-		return;
+		// return;
 		mutate(data);
 	};
 
@@ -88,7 +88,7 @@ export default function RegisterForm() {
 						{/* PhoneNumber field */}
 						<FormField
 							control={form.control}
-							name="phoneNumber"
+							name="phoneNo"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Phone number</FormLabel>

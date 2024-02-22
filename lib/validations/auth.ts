@@ -29,7 +29,7 @@ export const registerSchema = z.object({
 	prefix: z.string().min(2, {
 		message: "Prefix must be at least 2 characters long",
 	}),
-	phoneNumber: z
+	phoneNo: z
 		.string()
 		.min(8, {
 			message: "Phone must be at least 8 characters long",

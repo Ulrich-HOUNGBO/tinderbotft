@@ -3,21 +3,21 @@ import React from "react";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="grid lg:grid-cols-2 h-screen">
-			<div className="container relative flex flex-col justify-center max-w-md md:max-w-xl md:mx-auto">
+		<div className="grid h-screen lg:grid-cols-2">
+			<div className="container relative flex max-w-md flex-col justify-center md:mx-auto md:max-w-xl">
 				{children}
-				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-[10px] md:text-xs text-gray-400 ">
+				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-[10px] text-gray-400 md:text-xs ">
 					© 2024 MarkSafeTo. All rights reserved.
 				</p>
 			</div>
-			<div className="hidden h-screen lg:block overflow-hidden">
+			<div className="hidden h-screen overflow-hidden lg:block">
 				<Image
 					src="/images/montgolfiere.jpg"
 					alt="auth-layout"
 					height={3600}
 					width={2400}
 					priority
-					className="h-full w-full object-cover"
+					className="size-full object-cover"
 				/>
 			</div>
 			{/* Use bellow code later on hero section */}

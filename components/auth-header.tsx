@@ -6,8 +6,8 @@ type Props = {
 export default function AuthHeader({ title, description }: Props) {
 	return (
 		<div className="mb-5 space-y-1">
-			<h3 className="text-2xl xl:text-3xl font-semibold text-gray-600">{title}</h3>
-			<p className="xl:text-lg text-muted-foreground">{description}</p>
+			<h3 className="text-2xl font-semibold text-gray-600 xl:text-3xl">{title}</h3>
+			<p className="text-muted-foreground xl:text-lg">{description}</p>
 		</div>
 	);
 }

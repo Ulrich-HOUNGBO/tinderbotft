@@ -1,9 +1,6 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import { Button } from "@/components/ui/button";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -11,15 +8,21 @@ import {
 	NavigationMenuList,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { MainNavItem } from "@/types";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { MainNavItem } from "@/types";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import NavbarButtons from "./navbar-buttons";
+import { Session } from "next-auth";
+import { routes } from "@/lib/routes";
 
 interface NavBarProps {
 	items: MainNavItem[];
+	session: Session | null;
 }
 
-export default function NavBar({ items }: NavBarProps) {
+export default function NavBar({ items, session }: NavBarProps) {
 	const pathname = usePathname();
 
 	return (
@@ -52,14 +55,20 @@ export default function NavBar({ items }: NavBarProps) {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			<div className="hidden items-center space-x-3 md:flex md:space-x-4">
-				<Button asChild>
-					<Link href="/login">Login</Link>
+			{session ? (
+				<Button asChild variant="dashboard">
+					<Link href={routes.dashboard.home}>Dashboard</Link>
 				</Button>
-				<Button asChild variant="outline">
-					<Link href="/register">Create an account</Link>
-				</Button>
-			</div>
+			) : (
+				<div className="hidden items-center space-x-3 md:flex md:space-x-4">
+					<Button asChild>
+						<Link href={routes.auth.login}>Login</Link>
+					</Button>
+					<Button asChild variant="outline">
+						<Link href={routes.auth.register}>Create an account</Link>
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }

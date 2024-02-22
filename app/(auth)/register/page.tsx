@@ -15,7 +15,7 @@ export default function RegisterPage() {
 		<div>
 			<AuthHeader title="Get Started with MarkSafeTo" description="Create your account here" />
 			<RegisterForm />
-			<div className="flex items-center justify-center mt-5 space-x-2 text-sm">
+			<div className="mt-5 flex items-center justify-center space-x-2 text-sm">
 				<p className="text-gray-700">Already have an account?</p>
 				<Link href={routes.auth.login} className="text-primary underline">
 					Login here

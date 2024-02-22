@@ -51,6 +51,7 @@ export default function LoginForm() {
 		toast({
 			title: "Logged in successfully",
 		});
+		router.push(routes.dashboard.home);
 	};
 
 	return (
@@ -89,13 +90,13 @@ export default function LoginForm() {
 					</div>
 
 					<div className="flex justify-end">
-						<Link href={routes.auth.forgotPassword} className="text-primary underline text-sm">
+						<Link href={routes.auth.forgotPassword} className="text-sm text-primary underline">
 							Forgot password ?
 						</Link>
 					</div>
 
 					<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
-						{isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
+						{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
 						Login
 						<span className="sr-only">Login</span>
 					</Button>
