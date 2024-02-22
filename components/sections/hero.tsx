@@ -1,6 +1,7 @@
-import React from "react";
-import { Button } from "../ui/button";
+import { routes } from "@/lib/routes";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function Hero() {
 	return (
@@ -9,9 +10,13 @@ export default function Hero() {
 				<h1 className="text-4xl font-medium leading-tight text-gray-700 md:text-[3.5rem]">
 					Send professional SMS easily, fast and reliable
 				</h1>
-				<p className="text-xl text-gray-500">We help you send professional SMS to your customers, clients, and partners.</p>
+				<p className="text-xl text-gray-500">
+					We help you send professional SMS to your customers, clients, and partners.
+				</p>
 				<div className="flex space-x-2">
-					<Button>Get Started</Button>
+					<Button asChild>
+						<Link href={routes.auth.register}>Get Started</Link>
+					</Button>
 					<Button variant="outline">Learn More</Button>
 				</div>
 			</div>

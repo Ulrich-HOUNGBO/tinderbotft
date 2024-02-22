@@ -9,13 +9,12 @@ import {
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { siteConfig } from "@/config/site";
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
+import { Session } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import NavbarButtons from "./navbar-buttons";
-import { Session } from "next-auth";
-import { routes } from "@/lib/routes";
 
 interface NavBarProps {
 	items: MainNavItem[];
@@ -42,8 +41,8 @@ export default function NavBar({ items, session }: NavBarProps) {
 										<NavigationMenuLink
 											className={cn(
 												navigationMenuTriggerStyle(),
-												"h-auto",
-												isActive && "font-medium text-primary hover:text-primary"
+												"h-auto font-medium text-gray-500",
+												isActive && "text-primary hover:text-primary"
 											)}
 										>
 											{item.title}
