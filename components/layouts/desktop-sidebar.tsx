@@ -17,10 +17,10 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 	const pathname = usePathname();
 
 	return (
-		<div className="w-80 hidden md:flex flex-col justify-between bg-gray-100 py-7">
+		<div className="hidden w-80 flex-col justify-between bg-gray-100 py-7 md:flex">
 			<div className="space-y-12">
 				<Link aria-label={siteConfig.name} href="/dashboard/home">
-					<h3 className="font-semibold text-xl text-gray-800 px-6">{siteConfig.name}</h3>
+					<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
 				</Link>
 
 				<ul className="flex flex-col gap-y-2">
@@ -39,7 +39,7 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 										: "hover:bg-slate-200"
 								)}
 							>
-								<Icon className="w-5 h-5" />
+								<Icon className="size-5" />
 								<span className="text-xs lg:text-base">{item.title}</span>
 							</Link>
 						);
@@ -48,8 +48,8 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 			</div>
 
 			<h2 className="px-6">
-				<Button className="w-full bg-red-600/80 hover:bg-red-600 h-11">
-					<LogOut className="mr-2 h-4 w-4" /> Logout
+				<Button className="h-11 w-full bg-red-600/80 hover:bg-red-600">
+					<LogOut className="mr-2 size-4" /> Logout
 				</Button>
 			</h2>
 		</div>

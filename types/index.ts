@@ -22,8 +22,13 @@ export type SidebarNavItem = NavItemWithChildren;
 
 export interface UserInterface {
 	id: string;
-	username: string;
-	email: string;
-	phoneNumber: string;
-	creditsNumber: number;
+	user: {
+		id: string;
+		username: string;
+		phoneNo: string;
+		email: string;
+		role: "user" | "admin";
+		phoneNumber: string;
+		creditsNumber: number;
+	};
 }
