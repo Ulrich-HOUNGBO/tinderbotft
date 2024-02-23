@@ -21,7 +21,7 @@ export default function DashboardHeader() {
 
 	return (
 		<div className="mb-5 flex items-center justify-between">
-			<h3 className="text-xl font-medium text-gray-700">Welcome JOHN Doe</h3>
+			<h3 className="text-xl font-medium text-gray-700">Welcome {user?.user.username}</h3>
 
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>

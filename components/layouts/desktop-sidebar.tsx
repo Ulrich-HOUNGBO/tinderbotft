@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
 import { LogOut } from "lucide-react";
+import LogoutButton from "../logout-button";
 
 type DesktopSidebarProps = {
 	sidebarNavItems: MainNavItem[];
@@ -17,7 +18,7 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 	const pathname = usePathname();
 
 	return (
-		<div className="hidden w-80 flex-col justify-between bg-gray-100 py-7 md:flex">
+		<div className="hidden h-screen w-80 flex-col justify-between bg-gray-100 py-7 md:flex">
 			<div className="space-y-12">
 				<Link aria-label={siteConfig.name} href="/dashboard/home">
 					<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
@@ -48,9 +49,9 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 			</div>
 
 			<h2 className="px-6">
-				<Button className="h-11 w-full bg-red-600/80 hover:bg-red-600">
+				{/* <Button className="h-11 w-full bg-red-600/80 hover:bg-red-600">
 					<LogOut className="mr-2 size-4" /> Logout
-				</Button>
+				</Button> */}
 			</h2>
 		</div>
 	);
