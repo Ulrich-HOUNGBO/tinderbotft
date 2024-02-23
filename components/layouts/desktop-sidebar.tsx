@@ -5,10 +5,6 @@ import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
-import { Button } from "../ui/button";
-import { LogOut } from "lucide-react";
-import LogoutButton from "../logout-button";
 
 type DesktopSidebarProps = {
 	sidebarNavItems: MainNavItem[];

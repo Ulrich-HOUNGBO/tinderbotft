@@ -20,7 +20,7 @@ export default function Hero() {
 					</Button>
 					<Button variant="outline">Learn More</Button>
 				</div>
-				<div className="grid gap-4 rounded-xl bg-slate-100/60 p-4 md:grid-cols-2 [&>div:first-of-type]:md:border-r [&>div:first-of-type]:md:border-gray-400">
+				<div className="grid gap-4 rounded-xl bg-slate-100/50 p-4 md:grid-cols-2 [&>div:first-of-type]:md:border-r [&>div:first-of-type]:md:border-gray-400">
 					<div>
 						<h1>85%</h1>
 						<p>Earn in the first month</p>
