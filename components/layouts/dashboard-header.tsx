@@ -30,7 +30,7 @@ export default function DashboardHeader() {
 				</Button>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button variant="secondary" className="relative size-12 rounded-full">
+						<Button variant="secondary" className="relative size-11 rounded-full">
 							<Avatar className="border">
 								<AvatarImage
 									src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${user?.user.email}`}
