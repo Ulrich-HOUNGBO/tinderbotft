@@ -1,3 +1,4 @@
+import { routes } from "@/lib/routes";
 import { MainNavItem } from "@/types";
 import { CreditCard, LayoutGrid, MessageCircleMore } from "lucide-react";
 
@@ -5,17 +6,17 @@ export const dashboardConfig = {
 	mainNav: [
 		{
 			title: "Dashboard",
-			href: "/dashboard/home",
+			href: routes.dashboard.home,
 			icon: LayoutGrid,
 		},
 		{
 			title: "Sms",
-			href: "/dashboard/sms",
+			href: routes.dashboard.sms.index,
 			icon: MessageCircleMore,
 		},
 		{
 			title: "Credits",
-			href: "/dashboard/credits",
+			href: routes.dashboard.credits.index,
 			icon: CreditCard,
 		},
 	] satisfies MainNavItem[],

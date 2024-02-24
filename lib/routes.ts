@@ -11,7 +11,14 @@ export const routes = {
 
 	dashboard: {
 		home: "/dashboard/home",
-		credits: "/dashboard/credits",
-		sms: "/dashboard/sms",
+		credits: {
+			index: "/dashboard/credits",
+			buyCredits: "/dashboard/credits/buy",
+		},
+		sms: {
+			index: "/dashboard/sms",
+			send: "/dashboard/sms/send-sms",
+			viewSms: (id: string) => `/dashboard/sms/${id}`,
+		},
 	},
 };

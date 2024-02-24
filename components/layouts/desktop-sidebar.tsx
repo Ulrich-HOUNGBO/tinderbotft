@@ -14,7 +14,7 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 	const pathname = usePathname();
 
 	return (
-		<div className="hidden h-screen w-80 flex-col justify-between bg-gray-100 py-7 md:flex">
+		<div className="hidden h-screen w-64 flex-col justify-between bg-gray-100 py-7 md:flex">
 			<div className="space-y-12">
 				<Link aria-label={siteConfig.name} href="/dashboard/home">
 					<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
