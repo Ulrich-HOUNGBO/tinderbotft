@@ -10,7 +10,7 @@ export default function SmsPage() {
 	return (
 		<div>
 			<div className="flex flex-col">
-				<Breadcrumbs segments={[{ title: "Sms", href: routes.dashboard.sms.index }]} />
+				<Breadcrumbs segments={[{ title: "Sms"}]} />
 				<Button asChild className="w-fit font-heading">
 					<Link href={routes.dashboard.sms.send}>Send Pro SMS</Link>
 				</Button>

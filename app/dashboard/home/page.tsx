@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardHomePage() {
-	return <div>Home page</div>;
+	return (
+		<div>
+			<Breadcrumbs segments={[{ title: "Dashboard" }]} />
+		</div>
+	);
 }

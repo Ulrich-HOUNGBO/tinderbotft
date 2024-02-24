@@ -14,7 +14,7 @@ export default function PhoneInput({ eventProps, inputProps }: Props) {
 	const { data } = useCountries();
 
 	return (
-		<div className="flex items-center gap-1 rounded-md border">
+		<div className="flex items-center gap-1 rounded-md border focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background">
 			<Select {...eventProps}>
 				<SelectTrigger className="h-11 w-32 border-none md:h-12">
 					<SelectValue />
@@ -30,7 +30,7 @@ export default function PhoneInput({ eventProps, inputProps }: Props) {
 			</Select>
 			<Input
 				{...inputProps}
-				className="border-none focus-within:ring-0 focus:ring-transparent"
+				className="border-none focus-visible:ring-transparent focus-visible:ring-offset-0"
 				placeholder="123456789"
 			/>
 		</div>

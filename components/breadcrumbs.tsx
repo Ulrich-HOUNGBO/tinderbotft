@@ -7,7 +7,7 @@ import { ChevronRightIcon } from "lucide-react";
 interface BreadcrumbsProps extends React.ComponentPropsWithoutRef<"nav"> {
 	segments: {
 		title: string;
-		href: string;
+		href?: string;
 	}[];
 	separator?: React.ComponentType<{ className?: string }>;
 	truncationLength?: number;
@@ -32,7 +32,7 @@ export function Breadcrumbs({ segments, separator, truncationLength = 0, classNa
 					<React.Fragment key={segment.href}>
 						<Link
 							aria-current={isLastSegment ? "page" : undefined}
-							href={segment.href}
+							href={segment.href ?? "#"}
 							className={cn(
 								"truncate transition-colors hover:text-foreground lg:text-lg",
 								isLastSegment ? "text-foreground" : "text-muted-foreground"
