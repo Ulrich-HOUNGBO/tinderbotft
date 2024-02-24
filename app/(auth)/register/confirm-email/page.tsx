@@ -4,11 +4,13 @@ import { routes } from "@/lib/routes";
 import { confirmEmail } from "@/services/queries/user";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function EmailConfirmationPage() {
 	const token = useSearchParams().get("token");
+
+	if (!token) redirect(routes.auth.login);
 
 	const { isSuccess, isError, isLoading, data } = useQuery({
 		queryKey: ["confirm-email"],

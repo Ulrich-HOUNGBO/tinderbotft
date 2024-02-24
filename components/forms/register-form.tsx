@@ -53,107 +53,105 @@ export default function RegisterForm() {
 	};
 
 	return (
-		<div>
-			<Form {...form}>
-				<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-3 md:gap-y-7">
-					<div className="space-y-2 md:space-y-3">
-						{/* Email field */}
-						<FormField
-							control={form.control}
-							name="username"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Username</FormLabel>
+		<Form {...form}>
+			<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-3 md:gap-y-7">
+				<div className="space-y-2 md:space-y-3">
+					{/* Email field */}
+					<FormField
+						control={form.control}
+						name="username"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Username</FormLabel>
+								<FormControl>
+									<Input placeholder="john52" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					{/* Email field */}
+					<FormField
+						control={form.control}
+						name="email"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Email</FormLabel>
+								<FormControl>
+									<Input placeholder="johndoe@gmail.com" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					{/* PhoneNumber field */}
+					<FormField
+						control={form.control}
+						name="phoneNo"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Phone number</FormLabel>
+								<FormControl>
+									<PhoneInput
+										inputProps={field}
+										eventProps={{
+											value: form.watch("prefix"),
+											onValueChange: (value) => form.setValue("prefix", value),
+										}}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					{/* Password field */}
+					<FormField
+						control={form.control}
+						name="password"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Password</FormLabel>
+								<FormControl>
+									<PasswordInput placeholder="**********" {...field} />
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					{/* Accept items field */}
+					<FormField
+						control={form.control}
+						name="acceptTerms"
+						render={({ field }) => (
+							<FormItem>
+								<div className="flex items-center space-x-2">
 									<FormControl>
-										<Input placeholder="john52" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						{/* Email field */}
-						<FormField
-							control={form.control}
-							name="email"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Email</FormLabel>
-									<FormControl>
-										<Input placeholder="johndoe@gmail.com" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						{/* PhoneNumber field */}
-						<FormField
-							control={form.control}
-							name="phoneNo"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Phone number</FormLabel>
-									<FormControl>
-										<PhoneInput
-											inputProps={field}
-											eventProps={{
-												value: form.watch("prefix"),
-												onValueChange: (value) => form.setValue("prefix", value),
-											}}
+										<Checkbox
+											checked={field.value}
+											onCheckedChange={field.onChange}
+											className="rounded border-primary"
 										/>
 									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						{/* Password field */}
-						<FormField
-							control={form.control}
-							name="password"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<PasswordInput placeholder="**********" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+									<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+										I agree
+										<Link href="/terms" className="pl-1 text-primary underline">
+											with terms and conditions.
+										</Link>
+									</label>
+								</div>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</div>
 
-						{/* Accept items field */}
-						<FormField
-							control={form.control}
-							name="acceptTerms"
-							render={({ field }) => (
-								<FormItem>
-									<div className="flex items-center space-x-2">
-										<FormControl>
-											<Checkbox
-												checked={field.value}
-												onCheckedChange={field.onChange}
-												className="rounded border-primary"
-											/>
-										</FormControl>
-										<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-											I agree
-											<Link href="/terms" className="pl-1 text-primary underline">
-												with terms and conditions.
-											</Link>
-										</label>
-									</div>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-					</div>
-
-					<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
-						{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-						Create account
-						<span className="sr-only">register</span>
-					</Button>
-				</form>
-			</Form>
-		</div>
+				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
+					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
+					Create account
+					<span className="sr-only">register</span>
+				</Button>
+			</form>
+		</Form>
 	);
 }

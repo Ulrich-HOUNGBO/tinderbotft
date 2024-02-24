@@ -47,3 +47,30 @@ export const registerSchema = z.object({
 		}),
 	}),
 });
+
+export const forgotPasswordSchema = z.object({
+	email: z.string().email({
+		message: "Please enter a valid email address",
+	}),
+});
+
+export const resetPasswordSchema = z
+	.object({
+		newPassword: z
+			.string()
+			.min(8, {
+				message: "Password must be at least 8 characters long",
+			})
+			.max(50)
+			.regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!@#$%^&*])(?=.{8,})/, {
+				message:
+					"Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character",
+			}),
+		confirmPassword: z.string().min(8, {
+			message: "Password must be at least 8 characters long",
+		}),
+	})
+	.refine((data) => data.newPassword === data.confirmPassword, {
+		message: "Passwords do not match",
+		path: ["confirmPassword"],
+	});

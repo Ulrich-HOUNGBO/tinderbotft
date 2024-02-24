@@ -1,7 +1,6 @@
 import { routes } from "@/lib/routes";
 import Image from "next/image";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 import { Button } from "../ui/button";
 
 export default function Hero() {
