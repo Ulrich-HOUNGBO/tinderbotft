@@ -39,7 +39,7 @@ export default function RegisterForm() {
 			username: "",
 			email: "",
 			phoneNo: "",
-			prefix: "+229",
+			prefix: "BJ+229",
 			password: "",
 			acceptTerms: undefined,
 		},
@@ -47,9 +47,13 @@ export default function RegisterForm() {
 	});
 
 	const onSubmit = async (data: Credentials) => {
-		console.log(data);
-		// return;
-		mutate(data);
+		// console.log(data);
+		mutate({
+			username: data.username,
+			email: data.email,
+			phoneNo: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.phoneNo?.replace(/\s/g, "")}`,
+			password: data.password,
+		});
 	};
 
 	return (
@@ -96,7 +100,10 @@ export default function RegisterForm() {
 										inputProps={field}
 										eventProps={{
 											value: form.watch("prefix"),
-											onValueChange: (value) => form.setValue("prefix", value),
+											onValueChange: (value) => {
+												// console.log(value);
+												form.setValue("prefix", value);
+											},
 										}}
 									/>
 								</FormControl>

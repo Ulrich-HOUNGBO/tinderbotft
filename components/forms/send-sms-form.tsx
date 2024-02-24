@@ -36,7 +36,7 @@ export default function SendSmsForm() {
 		defaultValues: {
 			from: "",
 			to: "",
-			prefix: "+229",
+			prefix: "BJ+229",
 			message: "",
 			pageNumber: 0,
 		},
@@ -44,9 +44,20 @@ export default function SendSmsForm() {
 	});
 
 	const onSubmit = async (data: Credentials) => {
-		console.log(data);
+		console.log({
+			from: data.from,
+			to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
+			message: data.message,
+			pageNumber: data.pageNumber,
+		});
+
 		// return;
-		// mutate(data);
+		// mutate({
+		// 	from: data.from,
+		// 	to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
+		// 	message: data.message,
+		// 	pageNumber: data.pageNumber,
+		// });
 	};
 
 	return (

@@ -14,7 +14,7 @@ export const getMe = cache(async (): Promise<UserInterface> => {
 export interface createAccountCredentials {
 	username: string;
 	email: string;
-	phoneNumber?: string;
+	phoneNo?: string;
 	password: string;
 }
 

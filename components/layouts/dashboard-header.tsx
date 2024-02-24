@@ -63,7 +63,7 @@ export default function DashboardHeader() {
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
+						<DropdownMenuItem className="hover:!bg-destructive/10">
 							<LogoutButton />
 						</DropdownMenuItem>
 					</DropdownMenuContent>

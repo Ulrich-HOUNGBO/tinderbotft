@@ -20,9 +20,9 @@ export default function PhoneInput({ eventProps, inputProps }: Props) {
 					<SelectValue />
 				</SelectTrigger>
 				<SelectContent>
-					{data?.map((country) => (
-						<SelectItem key={`${country.code}`} value={country.code}>
-							<Image src={country.flag} alt={`${country.name}'s flag`} width={24} height={24} className="h-5 w-6" />
+					{data?.map((country, index) => (
+						<SelectItem key={`${country.code}`} value={`${country.code + "+" + country.callingCode}`} defaultValue="BJ">
+							<Image src={country.flag} alt={`${country.name}'s flag`} width={24} height={20} />
 							<span>{`+${country.callingCode}`}</span>
 						</SelectItem>
 					))}
@@ -30,6 +30,7 @@ export default function PhoneInput({ eventProps, inputProps }: Props) {
 			</Select>
 			<Input
 				{...inputProps}
+				type="number"
 				className="border-none focus-visible:ring-transparent focus-visible:ring-offset-0"
 				placeholder="123456789"
 			/>
