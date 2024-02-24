@@ -98,7 +98,7 @@ export default function SendSmsForm() {
 									<Textarea placeholder="Your message" {...field} rows={5} />
 								</FormControl>
 								<FormMessage />
-								<p>{form.watch("message").length} character</p>
+								<p className="text-xs font-medium text-gray-400">{form.watch("message").length} character</p>
 							</FormItem>
 						)}
 					/>

@@ -4,7 +4,7 @@ import { routes } from "@/lib/routes";
 
 export default function SendSmsPage() {
 	return (
-		<div className="space-y-3">
+		<div className="space-y-5">
 			<Breadcrumbs
 				segments={[
 					{ title: "Sms", href: routes.dashboard.sms.index },
