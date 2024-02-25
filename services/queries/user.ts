@@ -1,15 +1,14 @@
 import axios from "@/lib/axios";
 import { UserInterface } from "@/types";
-import { cache } from "react";
 
 /**
  * Query to get user profile information
  * @returns {Promise<UserInterface>} - Object containing user information:
  */
-export const getMe = cache(async (): Promise<UserInterface> => {
+export const getMe = async (): Promise<UserInterface> => {
 	const response = await axios.get("/users/profile").then((data) => data);
 	return response.data;
-});
+};
 
 export interface createAccountCredentials {
 	username: string;
