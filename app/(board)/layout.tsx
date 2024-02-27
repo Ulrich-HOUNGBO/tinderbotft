@@ -11,7 +11,7 @@ export default async function BoardLayout({ children }: { children: React.ReactN
 	return (
 		<div className="container">
 			<NavBar items={siteConfig.mainNav} session={session} />
-			<div className="py-10">{children}</div>
+			<div className="py-10 xl:py-20">{children}</div>
 			<BottomNav />
 		</div>
 	);
