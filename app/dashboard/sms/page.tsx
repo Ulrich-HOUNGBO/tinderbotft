@@ -9,14 +9,14 @@ import Link from "next/link";
 export default function SmsPage() {
 	return (
 		<div>
-			<div className="flex flex-col">
+			<div className="flex items-center justify-between">
 				<Breadcrumbs segments={[{ title: "Sms" }]} />
 				<Button asChild className="w-fit font-heading">
 					<Link href={routes.dashboard.sms.send}>Send Pro SMS</Link>
 				</Button>
 			</div>
 
-			<Alert className="my-3">
+			<Alert className="my-5">
 				<AlertCircle className="size-5" />
 				<AlertTitle>Unit price of a text message: 500 CFA</AlertTitle>
 				<AlertDescription className="pt-2 text-gray-600">

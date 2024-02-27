@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { smsSchema } from "@/lib/validations/sms";
-import { createAccount, createAccountCredentials } from "@/services/queries/user";
+import { sendSms, sendSmsCredentials } from "@/services/queries/sms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2, Send } from "lucide-react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import PhoneInput from "../ui/phone-input";
@@ -19,7 +20,7 @@ type Credentials = z.infer<typeof smsSchema>;
 export default function SendSmsForm() {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["send-sms"],
-		mutationFn: (credentials: createAccountCredentials) => createAccount(credentials),
+		mutationFn: (credentials: sendSmsCredentials) => sendSms(credentials),
 		onSuccess: () => {
 			toast({
 				title: "Account created successfully",
@@ -38,26 +39,28 @@ export default function SendSmsForm() {
 			to: "",
 			prefix: "BJ+229",
 			message: "",
-			pageNumber: 0,
+			pageNumber: "",
 		},
 		mode: "onChange",
 	});
 
-	const onSubmit = async (data: Credentials) => {
-		console.log({
-			from: data.from,
-			to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
-			message: data.message,
-			pageNumber: data.pageNumber,
-		});
+	useEffect(() => {
+		form.setValue("pageNumber", form.watch("message").length.toString());
+		// console.log(form.watch("message"));
+		// TODO: Review dependencies
+	}, [form.watch("message")]);
 
-		// return;
-		// mutate({
+	const onSubmit = async (data: Credentials) => {
+		console.log(data);
+		// console.log({
 		// 	from: data.from,
 		// 	to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
 		// 	message: data.message,
-		// 	pageNumber: data.pageNumber,
+		// 	pageNumber: data.message.length,
 		// });
+
+		// return;
+		mutate(data);
 	};
 
 	return (
@@ -109,7 +112,21 @@ export default function SendSmsForm() {
 									<Textarea placeholder="Your message" {...field} rows={5} />
 								</FormControl>
 								<FormMessage />
-								<p className="text-xs font-medium text-gray-400">{form.watch("message").length} character</p>
+								<div className="space-x-1">
+									<span className="text-xs font-medium text-gray-400">
+										{form.watch("message").length} character(s){" "}
+									</span>
+									<span className="text-xs font-medium text-destructive">
+										{form.watch("message").length > 80 &&
+											form.watch("message").length <= 160 &&
+											"1000 credits will be used for this message"}
+									</span>
+									<span className="text-xs font-medium text-destructive">
+										{form.watch("message").length > 160 &&
+											form.watch("message").length <= 240 &&
+											"1500 credits will be used for this message"}
+									</span>
+								</div>
 							</FormItem>
 						)}
 					/>
