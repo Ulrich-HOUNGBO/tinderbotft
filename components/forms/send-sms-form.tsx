@@ -55,7 +55,7 @@ export default function SendSmsForm() {
 		form.setValue("pageNumber", form.watch("message").length.toString());
 		// console.log(form.watch("message"));
 		// TODO: Review dependencies
-	}, [form.watch("message")]);
+	});
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
