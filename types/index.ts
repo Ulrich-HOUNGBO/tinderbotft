@@ -32,3 +32,15 @@ export interface UserInterface {
 		creditsNumber: number;
 	};
 }
+
+export interface SmsInterface {
+	id: string;
+	from: string;
+	to: string;
+	message: string;
+	pageNumber: string;
+	cost: number;
+	/*Review the enum below later*/
+	status: "sent" | "delivered" | "failed";
+	createdAt: string;
+}

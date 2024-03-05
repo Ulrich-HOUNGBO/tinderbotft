@@ -11,9 +11,9 @@ export default function SmsPage() {
 		<div>
 			<div className="flex items-center justify-between">
 				<Breadcrumbs segments={[{ title: "Sms" }]} />
-				<Button asChild className="w-fit font-heading">
+				{/*<Button asChild className="w-fit font-heading">
 					<Link href={routes.dashboard.sms.send}>Send Pro SMS</Link>
-				</Button>
+				</Button>*/}
 			</div>
 
 			<Alert className="my-5">

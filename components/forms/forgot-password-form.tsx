@@ -16,7 +16,6 @@ import { useFormStatus } from "react-dom";
 type Credentials = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordForm() {
-	// const [isPending, setIsPending] = React.useState(false);
 	const { pending: isPending } = useFormStatus();
 
 	const form = useForm<Credentials>({

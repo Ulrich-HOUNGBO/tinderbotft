@@ -6,11 +6,11 @@ import React from "react";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<AuthProvider>
-			<div className="flex h-screen flex-row">
+			<div className="flex h-screen">
 				<SideBar />
 				<div className="container w-full py-10">
 					<DashboardHeader />
-					<main className="font-sans">{children}</main>
+					<main className="pb-10 font-sans">{children}</main>
 				</div>
 			</div>
 		</AuthProvider>

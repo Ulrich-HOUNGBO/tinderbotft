@@ -1,10 +1,10 @@
 "use client";
 
-import { routes } from "@/lib/routes";
-import { confirmEmail } from "@/services/queries/user";
-import { useQuery } from "@tanstack/react-query";
+import {routes} from "@/lib/routes";
+import {confirmEmail} from "@/services/queries/user";
+import {useQuery} from "@tanstack/react-query";
 import Link from "next/link";
-import { redirect, useSearchParams } from "next/navigation";
+import {redirect, useSearchParams} from "next/navigation";
 
 export default function ConfirmEmailSection() {
 	const token = useSearchParams().get("token");
@@ -14,8 +14,7 @@ export default function ConfirmEmailSection() {
 	const { isSuccess, isError, isLoading } = useQuery({
 		queryKey: ["confirm-email"],
 		queryFn: async () => {
-			const response = await confirmEmail(token!);
-			return response;
+			return await confirmEmail(token!);
 		},
 		enabled: !!token,
 	});
@@ -25,12 +24,15 @@ export default function ConfirmEmailSection() {
 	}
 
 	if (isError) {
-		<div className="space-y-2 text-center">
-			<h3 className="text-2xl font-semibold text-red-700 xl:text-3xl">Oops! 🙁</h3>
-			<p className="text-sm text-muted-foreground xl:text-lg">
-				There was an error confirming your email. Please try again later.
-			</p>
-		</div>;
+		return (
+			<div className="space-y-2 text-center">
+				<h3 className="text-2xl font-semibold text-red-700 xl:text-3xl">Oops! 🙁</h3>
+				<p className="text-sm text-muted-foreground xl:text-lg">
+					There was an error confirming your email. Please try again later.
+				</p>
+			</div>
+		)
+
 	}
 	return (
 		<div className="text-center">

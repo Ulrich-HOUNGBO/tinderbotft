@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { smsSchema } from "@/lib/validations/sms";
 import { sendSms, sendSmsCredentials } from "@/services/queries/sms";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { Loader2, Send } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,18 +14,25 @@ import { z } from "zod";
 import PhoneInput from "../ui/phone-input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
+import {useRouter} from "next/navigation";
+import {routes} from "@/lib/routes";
 
 type Credentials = z.infer<typeof smsSchema>;
 
 export default function SendSmsForm() {
+	const router = useRouter();
+	const queryClient = useQueryClient();
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["send-sms"],
 		mutationFn: (credentials: sendSmsCredentials) => sendSms(credentials),
-		onSuccess: () => {
-			toast({
-				title: "Account created successfully",
-				description: "We've sent you an email to verify your account.",
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: ["messages-list"],
 			});
+			toast({
+				title: "SMS sent successfully",
+			});
+			router.push(routes.dashboard.sms.index);
 		},
 		onError: (error: Error) => {
 			console.log(error);
