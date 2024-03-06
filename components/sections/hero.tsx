@@ -7,10 +7,10 @@ export default function Hero() {
 	return (
 		<div className="grid items-center gap-8 lg:grid-cols-2 xl:gap-20">
 			<div className="space-y-5">
-				<h1 className="font-heading text-4xl leading-tight text-gray-700 max-lg:text-center md:text-[3.5rem]">
+				<h1 className="font-heading text-3xl leading-tight text-gray-700 max-lg:text-center md:text-[2.6rem] xl:text-4xl">
 					Send professional SMS easily, fast and reliable
 				</h1>
-				<p className="font-heading text-xl text-gray-400 max-lg:text-center">
+				<p className="font-heading text-gray-400 max-lg:text-center xl:text-xl">
 					We help you send professional SMS to your customers, clients, and partners.
 				</p>
 				<div className="flex gap-x-6 max-lg:justify-center">

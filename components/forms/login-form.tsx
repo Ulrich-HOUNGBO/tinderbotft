@@ -44,6 +44,12 @@ export default function LoginForm() {
 
 		if (response?.error) {
 			console.log(response);
+			response.status === 401 &&
+				toast({
+					variant: "destructive",
+					title: "Invalid credentials",
+				});
+			setIsPending(false);
 			return;
 		}
 

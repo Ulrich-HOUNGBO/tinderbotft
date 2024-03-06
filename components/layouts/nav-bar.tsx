@@ -29,7 +29,7 @@ export default function NavBar({ items, session }: NavBarProps) {
 			<Link aria-label={siteConfig.name} href="/">
 				<h3 className="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
 			</Link>
-			<div className="hidden items-center md:flex">
+			<div className="hidden items-center lg:flex">
 				<NavigationMenu className="lg:flex">
 					<NavigationMenuList>
 						{items.map((item) => {

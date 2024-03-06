@@ -40,7 +40,6 @@ export interface SmsInterface {
 	message: string;
 	pageNumber: string;
 	cost: number;
-	/*Review the enum below later*/
-	status: "sent" | "delivered" | "failed";
+	status: "success" | "failed" | "pending";
 	createdAt: string;
 }
