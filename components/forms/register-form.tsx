@@ -49,10 +49,8 @@ export default function RegisterForm() {
 	const onSubmit = async (data: Credentials) => {
 		// console.log(data);
 		mutate({
-			username: data.username,
-			email: data.email,
+			...data,
 			phoneNo: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.phoneNo?.replace(/\s/g, "")}`,
-			password: data.password,
 		});
 	};
 

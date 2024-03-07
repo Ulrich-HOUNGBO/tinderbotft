@@ -43,3 +43,9 @@ export interface SmsInterface {
 	status: "success" | "failed" | "pending";
 	createdAt: string;
 }
+
+export interface PaymentHistoryInterface {
+	id: string;
+	pack: string;
+	status: "pending" | "processing" | "success" | "failed";
+}

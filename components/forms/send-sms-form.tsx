@@ -67,7 +67,10 @@ export default function SendSmsForm() {
 		// });
 
 		// return;
-		mutate(data);
+		mutate({
+			...data,
+			to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
+		});
 	};
 
 	return (
