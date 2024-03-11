@@ -21,10 +21,20 @@ export default function DashboardHeader() {
 	const { user } = useAuth();
 
 	return (
-		<div className="mb-8 flex items-center border-b pb-3 md:justify-between">
-			<h3 className="text-xl font-medium text-gray-700 max-md:hidden">Welcome {user?.user.username}</h3>
+		<div className="mb-8 flex items-center justify-between border-b pb-3">
+			<div className="flex items-center gap-x-4">
+				<div className="lg:hidden">Menu</div>
+				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">Welcome {user?.user.username}</h3>
+			</div>
 
 			<div className="flex items-center gap-x-4">
+				<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 md:block">
+					{user && (
+						<span className="text-gray-700">{`${user?.user.credit} ${
+							user?.user.credit > 1 ? "Credits" : "Credit"
+						}`}</span>
+					)}
+				</div>
 				<Button asChild>
 					<Link href={routes.dashboard.credits.buyCredits}>Buy Credits</Link>
 				</Button>

@@ -29,7 +29,7 @@ export interface UserInterface {
 		email: string;
 		role: "user" | "admin";
 		phoneNumber: string;
-		creditsNumber: number;
+		credit: number;
 	};
 }
 

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {routes} from "@/lib/routes";
+import { routes } from "@/lib/routes";
 
 type DesktopSidebarProps = {
 	sidebarNavItems: MainNavItem[];
@@ -15,7 +15,7 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 	const pathname = usePathname();
 
 	return (
-		<div className="hidden h-screen w-56 flex-col justify-between bg-gray-100 py-7 md:flex xl:w-64">
+		<div className="hidden h-screen w-56 flex-col justify-between bg-gray-100 py-7 lg:flex xl:w-64">
 			<div className="space-y-12">
 				<Link aria-label={siteConfig.name} href={routes.dashboard.home}>
 					<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
