@@ -44,12 +44,6 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 					})}
 				</ul>
 			</div>
-
-			<h2 className="px-6">
-				{/* <Button className="h-11 w-full bg-red-600/80 hover:bg-red-600">
-					<LogOut className="mr-2 size-4" /> Logout
-				</Button> */}
-			</h2>
 		</div>
 	);
 }

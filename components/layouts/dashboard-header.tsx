@@ -16,6 +16,7 @@ import {
 import useAuth from "@/contexts/auth/hook";
 import LogoutButton from "../logout-button";
 import { routes } from "@/lib/routes";
+import MobileDashboardSidebar from "./mobile-dashboard-sidebar";
 
 export default function DashboardHeader() {
 	const { user } = useAuth();
@@ -23,7 +24,9 @@ export default function DashboardHeader() {
 	return (
 		<div className="mb-8 flex items-center justify-between border-b pb-3">
 			<div className="flex items-center gap-x-4">
-				<div className="lg:hidden">Menu</div>
+				<div className="lg:hidden">
+					<MobileDashboardSidebar />
+				</div>
 				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">Welcome {user?.user.username}</h3>
 			</div>
 

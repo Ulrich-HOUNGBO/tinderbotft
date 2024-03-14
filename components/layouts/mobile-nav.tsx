@@ -28,6 +28,7 @@ export default function MobileNav({ mainNavItems, session }: MobileNavProps) {
 				<Button
 					aria-label="Toggle Menu"
 					variant="ghost"
+					onClick={() => setIsOpen(false)}
 					className="border px-2 text-base text-secondary-foreground hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
 				>
 					<Menu className="size-6" />
@@ -47,6 +48,7 @@ export default function MobileNav({ mainNavItems, session }: MobileNavProps) {
 										<Link
 											aria-label={item.title}
 											href={String(item.href)}
+											onClick={() => setIsOpen(false)}
 											className={cn(
 												"font-medium hover:text-primary-500 ",
 												isActive ? "text-primary-500 font-semibold" : "font-medium"
