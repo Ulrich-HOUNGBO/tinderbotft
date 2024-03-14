@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -9,12 +8,12 @@ import {
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { siteConfig } from "@/config/site";
-import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AuthButtons from "../auth-buttons";
 
 interface NavBarProps {
 	items: MainNavItem[];
@@ -25,12 +24,12 @@ export default function NavBar({ items, session }: NavBarProps) {
 	const pathname = usePathname();
 
 	return (
-		<div className="flex items-center justify-between py-7">
+		<div className="flex w-full justify-between gap-x-6 md:gap-44">
 			<Link aria-label={siteConfig.name} href="/">
 				<h3 className="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
 			</Link>
-			<div className="hidden items-center lg:flex">
-				<NavigationMenu className="lg:flex">
+			<div className="flex w-full items-center justify-end space-x-6 lg:w-auto lg:justify-normal">
+				<NavigationMenu className="hidden lg:flex">
 					<NavigationMenuList>
 						{items.map((item) => {
 							const isActive = (pathname.includes(item.href) && item.href.length > 1) || pathname === item.href;
@@ -54,20 +53,8 @@ export default function NavBar({ items, session }: NavBarProps) {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			{session ? (
-				<Button asChild variant="dashboard">
-					<Link href={routes.dashboard.home}>Dashboard</Link>
-				</Button>
-			) : (
-				<div className="hidden items-center space-x-3 md:flex md:space-x-4">
-					<Button asChild>
-						<Link href={routes.auth.login}>Login</Link>
-					</Button>
-					<Button asChild variant="outline">
-						<Link href={routes.auth.register}>Create an account</Link>
-					</Button>
-				</div>
-			)}
+
+			<AuthButtons session={session} className="hidden md:flex" />
 		</div>
 	);
 }
