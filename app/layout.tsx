@@ -12,7 +12,7 @@ import "./globals.css";
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
 const fontHeading = localFont({
-	src: "../assets/fonts/ClashDisplay-Semibold.woff2",
+	src: "../assets/fonts/ClashDisplay-Medium.woff2",
 	variable: "--font-heading",
 });
 
