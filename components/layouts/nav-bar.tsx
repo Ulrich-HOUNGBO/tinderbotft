@@ -54,7 +54,7 @@ export default function NavBar({ items, session }: NavBarProps) {
 				</NavigationMenu>
 			</div>
 
-			<AuthButtons session={session} className="hidden md:flex" />
+			<AuthButtons session={session} className="mr-3 hidden md:flex" />
 		</div>
 	);
 }

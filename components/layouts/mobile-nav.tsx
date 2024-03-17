@@ -37,7 +37,7 @@ export default function MobileNav({ mainNavItems, session }: MobileNavProps) {
 			</SheetTrigger>
 
 			<SheetContent side="left" className="px-0 lg:hidden">
-				<ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+				<ScrollArea className="my-4 h-[calc(100vh-8rem)] px-6 pb-10">
 					<Accordion type="single" collapsible className="w-full">
 						{mainNavItems?.map((item, index) => {
 							const isActive = (pathname.includes(item.href) && item.href.length > 1) || pathname === item.href;
@@ -61,7 +61,7 @@ export default function MobileNav({ mainNavItems, session }: MobileNavProps) {
 							);
 						})}
 
-						<AuthButtons session={session} className="mt-8" />
+						<AuthButtons session={session} className="mt-8 flex md:hidden" />
 					</Accordion>
 				</ScrollArea>
 			</SheetContent>

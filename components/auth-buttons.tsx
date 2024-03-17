@@ -11,7 +11,7 @@ export default function AuthButtons({ session, className }: { session: Session |
 					<Link href={routes.dashboard.home}>Dashboard</Link>
 				</Button>
 			) : (
-				<div className={`${className} items-center space-x-3 md:space-x-4 `}>
+				<div className={`${className} items-center space-x-3 lg:space-x-4 `}>
 					<Button asChild>
 						<Link href={routes.auth.login}>Login</Link>
 					</Button>

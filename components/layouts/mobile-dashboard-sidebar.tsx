@@ -31,7 +31,7 @@ export default function MobileDashboardSidebar() {
 			</SheetTrigger>
 
 			<SheetContent side="mobileLeft" className="px-0 lg:hidden">
-				<ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+				<ScrollArea className="my-4 h-[calc(100vh-8rem)] px-6 pb-10">
 					<div className="space-y-12">
 						<Link aria-label={siteConfig.name} href={routes.dashboard.home}>
 							<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
