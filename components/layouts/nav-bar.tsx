@@ -24,7 +24,7 @@ export default function NavBar({ items, session }: NavBarProps) {
 	const pathname = usePathname();
 
 	return (
-		<div className="flex w-full justify-between gap-x-6 md:gap-44">
+		<div className="flex w-full items-center justify-between gap-x-6 md:gap-44">
 			<Link aria-label={siteConfig.name} href="/">
 				<h3 className="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
 			</Link>
