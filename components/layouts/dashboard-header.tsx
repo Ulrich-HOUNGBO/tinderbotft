@@ -39,7 +39,7 @@ export default function DashboardHeader() {
 					)}
 				</div>
 				<Button asChild>
-					<Link href={routes.dashboard.credits.buyCredits}>Buy Credits</Link>
+					<Link href={routes.dashboard.credits.index}>Buy Credits</Link>
 				</Button>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
