@@ -44,6 +44,14 @@ export interface SmsInterface {
 	createdAt: string;
 }
 
+export interface PlansInterface {
+	id: string;
+	price: string;
+	credit: string;
+	recommended: boolean;
+	status: "active" | "inactive";
+}
+
 export interface PaymentHistoryInterface {
 	id: string;
 	pack: string;

@@ -1,26 +1,24 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import useAuth from "@/contexts/auth/hook";
+import { routes } from "@/lib/routes";
 import { getSmsByUserId } from "@/services/queries/sms";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { SmsInterface } from "@/types";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
-import { routes } from "@/lib/routes";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function SmsListSection() {
 	const { user } = useAuth();
 
-	const { isLoading, isSuccess, isError, data } = useQuery<SmsInterface[]>({
+	const { isLoading, isSuccess, isError, data } = useQuery({
 		queryKey: ["messages-list"],
 		queryFn: () => getSmsByUserId(user?.id!),
 	});
 
-	// isError && console.log("error");
+	isError && console.log("error");
 
 	if (isLoading) {
 		return (

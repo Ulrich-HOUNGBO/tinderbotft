@@ -1,11 +1,20 @@
 import axios from "@/lib/axios";
-import { UserInterface } from "@/types";
+import { SmsInterface } from "@/types";
+
+/**
+ * Query to get all messages
+ * @returns {Promise<SmsInterface[]>} - List of messages
+ */
+export const getAllSms = async (): Promise<SmsInterface[]> => {
+	const response = await axios.get("/messages").then((data) => data);
+	return response.data;
+};
 
 /**
  * Query to get a user messages
- * @returns {Promise<any>} - Object containing user messages
+ * @returns {Promise<SmsInterface[]>} - Object containing user messages
  */
-export const getSmsByUserId = async (id: string): Promise<any> => {
+export const getSmsByUserId = async (id: string): Promise<SmsInterface[]> => {
 	const response = await axios.get(`/messages/user/${id}`).then((data) => data);
 	return response.data;
 };

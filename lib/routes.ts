@@ -13,7 +13,7 @@ export const routes = {
 		home: "/dashboard/home",
 		credits: {
 			index: "/dashboard/credits",
-			buyCredits: "/dashboard/credits/buy",
+			// buyCredits: (id: string) => `/dashboard/credits/buy-credits/${id}`,
 		},
 		sms: {
 			index: "/dashboard/sms",
