@@ -1,11 +1,8 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { routes } from "@/lib/routes";
+import DashboardSidebarSharedContent from "./dashboard-sidebar-shared-content";
 
 type DesktopSidebarProps = {
 	sidebarNavItems: MainNavItem[];
@@ -15,35 +12,8 @@ export default function DesktopSidebar({ sidebarNavItems }: DesktopSidebarProps)
 	const pathname = usePathname();
 
 	return (
-		<div className="hidden h-screen w-56 flex-col justify-between bg-gray-100 py-7 lg:flex xl:w-64">
-			<div className="space-y-12">
-				<Link aria-label={siteConfig.name} href={routes.dashboard.home}>
-					<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
-				</Link>
-
-				<ul className="flex flex-col gap-y-2">
-					{sidebarNavItems.map(({ icon: Icon, ...item }) => {
-						const isActive = (pathname.includes(item.href) && item.href.length > 1) || pathname === item.href;
-
-						return (
-							<Link
-								aria-label={item.title}
-								href={item.href}
-								key={`${item.href}`}
-								className={cn(
-									"text-gray-800 flex items-center gap-x-2 py-[14px] px-6 rounded-md relative",
-									isActive
-										? " text-primary font-medium before:content[''] before:w-[6px] before:h-full before:bg-primary before:absolute before:right-0 before:rounded-l-full"
-										: "hover:bg-slate-200"
-								)}
-							>
-								<Icon className="size-5" />
-								<span className="text-xs lg:text-base">{item.title}</span>
-							</Link>
-						);
-					})}
-				</ul>
-			</div>
+		<div className="hidden h-screen w-56 flex-col justify-between bg-gray-100 px-4 py-7 lg:flex xl:w-64">
+			<DashboardSidebarSharedContent sidebarNavItems={sidebarNavItems} pathname={pathname} />
 		</div>
 	);
 }

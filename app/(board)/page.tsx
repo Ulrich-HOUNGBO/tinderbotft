@@ -1,3 +1,4 @@
+import Payment from "@/components/payment";
 import AboutSection from "@/components/sections/about";
 import Hero from "@/components/sections/hero";
 import PricingSection from "@/components/sections/pricing";
@@ -8,6 +9,7 @@ export default function Homepage() {
 		<div className="space-y-36">
 			<Hero />
 			<AboutSection />
+			<Payment />
 			<PricingSection />
 		</div>
 	);

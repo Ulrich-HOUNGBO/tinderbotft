@@ -44,11 +44,19 @@ export default function LoginForm() {
 
 		if (response?.error) {
 			console.log(response);
+			// TODO: change response error
 			response.status === 401 &&
 				toast({
 					variant: "destructive",
 					title: "Invalid credentials",
 				});
+
+			response.error === "Server Error !" &&
+				toast({
+					variant: "destructive",
+					title: "Server error, please try again later",
+				});
+
 			setIsPending(false);
 			return;
 		}
