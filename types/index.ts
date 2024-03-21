@@ -28,7 +28,6 @@ export interface UserInterface {
 		phoneNo: string;
 		email: string;
 		role: "user" | "admin";
-		phoneNumber: string;
 		credit: number;
 	};
 }
@@ -46,7 +45,7 @@ export interface SmsInterface {
 
 export interface PlansInterface {
 	id: string;
-	price: string;
+	price: number;
 	credit: string;
 	recommended: boolean;
 	status: "active" | "inactive";
