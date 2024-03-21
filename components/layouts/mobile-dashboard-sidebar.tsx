@@ -27,7 +27,7 @@ export default function MobileDashboardSidebar() {
 				</Button>
 			</SheetTrigger>
 
-			<SheetContent side="mobileLeft" className="px-0 lg:hidden">
+			<SheetContent side="left" className="px-0 lg:hidden">
 				<ScrollArea className="my-4 h-[calc(100vh-8rem)] px-6 pb-10">
 					<DashboardSidebarSharedContent
 						sidebarNavItems={dashboardConfig.mainNav}

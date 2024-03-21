@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 		<div className="grid h-screen lg:grid-cols-2">
 			<div className="container relative flex max-w-md flex-col justify-center md:mx-auto md:max-w-xl">
 				{children}
-				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-[10px] text-gray-400 md:text-xs ">
+				<p className="absolute bottom-5 right-1/2 translate-x-1/2 text-center text-[9px] text-gray-400 md:text-xs ">
 					© 2024 MarkSafeTo. All rights reserved.
 				</p>
 			</div>
