@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Button } from "./ui/button";
 import { useKKiaPay } from "kkiapay-react";
 
-export default function Payment() {
+export default function Payment({ planID }: { planID: string }) {
 	const { openKkiapayWidget, addKkiapayListener, removeKkiapayListener } = useKKiaPay();
 
 	function open() {
@@ -37,7 +37,7 @@ export default function Payment() {
 
 	return (
 		<div className="text-center">
-			<Button onClick={open}>Pay now</Button>
+			<Button onClick={open}>Buy Credit</Button>
 		</div>
 	);
 }

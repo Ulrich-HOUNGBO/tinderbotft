@@ -2,7 +2,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Dashboard Home",
+	title: "Dashboard - Home",
 	description: "Dashboard home page",
 };
 

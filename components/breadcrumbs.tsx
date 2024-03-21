@@ -34,7 +34,7 @@ export function Breadcrumbs({ segments, separator, truncationLength = 0, classNa
 							aria-current={isLastSegment ? "page" : undefined}
 							href={segment.href ?? "#"}
 							className={cn(
-								"truncate transition-colors hover:text-foreground lg:text-lg",
+								"font-medium text-lg truncate transition-colors hover:text-foreground",
 								isLastSegment ? "text-foreground" : "text-muted-foreground"
 							)}
 						>

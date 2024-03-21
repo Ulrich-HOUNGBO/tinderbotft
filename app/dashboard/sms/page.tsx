@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Dashboard Sms",
+	description: "Dashboard sms page",
+};
 
 export default function SmsPage() {
 	return (

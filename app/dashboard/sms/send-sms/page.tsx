@@ -1,6 +1,12 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import SendSmsForm from "@/components/forms/send-sms-form";
 import { routes } from "@/lib/routes";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Dashboard - Send Sms",
+	description: "Dashboard send sms page",
+};
 
 export default function SendSmsPage() {
 	return (
@@ -11,7 +17,7 @@ export default function SendSmsPage() {
 					{ title: "Send Sms", href: routes.dashboard.sms.send },
 				]}
 			/>
-			<div className="max-w-2xl">
+			<div className="w-full">
 				<SendSmsForm />
 			</div>
 		</div>

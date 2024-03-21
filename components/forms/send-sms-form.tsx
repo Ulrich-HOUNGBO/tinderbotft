@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { smsSchema } from "@/lib/validations/sms";
 import { sendSms, sendSmsCredentials } from "@/services/queries/sms";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, Send } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,8 +14,8 @@ import { z } from "zod";
 import PhoneInput from "../ui/phone-input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
-import {useRouter} from "next/navigation";
-import {routes} from "@/lib/routes";
+import { useRouter } from "next/navigation";
+import { routes } from "@/lib/routes";
 
 type Credentials = z.infer<typeof smsSchema>;
 
@@ -51,11 +51,11 @@ export default function SendSmsForm() {
 		mode: "onChange",
 	});
 
-	useEffect(() => {
-		form.setValue("pageNumber", form.watch("message").length.toString());
-		// console.log(form.watch("message"));
-		// TODO: Review dependencies
-	});
+	// useEffect(() => {
+	// 	form.setValue("pageNumber", form.watch("message").length.toString());
+	// 	// console.log(form.watch("message"));
+	// 	// TODO: Review dependencies
+	// });
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
@@ -75,7 +75,10 @@ export default function SendSmsForm() {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)} className="grid gap-y-3 md:gap-y-7">
+			<form
+				onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
+				className="grid max-w-2xl gap-y-3 md:gap-y-7"
+			>
 				<div className="space-y-2 md:space-y-3">
 					{/* Sender's name field */}
 					<FormField
@@ -122,7 +125,7 @@ export default function SendSmsForm() {
 									<Textarea placeholder="Your message" {...field} rows={5} />
 								</FormControl>
 								<FormMessage />
-								<div className="space-x-1">
+								{/* <div className="space-x-1">
 									<span className="text-xs font-medium text-gray-400">
 										{form.watch("message").length} character(s){" "}
 									</span>
@@ -136,7 +139,7 @@ export default function SendSmsForm() {
 											form.watch("message").length <= 240 &&
 											"1500 credits will be used for this message"}
 									</span>
-								</div>
+								</div> */}
 							</FormItem>
 						)}
 					/>

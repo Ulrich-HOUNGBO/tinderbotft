@@ -1,7 +1,11 @@
 import ConfirmEmailSection from "@/components/sections/confirm-email-section";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Confirm Email",
+	description: "Email confirmation page",
+};
 
 export default function EmailConfirmationPage() {
-	return (
-		<ConfirmEmailSection/>
-	);
+	return <ConfirmEmailSection />;
 }

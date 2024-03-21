@@ -2,9 +2,9 @@
 
 import { getAllPlans } from "@/services/queries/plans";
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "../ui/skeleton";
-import PlansListCard from "../cards/plans-list-card";
 import { AlertCircle } from "lucide-react";
+import PlansListCard from "../cards/plans-list-card";
+import { Skeleton } from "../ui/skeleton";
 
 export default function CreditsListSection() {
 	const { isLoading, isError, data } = useQuery({
