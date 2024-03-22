@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Dashboard Sms",
+	title: "Dashboard - Sms",
 	description: "Dashboard sms page",
 };
 

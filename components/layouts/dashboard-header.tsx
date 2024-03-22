@@ -62,18 +62,18 @@ export default function DashboardHeader() {
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem asChild>
+							<DropdownMenuItem asChild className="cursor-pointer">
 								<Link href="/dashboard/profile">
 									<User className="mr-2 size-4" aria-hidden="true" />
 									Profile
 								</Link>
 							</DropdownMenuItem>
-							<DropdownMenuItem asChild>
+							{/* <DropdownMenuItem asChild>
 								<Link href="/dashboard/settings">
 									<Settings className="mr-2 size-4" aria-hidden="true" />
 									Settings
 								</Link>
-							</DropdownMenuItem>
+							</DropdownMenuItem> */}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem className="hover:!bg-destructive/10">
