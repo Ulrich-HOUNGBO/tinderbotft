@@ -16,7 +16,7 @@ export default function CreditsListSection() {
 
 	return (
 		<div className="space-y-3">
-			<h1 className="font-heading">Credit Packs</h1>
+			<h1 className="font-heading">Credit Packs (Select a plan to make the payment)</h1>
 
 			<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 				{isLoading ? (
