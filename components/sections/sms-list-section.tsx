@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import useAuth from "@/contexts/auth/hook";
 import { routes } from "@/lib/routes";
@@ -43,7 +42,8 @@ export default function SmsListSection() {
 					))}
 				</div>
 			) : (
-				<ScrollArea className="h-56 rounded-lg border border-gray-100 p-4 xl:h-96 2xl:h-[30rem]">
+				<>
+					{/* <ScrollArea className="h-56 rounded-lg border border-gray-100 p-4 xl:h-96 2xl:h-[30rem]"> */}
 					{data && data.length > 0 ? (
 						data?.map((sms) => (
 							<div key={sms.id} className="mb-4 cursor-pointer rounded-lg border bg-background p-4 hover:bg-gray-50">
@@ -68,7 +68,8 @@ export default function SmsListSection() {
 							</Button>
 						</div>
 					)}
-				</ScrollArea>
+					{/* </ScrollArea> */}
+				</>
 			)}
 		</div>
 	);
