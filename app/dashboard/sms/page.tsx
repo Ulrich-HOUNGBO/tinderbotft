@@ -24,11 +24,12 @@ export default function SmsPage() {
 
 			<Alert className="my-5">
 				<AlertCircle className="size-5" />
-				<AlertTitle>Unit price of a text message: 500 CFA</AlertTitle>
+				<AlertTitle>Unit price of a text message: 10 credits</AlertTitle>
 				<AlertDescription className="pt-2 text-gray-600">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt soluta architecto autem quia quidem, rerum
-					magnam aut perspiciatis corporis harum velit repellat adipisci mollitia culpa minus accusantium dicta ipsa
-					accusamus.
+					<p className="text-xs">
+						Have you purchased an SMS pack without seeing your SMS credit added to your balance automatically?
+					</p>
+					<p className="text-xs">Your recipients do not confirm receipt of your Pro SMS?</p>
 				</AlertDescription>
 			</Alert>
 			<SmsListSection />
