@@ -1,7 +1,5 @@
 "use client";
 
-import { Settings, User } from "lucide-react";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,8 +12,10 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useAuth from "@/contexts/auth/hook";
-import LogoutButton from "../logout-button";
 import { routes } from "@/lib/routes";
+import { User } from "lucide-react";
+import Link from "next/link";
+import LogoutButton from "../logout-button";
 import MobileDashboardSidebar from "./mobile-dashboard-sidebar";
 
 export default function DashboardHeader() {
@@ -68,12 +68,6 @@ export default function DashboardHeader() {
 									Profile
 								</Link>
 							</DropdownMenuItem>
-							{/* <DropdownMenuItem asChild>
-								<Link href="/dashboard/settings">
-									<Settings className="mr-2 size-4" aria-hidden="true" />
-									Settings
-								</Link>
-							</DropdownMenuItem> */}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem className="hover:!bg-destructive/10">
