@@ -13,8 +13,8 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast } from "../ui/use-toast";
 import PhoneInput from "../ui/phone-input";
+import { toast } from "../ui/use-toast";
 
 type Credentials = z.infer<typeof registerSchema>;
 
@@ -28,8 +28,13 @@ export default function RegisterForm() {
 				description: "We've sent you an email to verify your account.",
 			});
 		},
-		onError: (error: Error) => {
+		onError: (error: any) => {
 			console.log(error);
+			toast({
+				variant: "destructive",
+				title: "An error occurred",
+				description: error.response.statusText,
+			});
 		},
 	});
 

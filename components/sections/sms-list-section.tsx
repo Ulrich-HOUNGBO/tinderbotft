@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import useAuth from "@/contexts/auth/hook";
@@ -8,6 +7,7 @@ import { routes } from "@/lib/routes";
 import { getSmsByUserId } from "@/services/queries/sms";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import MessageCard from "../cards/message-card";
 
 export default function SmsListSection() {
 	const { user } = useAuth();
@@ -45,21 +45,7 @@ export default function SmsListSection() {
 				<>
 					{/* <ScrollArea className="h-56 rounded-lg border border-gray-100 p-4 xl:h-96 2xl:h-[30rem]"> */}
 					{data && data.length > 0 ? (
-						data?.map((sms) => (
-							<div key={sms.id} className="mb-4 cursor-pointer rounded-lg border bg-background p-4 hover:bg-gray-50">
-								<div className="mb-1">
-									<div className="flex items-center justify-between">
-										<h3 className="text-sm font-medium">Sent to : {sms.to}</h3>
-										<span className="text-xs font-medium text-gray-600">{sms.createdAt}</span>
-									</div>
-									<span className="text-xs text-gray-600">From : {sms.from}</span>
-								</div>
-								<div>
-									<p>{sms.message}</p>
-									<Badge className="font-sans">{sms.status}</Badge>
-								</div>
-							</div>
-						))
+						data?.map((sms) => <MessageCard key={sms.id} sms={sms} />)
 					) : (
 						<div className="flex flex-col items-center gap-y-3">
 							<h3 className="font-medium text-gray-600">You have no messages</h3>

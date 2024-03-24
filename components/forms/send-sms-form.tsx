@@ -3,19 +3,19 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { routes } from "@/lib/routes";
 import { smsSchema } from "@/lib/validations/sms";
 import { sendSms, sendSmsCredentials } from "@/services/queries/sms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2, Send } from "lucide-react";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import PhoneInput from "../ui/phone-input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
-import { useRouter } from "next/navigation";
-import { routes } from "@/lib/routes";
+import { useEffect } from "react";
 
 type Credentials = z.infer<typeof smsSchema>;
 
@@ -34,8 +34,13 @@ export default function SendSmsForm() {
 			});
 			router.push(routes.dashboard.sms.index);
 		},
-		onError: (error: Error) => {
-			console.log(error);
+		onError: (error: any) => {
+			// console.log(error);
+			toast({
+				variant: "destructive",
+				title: "An error occurred",
+				description: error.response.statusText,
+			});
 		},
 	});
 
@@ -51,11 +56,11 @@ export default function SendSmsForm() {
 		mode: "onChange",
 	});
 
-	// useEffect(() => {
-	// 	form.setValue("pageNumber", form.watch("message").length.toString());
-	// 	// console.log(form.watch("message"));
-	// 	// TODO: Review dependencies
-	// });
+	useEffect(() => {
+		form.setValue("pageNumber", form.watch("message").length.toString());
+		// console.log(form.watch("message"));
+		// TODO: Review dependencies
+	});
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
@@ -125,7 +130,7 @@ export default function SendSmsForm() {
 									<Textarea placeholder="Your message" {...field} rows={5} />
 								</FormControl>
 								<FormMessage />
-								{/* <div className="space-x-1">
+								<div className="space-x-1">
 									<span className="text-xs font-medium text-gray-400">
 										{form.watch("message").length} character(s){" "}
 									</span>
@@ -139,7 +144,7 @@ export default function SendSmsForm() {
 											form.watch("message").length <= 240 &&
 											"1500 credits will be used for this message"}
 									</span>
-								</div> */}
+								</div>
 							</FormItem>
 						)}
 					/>
