@@ -24,7 +24,7 @@ export default function BuyCreditPage({ params }: BuyCreditPageProps) {
 					{ title: "Buy Credits", href: routes.dashboard.credits.buyCredits(params.id) },
 				]}
 			/>
-			<h1 className="my-6">Buy credit page for id: {params.id}</h1>
+			<h1 className="my-6">Buy credit page</h1>
 			<Payment planID={params.id} />
 		</div>
 	);
