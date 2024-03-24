@@ -17,27 +17,34 @@ import { User } from "lucide-react";
 import Link from "next/link";
 import LogoutButton from "../logout-button";
 import MobileDashboardSidebar from "./mobile-dashboard-sidebar";
+import { Skeleton } from "../ui/skeleton";
 
 export default function DashboardHeader() {
-	const { user } = useAuth();
+	const { user, isLoading } = useAuth();
 
 	return (
-		<div className="mb-8 flex items-center justify-between border-b pb-3">
+		<div className="z-50 mb-8 flex items-center justify-between border-b bg-background pb-3 max-md:container max-md:fixed max-md:inset-x-0 max-md:top-0 max-md:pt-3">
 			<div className="flex items-center gap-x-4">
 				<div className="lg:hidden">
 					<MobileDashboardSidebar />
 				</div>
-				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">Welcome {user?.user.username}</h3>
+				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">
+					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Welcome ${user?.user.username}`}
+				</h3>
 			</div>
 
 			<div className="flex items-center gap-x-4">
-				<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 md:block">
-					{user && (
-						<span className="text-gray-700">{`${user?.user.credit} ${
-							user?.user.credit > 1 ? "Credits" : "Credit"
-						}`}</span>
-					)}
-				</div>
+				{!user || isLoading ? (
+					<Skeleton className="h-10 w-24" />
+				) : (
+					user && (
+						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 md:block">
+							<span className="text-gray-700">{`${user?.user.credit} ${
+								user?.user.credit > 1 ? "Credits" : "Credit"
+							}`}</span>
+						</div>
+					)
+				)}
 				<Button asChild>
 					<Link href={routes.dashboard.credits.index}>Buy Credits</Link>
 				</Button>

@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 				<SideBar />
 				<div className="container h-screen w-full overflow-y-auto py-5">
 					<DashboardHeader />
-					<main className="pb-5 font-sans">{children}</main>
+					<main className="pb-5 font-sans max-md:pt-16">{children}</main>
 				</div>
 			</div>
 		</AuthProvider>
