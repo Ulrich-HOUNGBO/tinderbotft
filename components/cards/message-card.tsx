@@ -12,7 +12,9 @@ export default function MessageCard({ sms }: { sms: SmsInterface }) {
 			<div className="mb-1">
 				<div className="flex items-center justify-between">
 					<h3 className="text-sm font-medium">Sent to : {sms.to}</h3>
-					<span className="text-xs font-medium text-gray-600">{`${formatDistanceToNowStrict(sms.createdAt)} ago`}</span>
+					<span className="text-xs font-medium text-gray-600">
+						{formatDistanceToNowStrict(sms.createdAt, { addSuffix: true })}
+					</span>
 				</div>
 				<span className="text-xs text-gray-600">From : {sms.from}</span>
 			</div>
