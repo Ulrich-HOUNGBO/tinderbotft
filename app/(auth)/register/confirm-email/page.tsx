@@ -1,5 +1,6 @@
 import ConfirmEmailSection from "@/components/sections/confirm-email-section";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "Confirm Email",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function EmailConfirmationPage() {
-	return <ConfirmEmailSection />;
+	return (
+		<Suspense>
+			<ConfirmEmailSection />;
+		</Suspense>
+	);
 }
