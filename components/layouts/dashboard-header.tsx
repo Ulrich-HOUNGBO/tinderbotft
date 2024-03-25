@@ -23,7 +23,7 @@ export default function DashboardHeader() {
 	const { user, isLoading } = useAuth();
 
 	return (
-		<div className="z-50 mb-8 flex items-center justify-between border-b bg-background pb-3 max-md:container max-md:fixed max-md:inset-x-0 max-md:top-0 max-md:pt-3">
+		<div className="z-50 mb-8 flex items-center justify-between border-b bg-background pb-3 max-lg:container max-lg:fixed max-lg:inset-x-0 max-lg:top-0 max-lg:pt-3">
 			<div className="flex items-center gap-x-4">
 				<div className="lg:hidden">
 					<MobileDashboardSidebar />
