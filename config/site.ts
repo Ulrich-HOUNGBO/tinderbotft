@@ -2,7 +2,8 @@ import { MainNavItem } from "@/types";
 
 export const siteConfig = {
 	name: "MarkSafeTo",
-	description: "Envoyer des SMS professionnels simplement, rapidement et avec plus de fiabilité",
+	description: "Send professional SMS messages simply, quickly and more reliably",
+	url: "https://marksafeto.com",
 	mainNav: [
 		{
 			title: "Home",
@@ -11,6 +12,10 @@ export const siteConfig = {
 		{
 			title: "About",
 			href: "/#about",
+		},
+		{
+			title: "Features",
+			href: "/#features",
 		},
 		{
 			title: "Our Pricing",
