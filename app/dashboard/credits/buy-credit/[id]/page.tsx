@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Payment from "@/components/payment";
 import { routes } from "@/lib/routes";
+import { getPlanById } from "@/services/queries/plans";
 
 interface BuyCreditPageProps {
 	params: {
@@ -8,11 +9,20 @@ interface BuyCreditPageProps {
 	};
 }
 
-export async function generateMetadata() {
-	return {
-		title: "Dashboard - Buy Credit",
-		description: "Buy credit to send SMS",
-	};
+export async function generateMetadata({ params }: BuyCreditPageProps) {
+	try {
+		const planData = await getPlanById(params.id);
+		console.log(planData);
+		return {
+			title: `Dashboard - Buy ${planData.credit} Credits`,
+			description: `Buy ${planData.credit} credits for ${planData.price}`,
+		};
+	} catch (error) {
+		return {
+			title: "Dashboard - Buy Credits",
+			description: "Buy credits page",
+		};
+	}
 }
 
 export default function BuyCreditPage({ params }: BuyCreditPageProps) {
@@ -24,7 +34,7 @@ export default function BuyCreditPage({ params }: BuyCreditPageProps) {
 					{ title: "Buy Credits", href: routes.dashboard.credits.buyCredits(params.id) },
 				]}
 			/>
-			<h1 className="my-6">Buy credit page</h1>
+			{/* <h1 className="my-6">Buy credit page</h1> */}
 			<Payment planID={params.id} />
 		</div>
 	);
