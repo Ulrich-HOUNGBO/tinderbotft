@@ -138,12 +138,12 @@ export default function SendSmsForm() {
 									<span className="text-xs font-medium text-destructive">
 										{form.watch("message").length > 80 &&
 											form.watch("message").length <= 160 &&
-											"1000 credits will be used for this message"}
+											"20 credits will be used for this message"}
 									</span>
 									<span className="text-xs font-medium text-destructive">
 										{form.watch("message").length > 160 &&
 											form.watch("message").length <= 240 &&
-											"1500 credits will be used for this message"}
+											"30 credits will be used for this message"}
 									</span>
 								</div>
 							</FormItem>
