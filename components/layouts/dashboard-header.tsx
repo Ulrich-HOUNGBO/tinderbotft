@@ -38,7 +38,7 @@ export default function DashboardHeader() {
 					<Skeleton className="hidden h-10 w-24 md:block" />
 				) : (
 					user && (
-						<div className="hidden h-10 items-center justify-center rounded-md border dark:border-foreground/50 px-4 py-2 md:block">
+						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 dark:border-foreground/50 md:block">
 							<span className="text-gray-700 dark:text-foreground/90">{`${user?.user.credit} ${
 								user?.user.credit > 1 ? "Credits" : "Credit"
 							}`}</span>

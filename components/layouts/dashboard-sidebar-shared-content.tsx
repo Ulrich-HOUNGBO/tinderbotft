@@ -34,8 +34,8 @@ export default function DashboardSidebarSharedContent({
 							className={cn(
 								"text-gray-800 dark:text-foreground/85 flex items-center gap-x-2 py-[14px] px-4 rounded-md relative",
 								isActive
-									? "font-medium bg-primary dark:bg-gray-700/40 dark:border dark:border-foreground/30 text-background dark:text-foreground"
-									: "hover:bg-slate-200 dark:hover:bg-foreground/15"
+									? "font-medium bg-foreground/5 dark:bg-gray-700/40 border border-foreground/30 dark:border-foreground/30 text-foreground dark:text-foreground"
+									: "hover:bg-foreground/5 dark:hover:bg-foreground/15"
 							)}
 						>
 							<Icon className="size-5" />
