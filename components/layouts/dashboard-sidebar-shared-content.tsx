@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/components/logo";
+import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import Link from "next/link";
@@ -18,7 +19,7 @@ export default function DashboardSidebarSharedContent({
 }: DashboardSidebarSharedContentProps) {
 	return (
 		<div className="space-y-12">
-			<Logo />
+			<Logo href={routes.dashboard.home} />
 
 			<ul className="flex flex-col gap-y-2">
 				{sidebarNavItems.map(({ icon: Icon, ...item }) => {
@@ -31,8 +32,10 @@ export default function DashboardSidebarSharedContent({
 							key={`${item.href}`}
 							onClick={() => setIsOpen?.(false)}
 							className={cn(
-								"text-gray-800 flex items-center gap-x-2 py-[14px] px-4 rounded-md relative",
-								isActive ? "font-medium bg-primary text-white" : "hover:bg-slate-200"
+								"text-gray-800 dark:text-foreground/85 flex items-center gap-x-2 py-[14px] px-4 rounded-md relative",
+								isActive
+									? "font-medium bg-primary dark:bg-gray-700/40 dark:border dark:border-foreground/30 text-background dark:text-foreground"
+									: "hover:bg-slate-200 dark:hover:bg-foreground/15"
 							)}
 						>
 							<Icon className="size-5" />

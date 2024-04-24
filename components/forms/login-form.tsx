@@ -103,7 +103,7 @@ export default function LoginForm() {
 				</div>
 
 				<div className="flex justify-end">
-					<Link href={routes.auth.forgotPassword} className="text-sm text-primary underline">
+					<Link href={routes.auth.forgotPassword} className="text-sm text-primary underline dark:text-foreground/80">
 						Mot de passe oublié ?
 					</Link>
 				</div>

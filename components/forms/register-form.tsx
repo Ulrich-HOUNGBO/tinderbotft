@@ -143,9 +143,9 @@ export default function RegisterForm() {
 											className="rounded border-primary"
 										/>
 									</FormControl>
-									<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+									<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-foreground/90">
 										J&apos;accepte les
-										<Link href="/terms" className="pl-1 text-primary underline">
+										<Link href="/terms" className="pl-1 text-primary underline dark:text-foreground/80">
 											conditions d&apos;utilisation
 										</Link>
 									</label>

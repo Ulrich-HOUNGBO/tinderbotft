@@ -16,7 +16,9 @@ export default function CreditsListSection() {
 
 	return (
 		<div className="space-y-3">
-			<h1 className="font-heading">Packs de crédits (sélectionnez un pack pour effectuer le paiement)</h1>
+			<h1 className="font-heading dark:text-foreground/90">
+				Packs de crédits (sélectionnez un pack pour effectuer le paiement)
+			</h1>
 
 			<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 				{isLoading ? (

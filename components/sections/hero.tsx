@@ -7,7 +7,7 @@ export default function Hero() {
 	return (
 		<div className="grid items-center gap-8 lg:grid-cols-2 xl:gap-20">
 			<div className="space-y-5">
-				<h1 className="text-3xl leading-tight text-gray-700 max-lg:text-center md:text-[2.6rem] xl:text-4xl">
+				<h1 className="text-3xl leading-tight text-gray-700 dark:text-foreground/85 max-lg:text-center md:text-[2.6rem] xl:text-4xl">
 					Envoyez des SMS professionnels facilement, rapidement et de manière fiable
 				</h1>
 				<p className="text-gray-400 max-lg:text-center xl:text-xl">
@@ -19,7 +19,7 @@ export default function Hero() {
 					</Button>
 					<Button variant="outline">En savoir plus</Button>
 				</div>
-				<div className="grid gap-4 rounded-xl bg-slate-100/50 p-4 md:grid-cols-2 [&>div:first-of-type]:md:border-r [&>div:first-of-type]:md:border-gray-400">
+				<div className="grid gap-4 rounded-xl bg-slate-100/50 p-4 dark:bg-foreground/5 md:grid-cols-2 [&>div:first-of-type]:md:border-r [&>div:first-of-type]:md:border-gray-400">
 					<div>
 						<h1>85%</h1>
 						<p>Gagnez le premier mois</p>
@@ -33,13 +33,13 @@ export default function Hero() {
 
 			<div className="max-lg:order-first">
 				<div className="flex h-[18rem] flex-col justify-center overflow-hidden px-2 md:h-[30rem]">
-					<div className="-m-2 h-full rounded-xl bg-gray-900/5 p-3 ring-1 ring-inset ring-gray-900/10 lg:-m-2 lg:rounded-2xl lg:p-3">
+					<div className="-m-2 h-full rounded-xl bg-gray-900/5 p-3 ring-1 ring-inset ring-gray-900/15 dark:bg-foreground/10 dark:ring-foreground/30 lg:-m-2 lg:rounded-2xl lg:p-3">
 						<Image
 							src="/images/montgolfiere.jpg"
 							alt="auth-layout"
 							height={500}
 							width={800}
-							className="size-full rounded-md	bg-white object-cover shadow-2xl ring-1 ring-gray-900/10"
+							className="size-full rounded-md	bg-white object-cover shadow-2xl ring-1 ring-gray-900/10 dark:bg-foreground dark:ring-foreground/20"
 						/>
 					</div>
 				</div>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function EmailConfirmationPage() {
 	return (
 		<Suspense>
-			<ConfirmEmailSection />;
+			<ConfirmEmailSection />
 		</Suspense>
 	);
 }

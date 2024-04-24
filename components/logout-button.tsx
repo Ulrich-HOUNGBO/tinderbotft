@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 export default function LogoutButton() {
 	return (
 		<div
-			className="flex w-full cursor-pointer items-center py-[2px] font-medium text-destructive"
+			className="flex w-full cursor-pointer items-center py-[2px] font-medium text-destructive dark:text-red-500"
 			onClick={() =>
 				signOut({
 					callbackUrl: "/",
