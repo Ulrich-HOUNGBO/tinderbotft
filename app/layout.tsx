@@ -17,9 +17,19 @@ const fontHeading = localFont({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXTAUTH_URL!),
 	title: {
 		default: siteConfig.name,
 		template: `%s | ${siteConfig.name}`,
+	},
+	keywords: ["sms professionnel"],
+	openGraph: {
+		type: "website",
+		locale: "fr_FR",
+		url: siteConfig.url,
+		title: siteConfig.name,
+		description: siteConfig.description,
+		siteName: siteConfig.name,
 	},
 	description: siteConfig.description,
 };
