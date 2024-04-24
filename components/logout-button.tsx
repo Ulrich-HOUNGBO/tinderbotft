@@ -1,5 +1,6 @@
 "use client";
 
+import { routes } from "@/lib/routes";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
@@ -9,7 +10,7 @@ export default function LogoutButton() {
 			className="flex w-full cursor-pointer items-center py-[2px] font-medium text-destructive dark:text-red-500"
 			onClick={() =>
 				signOut({
-					callbackUrl: "/",
+					callbackUrl: routes.auth.login,
 				})
 			}
 		>
