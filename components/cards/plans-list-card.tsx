@@ -15,7 +15,7 @@ export default function PlansListCard({ props }: { props: PlansInterface }) {
 			</div>
 			{props.recommended == true && (
 				<span className="absolute right-2 top-2 rounded-full bg-gray-300 px-2 py-1 text-xs font-medium text-gray-800 lg:text-xs">
-					Recommended
+					Recommandé
 				</span>
 			)}
 		</Link>

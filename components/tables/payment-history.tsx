@@ -8,23 +8,23 @@ export default function PaymentHistory() {
 		{
 			id: "1",
 			pack: "5000 FCFA",
-			status: "success",
+			status: "Succès",
 		},
 		{
 			id: "2",
 			pack: "5000 FCFA",
-			status: "failed",
+			status: "Échoué",
 		},
 		{
 			id: "3",
 			pack: "5000 FCFA",
-			status: "pending",
+			status: "En attente",
 		},
 	] satisfies PaymentHistoryInterface[];
 
 	return (
 		<div className="space-y-3">
-			<h1 className="font-heading">Payment History</h1>
+			<h1 className="font-heading">Historique de paiement</h1>
 			<DataTable columns={paymentHistoryColumns} data={data} />
 		</div>
 	);

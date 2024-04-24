@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-	title: "Confirm Email",
-	description: "Email confirmation page",
+	title: "Confirmer votre adresse mail",
+	description: "Confirmation d'email",
 };
 
 export default function EmailConfirmationPage() {

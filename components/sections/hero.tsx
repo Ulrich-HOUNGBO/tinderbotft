@@ -8,25 +8,25 @@ export default function Hero() {
 		<div className="grid items-center gap-8 lg:grid-cols-2 xl:gap-20">
 			<div className="space-y-5">
 				<h1 className="text-3xl leading-tight text-gray-700 max-lg:text-center md:text-[2.6rem] xl:text-4xl">
-					Send professional SMS easily, fast and reliable
+					Envoyez des SMS professionnels facilement, rapidement et de manière fiable
 				</h1>
 				<p className="text-gray-400 max-lg:text-center xl:text-xl">
-					We help you send professional SMS to your customers, clients, and partners.
+					Nous vous aidons à envoyer des SMS professionnels à vos clients et partenaires.
 				</p>
 				<div className="flex gap-x-6 max-lg:justify-center">
 					<Button asChild>
-						<Link href={routes.auth.register}>Get Started</Link>
+						<Link href={routes.auth.register}>Découvrir</Link>
 					</Button>
-					<Button variant="outline">Learn More</Button>
+					<Button variant="outline">En savoir plus</Button>
 				</div>
 				<div className="grid gap-4 rounded-xl bg-slate-100/50 p-4 md:grid-cols-2 [&>div:first-of-type]:md:border-r [&>div:first-of-type]:md:border-gray-400">
 					<div>
 						<h1>85%</h1>
-						<p>Earn in the first month</p>
+						<p>Gagnez le premier mois</p>
 					</div>
 					<div>
 						<h1>+12k</h1>
-						<p>Average profit per month</p>
+						<p>Bénéfice moyen par mois</p>
 					</div>
 				</div>
 			</div>

@@ -4,13 +4,13 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-	title: "Reset Password",
-	description: "Reset your password",
+	title: "Réinitialiser mot de passe",
+	description: "Réinitialiser votre mot de passe",
 };
 export default function ResetPasswordPage() {
 	return (
 		<div>
-			<AuthHeader title="Reset your password" description="Enter your new password" />
+			<AuthHeader title="Réinitialiser votre mot de passe" description="Entrez votre nouveau mot de passe" />
 			<Suspense>
 				<ResetPasswordForm />
 			</Suspense>

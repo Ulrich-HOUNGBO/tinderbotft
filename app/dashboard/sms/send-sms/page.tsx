@@ -14,7 +14,7 @@ export default function SendSmsPage() {
 			<Breadcrumbs
 				segments={[
 					{ title: "Sms", href: routes.dashboard.sms.index },
-					{ title: "Send Sms", href: routes.dashboard.sms.send },
+					{ title: "Envoyer Sms", href: routes.dashboard.sms.send },
 				]}
 			/>
 			<div className="w-full">

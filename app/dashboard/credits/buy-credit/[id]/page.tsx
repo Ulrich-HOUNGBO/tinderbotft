@@ -31,7 +31,7 @@ export default function BuyCreditPage({ params }: BuyCreditPageProps) {
 			<Breadcrumbs
 				segments={[
 					{ title: "Credits", href: routes.dashboard.credits.index },
-					{ title: "Buy Credits", href: routes.dashboard.credits.buyCredits(params.id) },
+					{ title: "Acheter du credits", href: routes.dashboard.credits.buyCredits(params.id) },
 				]}
 			/>
 			{/* <h1 className="my-6">Buy credit page</h1> */}

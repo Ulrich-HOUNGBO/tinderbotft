@@ -20,5 +20,6 @@ export const routes = {
 			send: "/dashboard/sms/send-sms",
 			viewSms: (id: string) => `/dashboard/sms/${id}`,
 		},
+		profile: "/dashboard/profile",
 	},
 };

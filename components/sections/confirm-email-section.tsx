@@ -1,10 +1,10 @@
 "use client";
 
-import {routes} from "@/lib/routes";
-import {confirmEmail} from "@/services/queries/user";
-import {useQuery} from "@tanstack/react-query";
+import { routes } from "@/lib/routes";
+import { confirmEmail } from "@/services/queries/user";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import {redirect, useSearchParams} from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 
 export default function ConfirmEmailSection() {
 	const token = useSearchParams().get("token");
@@ -20,7 +20,7 @@ export default function ConfirmEmailSection() {
 	});
 
 	if (isLoading) {
-		return <p className="text-center">We&apos;re verifying your email</p>;
+		return <p className="text-center">Vérification de votre adresse mail...</p>;
 	}
 
 	if (isError) {
@@ -28,23 +28,22 @@ export default function ConfirmEmailSection() {
 			<div className="space-y-2 text-center">
 				<h3 className="text-2xl font-semibold text-red-700 xl:text-3xl">Oops! 🙁</h3>
 				<p className="text-sm text-muted-foreground xl:text-lg">
-					There was an error confirming your email. Please try again later.
+					Une erreur s&apos;est produite lors de la confirmation de votre e-mail. Veuillez réessayer plus tard.
 				</p>
 			</div>
-		)
-
+		);
 	}
 	return (
 		<div className="text-center">
 			{isSuccess && (
 				<div className="space-y-2">
-					<h3 className="text-2xl font-semibold text-green-700 xl:text-3xl">Congratulation! 🎉</h3>
+					<h3 className="text-2xl font-semibold text-green-700 xl:text-3xl">Félicitation! 🎉</h3>
 					<p className="text-sm text-muted-foreground xl:text-lg">
-						Your email has been confirmed. You can now{" "}
+						Votre email a été confirmé. Vous pouvez maintenant{" "}
 						<Link href={routes.auth.login} className="text-primary underline">
-							login
+							vous connecter
 						</Link>{" "}
-						to your account.
+						à votre compte.
 					</p>
 				</div>
 			)}

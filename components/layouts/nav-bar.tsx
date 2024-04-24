@@ -7,13 +7,13 @@ import {
 	NavigationMenuList,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AuthButtons from "../auth-buttons";
+import Logo from "../logo";
 
 interface NavBarProps {
 	items: MainNavItem[];
@@ -24,10 +24,8 @@ export default function NavBar({ items, session }: NavBarProps) {
 	const pathname = usePathname();
 
 	return (
-		<div className="flex w-full items-center justify-between gap-x-6 md:gap-44">
-			<Link aria-label={siteConfig.name} href="/">
-				<h3 className="text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
-			</Link>
+		<div className="flex w-full items-center justify-between gap-x-6 md:gap-0">
+			<Logo />
 			<div className="flex w-full items-center justify-end space-x-6 lg:w-auto lg:justify-normal">
 				<NavigationMenu className="hidden lg:flex">
 					<NavigationMenuList>
@@ -54,7 +52,7 @@ export default function NavBar({ items, session }: NavBarProps) {
 				</NavigationMenu>
 			</div>
 
-			<AuthButtons session={session} className="mr-3 hidden md:flex" />
+			<AuthButtons session={session} className="mr-3 hidden md:flex lg:mr-0" />
 		</div>
 	);
 }

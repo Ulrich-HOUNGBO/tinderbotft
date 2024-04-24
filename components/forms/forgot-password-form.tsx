@@ -50,12 +50,12 @@ export default function ForgotPasswordForm() {
 
 				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-					Send reset password link
-					<span className="sr-only">Send reset password link</span>
+					Envoyer
+					<span className="sr-only">Envoyer le lien de réinitialisation</span>
 				</Button>
 				<div className="flex justify-end">
 					<Link href={routes.auth.login} className="text-sm text-primary underline">
-						Go back to login page
+						Aller à la page de connexion
 					</Link>
 				</div>
 			</form>

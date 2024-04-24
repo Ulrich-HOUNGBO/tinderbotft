@@ -25,7 +25,7 @@ export default function RefreshMessages({ disabled, setDisabled, isLoading }: Re
 	return (
 		<Button variant="dashboard" disabled={disabled || isLoading} onClick={handleRefreshMessages}>
 			<ReloadIcon className={cn("mr-2 size-3", disabled && "animate-spin")} />
-			<span className="text-xs">Refresh</span>
+			<span className="text-xs">Rafraîchir</span>
 		</Button>
 	);
 }

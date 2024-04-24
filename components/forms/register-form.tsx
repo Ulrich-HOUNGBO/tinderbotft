@@ -24,15 +24,15 @@ export default function RegisterForm() {
 		mutationFn: (credentials: createAccountCredentials) => createAccount(credentials),
 		onSuccess: () => {
 			toast({
-				title: "Account created successfully",
-				description: "We've sent you an email to verify your account.",
+				title: "Compte créé avec succès",
+				description: "Nous vous avons envoyé un e-mail pour vérifier votre compte.",
 			});
 		},
 		onError: (error: any) => {
 			console.log(error);
 			toast({
 				variant: "destructive",
-				title: "An error occurred",
+				title: "Une erreur s'est produite",
 				description: error.response.statusText,
 			});
 		},
@@ -69,7 +69,7 @@ export default function RegisterForm() {
 						name="username"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Username</FormLabel>
+								<FormLabel>Nom d&apos;utilisateur</FormLabel>
 								<FormControl>
 									<Input placeholder="john52" {...field} />
 								</FormControl>
@@ -97,7 +97,7 @@ export default function RegisterForm() {
 						name="phoneNo"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Phone number</FormLabel>
+								<FormLabel>Numéro de téléphone</FormLabel>
 								<FormControl>
 									<PhoneInput
 										inputProps={field}
@@ -120,7 +120,7 @@ export default function RegisterForm() {
 						name="password"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Password</FormLabel>
+								<FormLabel>Mot de passe</FormLabel>
 								<FormControl>
 									<PasswordInput placeholder="**********" {...field} />
 								</FormControl>
@@ -144,9 +144,9 @@ export default function RegisterForm() {
 										/>
 									</FormControl>
 									<label className="text-sm text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-										I agree
+										J&apos;accepte les
 										<Link href="/terms" className="pl-1 text-primary underline">
-											with terms and conditions.
+											conditions d&apos;utilisation
 										</Link>
 									</label>
 								</div>
@@ -158,7 +158,7 @@ export default function RegisterForm() {
 
 				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-					Create account
+					S&apos;inscrire
 					<span className="sr-only">register</span>
 				</Button>
 			</form>
