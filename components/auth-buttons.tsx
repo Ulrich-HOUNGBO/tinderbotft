@@ -11,12 +11,12 @@ export default function AuthButtons({ session, className }: { session: Session |
 					<Link href={routes.dashboard.home}>Dashboard</Link>
 				</Button>
 			) : (
-				<div className={`${className} items-center space-x-3 lg:space-x-4 `}>
+				<div className={`${className} items-center gap-x-3 lg:gap-x-4 `}>
 					<Button asChild>
-						<Link href={routes.auth.login}>Login</Link>
+						<Link href={routes.auth.login}>Se connecter</Link>
 					</Button>
 					<Button asChild variant="outline">
-						<Link href={routes.auth.register}>Create an account</Link>
+						<Link href={routes.auth.register}>Créer un compte</Link>
 					</Button>
 				</div>
 			)}

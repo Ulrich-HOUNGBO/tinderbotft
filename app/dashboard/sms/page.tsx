@@ -18,18 +18,18 @@ export default function SmsPage() {
 			<div className="flex items-center justify-between">
 				<Breadcrumbs segments={[{ title: "Sms" }]} />
 				<Button asChild className="w-fit font-heading">
-					<Link href={routes.dashboard.sms.send}>Send Pro SMS</Link>
+					<Link href={routes.dashboard.sms.send}>Envoyer un SMS</Link>
 				</Button>
 			</div>
 
 			<Alert className="my-5">
 				<AlertCircle className="size-5" />
-				<AlertTitle>Unit price of a text message: 10 credits</AlertTitle>
+				<AlertTitle>Prix unitaire d&apos;un SMS : 10 crédits</AlertTitle>
 				<AlertDescription className="pt-2 text-gray-600">
 					<p className="text-xs">
-						Have you purchased an SMS pack without seeing your SMS credit added to your balance automatically?
+						Avez-vous acheter un pack SMS sans voir votre crédit SMS ajouté à votre solde automatiquement ?
 					</p>
-					<p className="text-xs">Your recipients do not confirm receipt of your Pro SMS?</p>
+					<p className="text-xs">Vos destinataires ne confirment pas la réception de vos SMS Pro ?</p>
 				</AlertDescription>
 			</Alert>
 			<SmsListSection />

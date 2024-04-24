@@ -4,42 +4,39 @@ export const smsSchema = z
 	.object({
 		from: z
 			.string({
-				required_error: "Sender name is required",
+				required_error: "Nom de l'expéditeur requis",
 			})
 			.min(3, {
-				message: "Sender name must be at least 3 characters",
+				message: "Le nom de l'expéditeur doit comporter au moins 3 caractères",
 			})
 			.max(15, {
-				message: "Sender name must be at most 15 characters",
+				message: "Le nom de l'expéditeur doit comporter au plus 15 caractères",
 			}),
 		prefix: z.string().min(2, {
-			message: "Prefix must be at least 2 characters long",
+			message: "Le préfixe doit comporter au moins 2 caractères",
 		}),
 		to: z
 			.string({
-				required_error: "Receiver's phone number is required",
+				required_error: "Numéro de téléphone du destinataire requis",
 			})
 			.min(8, {
-				message: "Receiver's phone number must be at least 8 characters long",
+				message: "Le numéro de téléphone du destinataire doit comporter au moins 8 chiffres",
 			})
 			.max(15, {
-				message: "Receiver's phone number must be at most 15 characters long",
+				message: "Le numéro de téléphone du destinataire doit comporter au plus 15 chiffres",
 			})
 			.regex(/^[0-9]+$/, {
-				message: "Receiver's phone number must be a number",
+				message: "Le numéro de téléphone du destinataire doit être composé de chiffres uniquement",
 			}),
 		message: z
 			.string({
-				required_error: "Message is required",
+				required_error: "Message requis",
 			})
 			.min(1, {
-				message: "Message is required",
+				message: "Le message doit comporter au moins 1 caractère",
 			}),
-		pageNumber: z
-			.string({
-				required_error: "Page number is required",
-			})
-			// .transform((value) => Number(value))
-			// .default("1"),
+		pageNumber: z.string({
+			required_error: "Nombre de caractère requis",
+		}),
 	})
 	.required();

@@ -14,7 +14,7 @@ export default function LogoutButton() {
 			}
 		>
 			<LogOut className="mr-2 size-4" aria-hidden="true" />
-			<span>Log out</span>
+			<span>Se déconnecter</span>
 		</div>
 	);
 }

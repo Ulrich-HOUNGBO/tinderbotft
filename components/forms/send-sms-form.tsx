@@ -22,7 +22,7 @@ type Credentials = z.infer<typeof smsSchema>;
 export default function SendSmsForm() {
 	const router = useRouter();
 	const queryClient = useQueryClient();
-	
+
 	const { mutate, isPending } = useMutation({
 		mutationKey: ["send-sms"],
 		mutationFn: (credentials: sendSmsCredentials) => sendSms(credentials),
@@ -31,7 +31,7 @@ export default function SendSmsForm() {
 				queryKey: ["messages-list"],
 			});
 			toast({
-				title: "SMS sent successfully",
+				title: "SMS envoyé avec succès",
 			});
 			router.push(routes.dashboard.sms.index);
 		},
@@ -59,20 +59,11 @@ export default function SendSmsForm() {
 
 	useEffect(() => {
 		form.setValue("pageNumber", form.watch("message").length.toString());
-		// console.log(form.watch("message"));
-		// TODO: Review dependencies
 	});
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
-		// console.log({
-		// 	from: data.from,
-		// 	to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
-		// 	message: data.message,
-		// 	pageNumber: data.message.length,
-		// });
 
-		// return;
 		mutate({
 			...data,
 			to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
@@ -92,7 +83,7 @@ export default function SendSmsForm() {
 						name="from"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Sender&apos;s name</FormLabel>
+								<FormLabel>Nom de l&apos;expéditeur</FormLabel>
 								<FormControl>
 									<Input placeholder="Josh" {...field} />
 								</FormControl>
@@ -106,7 +97,7 @@ export default function SendSmsForm() {
 						name="to"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Receiver&apos;s phone number</FormLabel>
+								<FormLabel>Numéro de téléphone du destinataire</FormLabel>
 								<FormControl>
 									<PhoneInput
 										inputProps={field}
@@ -128,22 +119,20 @@ export default function SendSmsForm() {
 							<FormItem>
 								<FormLabel>Message</FormLabel>
 								<FormControl>
-									<Textarea placeholder="Your message" {...field} rows={5} />
+									<Textarea placeholder="Votre message" {...field} rows={5} />
 								</FormControl>
 								<FormMessage />
 								<div className="space-x-1">
-									<span className="text-xs font-medium text-gray-400">
-										{form.watch("message").length} character(s){" "}
-									</span>
+									<span className="text-xs font-medium text-gray-400">{form.watch("message").length} caratère(s) </span>
 									<span className="text-xs font-medium text-destructive">
 										{form.watch("message").length > 80 &&
 											form.watch("message").length <= 160 &&
-											"20 credits will be used for this message"}
+											"20 crédits seront utilisés pour ce message"}
 									</span>
 									<span className="text-xs font-medium text-destructive">
 										{form.watch("message").length > 160 &&
 											form.watch("message").length <= 240 &&
-											"30 credits will be used for this message"}
+											"30 crédits seront utilisés pour ce message"}
 									</span>
 								</div>
 							</FormItem>
@@ -153,9 +142,9 @@ export default function SendSmsForm() {
 
 				<Button disabled={isPending}>
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-					Send SMS
+					Envoyer SMS
 					{!isPending && <Send className="ml-2 size-4" aria-hidden="true" />}
-					<span className="sr-only">Send sms</span>
+					<span className="sr-only">Envoyer sms</span>
 				</Button>
 			</form>
 		</Form>

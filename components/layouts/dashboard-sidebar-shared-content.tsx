@@ -1,7 +1,6 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
-import { routes } from "@/lib/routes";
+import Logo from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { MainNavItem } from "@/types";
 import Link from "next/link";
@@ -19,9 +18,7 @@ export default function DashboardSidebarSharedContent({
 }: DashboardSidebarSharedContentProps) {
 	return (
 		<div className="space-y-12">
-			<Link aria-label={siteConfig.name} href={routes.dashboard.home}>
-				<h3 className="px-6 text-xl font-semibold text-gray-800">{siteConfig.name}</h3>
-			</Link>
+			<Logo />
 
 			<ul className="flex flex-col gap-y-2">
 				{sidebarNavItems.map(({ icon: Icon, ...item }) => {

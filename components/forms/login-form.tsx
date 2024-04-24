@@ -48,13 +48,13 @@ export default function LoginForm() {
 			response.status === 401 &&
 				toast({
 					variant: "destructive",
-					title: "Invalid credentials",
+					title: "Identifiants incorrects",
 				});
 
 			response.error === "Server Error !" &&
 				toast({
 					variant: "destructive",
-					title: "Server error, please try again later",
+					title: "Erreur serveur, veuillez réessayer plus tard",
 				});
 
 			setIsPending(false);
@@ -63,7 +63,7 @@ export default function LoginForm() {
 
 		setIsPending(false);
 		toast({
-			title: "Logged in successfully",
+			title: "Connexion réussie",
 		});
 		router.push(routes.dashboard.home);
 	};
@@ -92,7 +92,7 @@ export default function LoginForm() {
 						name="password"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Password</FormLabel>
+								<FormLabel>Mot de passe</FormLabel>
 								<FormControl>
 									<PasswordInput placeholder="**********" {...field} />
 								</FormControl>
@@ -104,14 +104,14 @@ export default function LoginForm() {
 
 				<div className="flex justify-end">
 					<Link href={routes.auth.forgotPassword} className="text-sm text-primary underline">
-						Forgot password ?
+						Mot de passe oublié ?
 					</Link>
 				</div>
 
 				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-					Login
-					<span className="sr-only">Login</span>
+					Se connecter
+					<span className="sr-only">Se connecter</span>
 				</Button>
 			</form>
 		</Form>

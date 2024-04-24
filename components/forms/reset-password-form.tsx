@@ -43,7 +43,7 @@ export default function ResetPasswordForm() {
 						name="newPassword"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Password</FormLabel>
+								<FormLabel>Mot de passe</FormLabel>
 								<FormControl>
 									<PasswordInput placeholder="**********" {...field} />
 								</FormControl>
@@ -58,7 +58,7 @@ export default function ResetPasswordForm() {
 						name="confirmPassword"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Confirm Password</FormLabel>
+								<FormLabel>Confirmer mot de passe</FormLabel>
 								<FormControl>
 									<PasswordInput placeholder="**********" {...field} />
 								</FormControl>
@@ -70,8 +70,8 @@ export default function ResetPasswordForm() {
 
 				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
-					Reset password
-					<span className="sr-only">Reset password</span>
+					Réinitialiser mon mot de passe
+					<span className="sr-only">Réinitialiser mon mot de passe</span>
 				</Button>
 			</form>
 		</Form>

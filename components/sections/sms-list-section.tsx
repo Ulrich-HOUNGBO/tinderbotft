@@ -20,12 +20,17 @@ export default function SmsListSection() {
 		queryFn: () => getSmsByUserId(user?.id!),
 	});
 
-	isError && console.log("error");
+	isError && console.log("Error fetching messages");
 
 	return (
 		<div className="space-y-5">
 			<div className="flex items-center justify-between">
-				<h1 className="font-heading">Messages list</h1>
+				<div className="flex gap-x-1 font-heading">
+					Messages
+					<span className="flex size-6 items-center justify-center rounded bg-gray-700 text-background">
+						{data?.length}
+					</span>
+				</div>
 				<RefreshMessages isLoading={isLoading} disabled={disabled} setDisabled={setDisabled} />
 			</div>
 			{isLoading ? (
@@ -41,9 +46,9 @@ export default function SmsListSection() {
 						data?.map((sms) => <MessageCard key={sms.id} sms={sms} />)
 					) : (
 						<div className="flex flex-col items-center gap-y-3">
-							<h3 className="font-medium text-gray-600">You have no messages</h3>
+							<h3 className="font-medium text-gray-600">Aucun message envoyé</h3>
 							<Button asChild className="w-fit font-heading">
-								<Link href={routes.dashboard.sms.send}>Send Pro SMS</Link>
+								<Link href={routes.dashboard.sms.send}>Envoyer un SMS</Link>
 							</Button>
 						</div>
 					)}

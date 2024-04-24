@@ -29,13 +29,13 @@ export default function DashboardHeader() {
 					<MobileDashboardSidebar />
 				</div>
 				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">
-					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Welcome ${user?.user.username}`}
+					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Bienvenue ${user?.user.username}`}
 				</h3>
 			</div>
 
 			<div className="flex items-center gap-x-4">
 				{!user || isLoading ? (
-					<Skeleton className="h-10 w-24" />
+					<Skeleton className="hidden h-10 w-24 md:block" />
 				) : (
 					user && (
 						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 md:block">
@@ -46,7 +46,7 @@ export default function DashboardHeader() {
 					)
 				)}
 				<Button asChild>
-					<Link href={routes.dashboard.credits.index}>Buy Credits</Link>
+					<Link href={routes.dashboard.credits.index}>Acheter du credits</Link>
 				</Button>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
@@ -70,7 +70,7 @@ export default function DashboardHeader() {
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
 							<DropdownMenuItem asChild className="cursor-pointer">
-								<Link href="/dashboard/profile">
+								<Link href={routes.dashboard.profile}>
 									<User className="mr-2 size-4" aria-hidden="true" />
 									Profile
 								</Link>

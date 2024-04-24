@@ -16,7 +16,7 @@ export default function CreditsListSection() {
 
 	return (
 		<div className="space-y-3">
-			<h1 className="font-heading">Credit Packs (Select a plan to make the payment)</h1>
+			<h1 className="font-heading">Packs de crédits (sélectionnez un pack pour effectuer le paiement)</h1>
 
 			<div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 				{isLoading ? (
@@ -30,7 +30,7 @@ export default function CreditsListSection() {
 				) : (
 					<div className="col-span-3 flex items-center gap-3 rounded-lg border border-blue-400 p-4">
 						<AlertCircle size={24} className="text-blue-400" />
-						<h3 className="font-medium text-blue-400">No credit pack available</h3>
+						<h3 className="font-medium text-blue-400">Aucun pack de crédits disponible</h3>
 					</div>
 				)}
 			</div>

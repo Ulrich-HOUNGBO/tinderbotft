@@ -54,5 +54,5 @@ export interface PlansInterface {
 export interface PaymentHistoryInterface {
 	id: string;
 	pack: string;
-	status: "pending" | "processing" | "success" | "failed";
+	status: "En attente" | "Succès" | "Échoué";
 }
