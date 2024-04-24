@@ -27,7 +27,7 @@ export default function SmsListSection() {
 			<div className="flex items-center justify-between">
 				<div className="flex gap-x-1 font-heading">
 					Messages
-					<span className="flex size-6 items-center justify-center rounded bg-gray-700 text-background">
+					<span className="flex size-6 items-center justify-center rounded bg-gray-700 text-background dark:text-foreground/90">
 						{data?.length}
 					</span>
 				</div>
@@ -46,7 +46,7 @@ export default function SmsListSection() {
 						data?.map((sms) => <MessageCard key={sms.id} sms={sms} />)
 					) : (
 						<div className="flex flex-col items-center gap-y-3">
-							<h3 className="font-medium text-gray-600">Aucun message envoyé</h3>
+							<h3 className="font-medium text-gray-600 dark:text-foreground/90">Aucun message envoyé</h3>
 							<Button asChild className="w-fit font-heading">
 								<Link href={routes.dashboard.sms.send}>Envoyer un SMS</Link>
 							</Button>

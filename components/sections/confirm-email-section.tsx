@@ -40,7 +40,7 @@ export default function ConfirmEmailSection() {
 					<h3 className="text-2xl font-semibold text-green-700 xl:text-3xl">Félicitation! 🎉</h3>
 					<p className="text-sm text-muted-foreground xl:text-lg">
 						Votre email a été confirmé. Vous pouvez maintenant{" "}
-						<Link href={routes.auth.login} className="text-primary underline">
+						<Link href={routes.auth.login} className="text-primary underline dark:text-foreground/80">
 							vous connecter
 						</Link>{" "}
 						à votre compte.

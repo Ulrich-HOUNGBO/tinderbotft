@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 		<AuthProvider>
 			<div className="flex">
 				<SideBar />
-				<main className="h-screen w-full overflow-y-auto py-5 ">
+				<main className="dashboard-content h-screen w-full overflow-y-auto py-5">
 					<div className="container">
 						<DashboardHeader />
 						<div className="pb-5 font-sans max-lg:pt-16">{children}</div>

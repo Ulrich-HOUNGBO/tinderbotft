@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import { Outfit as FontSans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -47,11 +48,11 @@ export default function RootLayout({
 			>
 				<SessionProvider>
 					<QueryProvider>
-						{/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
+						<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 						{children}
 						<TailwindIndicator />
 						<Toaster />
-						{/* </ThemeProvider> */}
+						</ThemeProvider>
 					</QueryProvider>
 				</SessionProvider>
 			</body>

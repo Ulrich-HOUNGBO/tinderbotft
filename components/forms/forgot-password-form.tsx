@@ -54,7 +54,7 @@ export default function ForgotPasswordForm() {
 					<span className="sr-only">Envoyer le lien de réinitialisation</span>
 				</Button>
 				<div className="flex justify-end">
-					<Link href={routes.auth.login} className="text-sm text-primary underline">
+					<Link href={routes.auth.login} className="text-sm text-primary underline dark:text-foreground/80">
 						Aller à la page de connexion
 					</Link>
 				</div>

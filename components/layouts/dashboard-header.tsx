@@ -28,7 +28,7 @@ export default function DashboardHeader() {
 				<div className="lg:hidden">
 					<MobileDashboardSidebar />
 				</div>
-				<h3 className="text-xl font-medium text-gray-700 max-md:hidden">
+				<h3 className="text-xl font-medium text-gray-700 dark:text-foreground max-md:hidden">
 					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Bienvenue ${user?.user.username}`}
 				</h3>
 			</div>
@@ -38,8 +38,8 @@ export default function DashboardHeader() {
 					<Skeleton className="hidden h-10 w-24 md:block" />
 				) : (
 					user && (
-						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 md:block">
-							<span className="text-gray-700">{`${user?.user.credit} ${
+						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 dark:border-foreground/50 md:block">
+							<span className="text-gray-700 dark:text-foreground/90">{`${user?.user.credit} ${
 								user?.user.credit > 1 ? "Credits" : "Credit"
 							}`}</span>
 						</div>
@@ -77,7 +77,7 @@ export default function DashboardHeader() {
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="hover:!bg-destructive/10">
+						<DropdownMenuItem className="hover:!bg-destructive/10 dark:hover:!bg-red-500/30">
 							<LogoutButton />
 						</DropdownMenuItem>
 					</DropdownMenuContent>

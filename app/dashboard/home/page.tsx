@@ -16,7 +16,7 @@ export default function DashboardHomePage() {
 
 			<DashboardStats />
 
-			<Alert className="bg-slate-100">
+			<Alert>
 				<Info className="size-4" />
 				<AlertTitle>Heads up!</AlertTitle>
 				<AlertDescription>Vérifiez votre numéro de téléphone et obtenez 10 crédits gratuits</AlertDescription>

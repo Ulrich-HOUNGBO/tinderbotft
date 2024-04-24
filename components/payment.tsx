@@ -58,7 +58,11 @@ export default function Payment({ planID }: { planID: string }) {
 	return (
 		<div className="text-center">
 			<Button onClick={open} disabled={paymenIsPending}>
-				{paymenIsPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : <CreditCardIcon className="mr-2" />}
+				{paymenIsPending ? (
+					<Loader2 className="mr-2 size-4 animate-spin" />
+				) : (
+					<CreditCardIcon className="mr-2 dark:text-background" />
+				)}
 				Acheter du crédit pour {data?.price} FCFA
 			</Button>
 		</div>
