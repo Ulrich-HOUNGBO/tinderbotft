@@ -6,9 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { registerSchema } from "@/lib/validations/auth";
-import { createAccount, createAccountCredentials } from "@/services/queries/user";
+import { useCreateAccount } from "@/services/users/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -19,24 +18,7 @@ import { toast } from "../ui/use-toast";
 type Credentials = z.infer<typeof registerSchema>;
 
 export default function RegisterForm() {
-	const { mutate, isPending } = useMutation({
-		mutationKey: ["create-account"],
-		mutationFn: (credentials: createAccountCredentials) => createAccount(credentials),
-		onSuccess: () => {
-			toast({
-				title: "Compte créé avec succès",
-				description: "Nous vous avons envoyé un e-mail pour vérifier votre compte.",
-			});
-		},
-		onError: (error: any) => {
-			console.log(error);
-			toast({
-				variant: "destructive",
-				title: "Une erreur s'est produite",
-				description: error.response.statusText,
-			});
-		},
-	});
+	const { mutate, isPending } = useCreateAccount();
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(registerSchema),
@@ -53,10 +35,28 @@ export default function RegisterForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		// console.log(data);
-		mutate({
-			...data,
-			phoneNo: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.phoneNo?.replace(/\s/g, "")}`,
-		});
+		mutate(
+			{
+				...data,
+				phoneNo: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.phoneNo?.replace(/\s/g, "")}`,
+			},
+			{
+				onSuccess: () => {
+					toast({
+						title: "Compte créé avec succès",
+						description: "Nous vous avons envoyé un e-mail pour vérifier votre compte.",
+					});
+				},
+				onError: (error: any) => {
+					// console.log(error);
+					toast({
+						variant: "destructive",
+						title: "Une erreur s'est produite",
+						description: error.response.statusText,
+					});
+				},
+			}
+		);
 	};
 
 	return (

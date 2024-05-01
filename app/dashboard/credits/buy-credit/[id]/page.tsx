@@ -1,7 +1,7 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Payment from "@/components/payment";
 import { routes } from "@/lib/routes";
-import { getPlanById } from "@/services/queries/plans";
+import { getPlanById } from "@/services/plans/queries";
 
 interface BuyCreditPageProps {
 	params: {
@@ -12,7 +12,7 @@ interface BuyCreditPageProps {
 export async function generateMetadata({ params }: BuyCreditPageProps) {
 	try {
 		const planData = await getPlanById(params.id);
-		console.log(planData);
+		// console.log(planData);
 		return {
 			title: `Dashboard - Buy ${planData.credit} Credits`,
 			description: `Buy ${planData.credit} credits for ${planData.price}`,

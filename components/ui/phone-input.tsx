@@ -1,6 +1,6 @@
 "use client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useCountries } from "@/services/hooks/use-countries";
+import { useCountries } from "@/services/countries/hooks";
 import { SelectProps } from "@radix-ui/react-select";
 import Image from "next/image";
 import { Input, InputProps } from "./input";

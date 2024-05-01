@@ -32,6 +32,5 @@ export interface sendSmsCredentials {
  */
 export const sendSms = async (credentials: sendSmsCredentials) => {
 	const response = await axios.post("/messages", credentials);
-
 	return response.data;
 };

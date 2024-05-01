@@ -4,21 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import useAuth from "@/contexts/auth/hook";
 import { routes } from "@/lib/routes";
-import { getSmsByUserId } from "@/services/queries/sms";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
 import MessageCard from "../cards/message-card";
 import RefreshMessages from "../refresh-messages";
+import { useMessages } from "@/services/messages/hooks";
 
 export default function SmsListSection() {
 	const { user } = useAuth();
 	const [disabled, setDisabled] = useState(false);
 
-	const { isLoading, isError, data } = useQuery({
-		queryKey: ["messages-list"],
-		queryFn: () => getSmsByUserId(user?.id!),
-	});
+	const { isLoading, isError, data } = useMessages(user?.id!);
 
 	isError && console.log("Error fetching messages");
 

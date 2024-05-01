@@ -1,8 +1,7 @@
 "use client";
 
 import { routes } from "@/lib/routes";
-import { confirmEmail } from "@/services/queries/user";
-import { useQuery } from "@tanstack/react-query";
+import { useConfirmEmail } from "@/services/accounts/hooks";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 
@@ -11,13 +10,7 @@ export default function ConfirmEmailSection() {
 
 	if (!token) redirect(routes.auth.login);
 
-	const { isSuccess, isError, isLoading } = useQuery({
-		queryKey: ["confirm-email"],
-		queryFn: async () => {
-			return await confirmEmail(token!);
-		},
-		enabled: !!token,
-	});
+	const { isSuccess, isError, isLoading } = useConfirmEmail(token!);
 
 	if (isLoading) {
 		return <p className="text-center">Vérification de votre adresse mail...</p>;

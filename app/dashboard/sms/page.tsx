@@ -26,10 +26,10 @@ export default function SmsPage() {
 				<AlertCircle className="size-5" />
 				<AlertTitle>Prix unitaire d&apos;un SMS : 10 crédits</AlertTitle>
 				<AlertDescription className="pt-2 text-gray-600 dark:text-foreground/90">
-					<p className="text-xs">
-						Avez-vous acheter un pack SMS sans voir votre crédit SMS ajouté à votre solde automatiquement ?
+					<p className="text-sm">
+						- Avez-vous acheter un pack SMS sans voir votre crédit SMS ajouté à votre solde automatiquement ?
 					</p>
-					<p className="text-xs">Vos destinataires ne confirment pas la réception de vos SMS Pro ?</p>
+					<p className="text-sm">- Vos destinataires ne confirment pas la réception de vos SMS Pro ?</p>
 				</AlertDescription>
 			</Alert>
 			<SmsListSection />
