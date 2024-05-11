@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
 import SendSmsForm from "@/components/forms/send-sms-form";
 import { routes } from "@/lib/routes";
 import { Metadata } from "next";

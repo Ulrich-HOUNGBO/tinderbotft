@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
 import ProfileForm from "@/components/forms/profile-form";
 import { Metadata } from "next";
 

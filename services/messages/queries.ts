@@ -14,8 +14,8 @@ export const getAllSms = async (): Promise<SmsInterface[]> => {
  * Query to get a user messages
  * @returns {Promise<SmsInterface[]>} - Object containing user messages
  */
-export const getSmsByUserId = async (id: string): Promise<SmsInterface[]> => {
-	const response = await axios.get(`/messages/user/${id}`).then((data) => data);
+export const getSmsByUserId = async (id: string, page: string): Promise<SmsInterface[]> => {
+	const response = await axios.get(`/messages/user/${id}?page=${page}`).then((data) => data);
 	return response.data;
 };
 

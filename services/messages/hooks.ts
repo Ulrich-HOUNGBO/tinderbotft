@@ -1,9 +1,10 @@
 import { getSmsByUserId, sendSms, sendSmsCredentials } from "@/services/messages/queries";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // --------------- QUERY KEYS --------------- //
 export const messagesQueryKeys = {
 	messagesKey: ["messages-list"],
+	messagesWithPaginationKey: (page: string) => ["messages-list", page],
 	messageKey: (id: string) => ["message", id],
 	sendMessageKey: ["send-message"],
 	updateMessageKey: (id: string) => ["update-message", id],
@@ -11,11 +12,23 @@ export const messagesQueryKeys = {
 };
 
 // --------------- QUERIES HOOKS --------------- //
-export const useMessages = (userId: string) => {
+export const useMessages = (userId: string, page: string) => {
 	return useQuery({
-		queryKey: messagesQueryKeys.messagesKey,
-		queryFn: () => getSmsByUserId(userId),
+		queryKey: messagesQueryKeys.messagesWithPaginationKey(page),
+		queryFn: () => getSmsByUserId(userId, page),
+		placeholderData: keepPreviousData,
 	});
+};
+
+export const usePrefetchMessages = (userId: string, page: string) => {
+	const queryClient = useQueryClient();
+
+	return () => {
+		queryClient.prefetchQuery({
+			queryKey: messagesQueryKeys.messagesWithPaginationKey(page),
+			queryFn: () => getSmsByUserId(userId, page),
+		});
+	};
 };
 
 // --------------- MUTATIONS HOOKS --------------- //

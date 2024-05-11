@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
 import Payment from "@/components/payment";
 import { routes } from "@/lib/routes";
 import { getPlanById } from "@/services/plans/queries";

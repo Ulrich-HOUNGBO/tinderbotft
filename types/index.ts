@@ -29,6 +29,7 @@ export interface UserInterface {
 		email: string;
 		role: "user" | "admin";
 		credit: number;
+		satus: "incomplete" | "complete";
 	};
 }
 
