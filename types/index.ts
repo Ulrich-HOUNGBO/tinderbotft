@@ -22,15 +22,12 @@ export type SidebarNavItem = NavItemWithChildren;
 
 export interface UserInterface {
 	id: string;
-	user: {
-		id: string;
-		username: string;
-		phoneNo: string;
-		email: string;
-		role: "user" | "admin";
-		credit: number;
-		satus: "incomplete" | "complete";
-	};
+	username: string;
+	phoneNo: string;
+	email: string;
+	role: "user" | "admin";
+	credit: number;
+	status: "incomplete" | "complete";
 }
 
 export interface SmsInterface {

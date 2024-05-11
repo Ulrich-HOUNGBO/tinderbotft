@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CreditsPage() {
 	return (
-		<div>
+		<div className="space-y-5">
 			<Breadcrumbs segments={[{ title: "Credits" }]} />
 
 			<div className="space-y-6">

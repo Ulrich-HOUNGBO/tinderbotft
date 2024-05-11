@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function SmsPage() {
 	return (
-		<div>
+		<div className="space-y-5">
 			<div className="flex items-center justify-between">
 				<Breadcrumbs segments={[{ title: "Sms" }]} />
 				<Button asChild className="w-fit font-heading">
@@ -23,7 +23,7 @@ export default function SmsPage() {
 				</Button>
 			</div>
 
-			<Alert className="my-5">
+			<Alert>
 				<AlertCircle className="size-5" />
 				<AlertTitle>Prix unitaire d&apos;un SMS : 10 crédits</AlertTitle>
 				<AlertDescription className="pt-2 text-gray-600 dark:text-foreground/90">

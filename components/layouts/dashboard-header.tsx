@@ -29,7 +29,7 @@ export default function DashboardHeader() {
 					<MobileDashboardSidebar />
 				</div>
 				<h3 className="text-xl font-medium text-gray-700 dark:text-foreground max-md:hidden">
-					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Bienvenue ${user?.user.username}`}
+					{!user || isLoading ? <Skeleton className="h-10 w-48" /> : user && `Bienvenue ${user?.username}`}
 				</h3>
 			</div>
 
@@ -39,8 +39,8 @@ export default function DashboardHeader() {
 				) : (
 					user && (
 						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 dark:border-foreground/50 md:block">
-							<span className="text-gray-700 dark:text-foreground/90">{`${user?.user.credit} ${
-								user?.user.credit > 1 ? "Credits" : "Credit"
+							<span className="text-gray-700 dark:text-foreground/90">{`${user?.credit} ${
+								user?.credit > 1 ? "Credits" : "Credit"
 							}`}</span>
 						</div>
 					)
@@ -53,18 +53,18 @@ export default function DashboardHeader() {
 						<Button variant="secondary" className="relative size-11 rounded-full">
 							<Avatar className="border">
 								<AvatarImage
-									src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${user?.user.email}`}
-									alt={user?.user.username}
+									src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${user?.email}`}
+									alt={user?.username}
 								/>
-								<AvatarFallback>{user?.user.username.substring(0, 2).toUpperCase()}</AvatarFallback>
+								<AvatarFallback>{user?.username.substring(0, 2).toUpperCase()}</AvatarFallback>
 							</Avatar>
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className="w-56" align="end" forceMount>
 						<DropdownMenuLabel className="font-normal">
 							<div className="flex flex-col space-y-1">
-								<p className="text-sm font-medium leading-none">{user?.user.username}</p>
-								<p className="text-xs leading-none text-muted-foreground">{user?.user.email}</p>
+								<p className="text-sm font-medium leading-none">{user?.username}</p>
+								<p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />

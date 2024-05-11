@@ -7,7 +7,7 @@ import { UserInterface } from "@/types";
  */
 export const getMe = async (): Promise<UserInterface> => {
 	const response = await axios.get("/users/profile").then((data) => data);
-	return response.data;
+	return response.data.user;
 };
 
 export interface createAccountCredentials {
