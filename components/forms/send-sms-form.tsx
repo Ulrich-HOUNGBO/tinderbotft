@@ -134,7 +134,7 @@ export default function SendSmsForm() {
 					/>
 				</div>
 
-				<Button disabled={isPending}>
+				<Button disabled={isPending} className="w-fit">
 					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
 					Envoyer SMS
 					{!isPending && <Send className="ml-2 size-4" aria-hidden="true" />}

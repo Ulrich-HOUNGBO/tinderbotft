@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 			<div className="container relative flex max-w-md flex-col justify-between py-8 md:mx-auto md:max-w-xl">
 				<Logo />
 				{children}
-				<p className="w-full text-center text-[8px] text-gray-400 md:text-xs">
+				<p className="w-full text-center text-[10px] text-gray-400 md:text-xs">
 					© 2024 MarkSafeTo. Tous droits réservés.
 				</p>
 			</div>

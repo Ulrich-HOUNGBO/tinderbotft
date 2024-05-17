@@ -1,7 +1,7 @@
 import { getCountries } from "@/services/countries/queries";
 import { useQuery } from "@tanstack/react-query";
 
-// --------------- QUERY KEYS --------------- //
+// --------------- QUERY & MUTATION KEYS --------------- //
 export const countriesQueryKeys = {
 	countriesKey: ["countries-list"],
 	countryKey: (id: string) => ["country", id],

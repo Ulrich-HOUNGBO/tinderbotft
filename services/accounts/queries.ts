@@ -15,7 +15,7 @@ export const confirmEmail = async (token: string) => {
  */
 
 export const forgotPassword = async (email: string) => {
-	const response = await axios.post("/users/reset-password", { email });
+	const response = await axios.post("/users/forgot-password", { email });
 	return response.data;
 };
 
@@ -24,7 +24,7 @@ export const forgotPassword = async (email: string) => {
  * @param token - User token
  * @param password - New password
  */
-export const resetPassword = async (token: string, password: string) => {
-	const response = await axios.post(`/users/reset-password/${token}`, { password });
+export const resetPassword = async (token: string, newPassword: string) => {
+	const response = await axios.post(`/users/reset-password`, { token, newPassword });
 	return response.data;
 };

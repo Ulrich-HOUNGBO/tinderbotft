@@ -1,14 +1,14 @@
 import {
-  addPlan,
-  createPlanCredentials,
-  getAllPlans,
-  getPlanById,
-  removePlan,
-  updatePlan,
+	addPlan,
+	createPlanCredentials,
+	getAllPlans,
+	getPlanById,
+	removePlan,
+	updatePlan,
 } from "@/services/plans/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-// --------------- QUERY KEYS --------------- //
+// --------------- QUERY & MUTATION KEYS --------------- //
 export const plansQueryKeys = {
 	plansKey: ["plans-list"],
 	planKey: (id: string) => ["plan", id],

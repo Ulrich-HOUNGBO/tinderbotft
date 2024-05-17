@@ -1,7 +1,7 @@
 import { getSmsByUserId, sendSms, sendSmsCredentials } from "@/services/messages/queries";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-// --------------- QUERY KEYS --------------- //
+// --------------- QUERY & MUTATION KEYS --------------- //
 export const messagesQueryKeys = {
 	messagesKey: ["messages-list"],
 	messagesWithPaginationKey: (page: string) => ["messages-list", page],

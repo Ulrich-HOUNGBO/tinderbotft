@@ -26,7 +26,7 @@ export default function Payment({ planID }: { planID: string }) {
 				amount: data.price,
 				api_key: "520ac280d39811edb532ad421d393c9e",
 				sandbox: true,
-				email: user.user.email,
+				email: user.email,
 				phone: "97000000",
 			});
 		}

@@ -1,7 +1,7 @@
 import { confirmEmail, forgotPassword } from "@/services/accounts/queries";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-// --------------- QUERY KEYS --------------- //
+// --------------- QUERY & MUTATION KEYS --------------- //
 export const accountsQueryKeys = {
 	confirmEmailKey: ["confirm-email"],
 	forgotPasswordKey: ["forgot-password"],

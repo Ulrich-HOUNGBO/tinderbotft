@@ -18,7 +18,7 @@ export default function DashboardHomePage() {
 
 			<Alert>
 				<Info className="size-4" />
-				<AlertTitle>Heads up!</AlertTitle>
+				<AlertTitle>Info!</AlertTitle>
 				<AlertDescription>Vérifiez votre numéro de téléphone et obtenez 10 crédits gratuits</AlertDescription>
 			</Alert>
 		</div>

@@ -1,7 +1,7 @@
-import { createAccount, createAccountCredentials, editProfile, getMe } from "@/services/users/queries";
+import { createAccount, createAccountCredentials, editProfile, getMe, getUserStats } from "@/services/users/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-// --------------- QUERY KEYS --------------- //
+// --------------- QUERY & MUTATION KEYS --------------- //
 export const usersQueryKeys = {
 	usersKey: ["users-list"],
 	meKey: ["me"],
@@ -9,6 +9,7 @@ export const usersQueryKeys = {
 	createAccountKey: ["create-account"],
 	editProfileKey: (id: string) => ["edit-profile", id],
 	deleteUserKey: (id: string) => ["delete-user", id],
+	userStatsKey: ["user-stats"],
 };
 
 // --------------- QUERIES HOOKS --------------- //
@@ -17,6 +18,13 @@ export const useMe = (token: boolean) => {
 		queryKey: usersQueryKeys.meKey,
 		queryFn: getMe,
 		enabled: token,
+	});
+};
+
+export const useStats = () => {
+	return useQuery({
+		queryKey: usersQueryKeys.userStatsKey,
+		queryFn: getUserStats,
 	});
 };
 
@@ -33,7 +41,7 @@ export const useEditProfile = (userId: string) => {
 
 	return useMutation({
 		mutationKey: usersQueryKeys.editProfileKey(userId),
-		mutationFn: (id: string) => editProfile(id),
+		mutationFn: (credentials: createAccountCredentials) => editProfile(userId, credentials),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: usersQueryKeys.meKey,

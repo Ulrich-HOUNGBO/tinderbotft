@@ -34,6 +34,8 @@ export default function SmsListSection() {
 
 	const { isLoading, isError, data, isPlaceholderData } = useMessages(user?.id!, pageCount.toString());
 
+	// console.log(data);
+
 	useEffect(() => {
 		const queryClient = new QueryClient();
 
@@ -54,7 +56,7 @@ export default function SmsListSection() {
 					Messages
 					{data && (
 						<span className="flex size-6 items-center justify-center rounded bg-gray-700 text-background dark:text-foreground/90">
-							{data?.length}
+							{data?.data?.length}
 						</span>
 					)}
 				</div>
@@ -68,9 +70,9 @@ export default function SmsListSection() {
 				</div>
 			) : (
 				<>
-					{data && data.length > 0 ? (
+					{data && data?.data?.length > 0 ? (
 						<div>
-							{data?.map((sms) => (
+							{data.data?.map((sms) => (
 								<MessageCard key={sms.id} sms={sms} />
 							))}
 							<Paginations page={page} pageCount={pageCount} createQueryString={createQueryString} />

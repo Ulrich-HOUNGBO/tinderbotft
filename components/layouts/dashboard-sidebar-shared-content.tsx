@@ -19,7 +19,7 @@ export default function DashboardSidebarSharedContent({
 }: DashboardSidebarSharedContentProps) {
 	return (
 		<div className="space-y-12">
-			<Logo href={routes.dashboard.home} />
+			<Logo href={routes.dashboard.home} onClick={() => setIsOpen?.(false)} />
 
 			<ul className="flex flex-col gap-y-2">
 				{sidebarNavItems.map(({ icon: Icon, ...item }) => {
