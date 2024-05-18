@@ -33,9 +33,9 @@ export default function Hero() {
 
 			<div className="max-lg:order-first">
 				<div className="flex h-[18rem] flex-col justify-center overflow-hidden px-2 md:h-[30rem]">
-					<div className="-m-2 h-full rounded-xl bg-gray-900/5 p-3 ring-1 ring-inset ring-gray-900/15 dark:bg-foreground/10 dark:ring-foreground/30 lg:-m-2 lg:rounded-2xl lg:p-3">
+					<div className="-m-1.5 h-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/15 dark:bg-foreground/10 dark:ring-foreground/30 lg:rounded-2xl">
 						<Image
-							src="/images/montgolfiere.jpg"
+							src="/images/img-layout.avif"
 							alt="auth-layout"
 							height={500}
 							width={800}

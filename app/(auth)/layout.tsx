@@ -14,10 +14,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 			</div>
 			<div className="hidden h-screen overflow-hidden lg:block">
 				<Image
-					src="/images/montgolfiere.jpg"
+					src="/images/img-layout.avif"
 					alt="auth-layout"
-					height={3600}
-					width={2400}
+					height={1920}
+					width={1690}
 					priority
 					className="size-full object-cover"
 				/>
