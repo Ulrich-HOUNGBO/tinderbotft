@@ -1,12 +1,11 @@
 "use client";
 
-import { SmsInterface } from "@/types";
-import { Badge } from "../ui/badge";
+import { MessagesList } from "@/types";
 import { formatDistanceToNowStrict } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Badge } from "../ui/badge";
 
-export default function MessageCard({ sms }: { sms: SmsInterface }) {
-
+export default function MessageCard({ sms }: { sms: MessagesList }) {
 	return (
 		<div className="mb-4 cursor-pointer rounded-lg border bg-background p-4 hover:bg-gray-50 dark:hover:bg-foreground/5">
 			<div className="mb-1">

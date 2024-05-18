@@ -38,8 +38,8 @@ export default function NavBar({ items, session }: NavBarProps) {
 										<NavigationMenuLink
 											className={cn(
 												navigationMenuTriggerStyle(),
-												"h-auto font-medium text-gray-500",
-												isActive && "text-primary hover:text-primary"
+												"h-auto text-gray-500 dark:text-foreground/90",
+												isActive && "text-primary font-medium dark:text-white hover:text-primary"
 											)}
 										>
 											{item.title}

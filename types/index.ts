@@ -22,17 +22,15 @@ export type SidebarNavItem = NavItemWithChildren;
 
 export interface UserInterface {
 	id: string;
-	user: {
-		id: string;
-		username: string;
-		phoneNo: string;
-		email: string;
-		role: "user" | "admin";
-		credit: number;
-	};
+	username: string;
+	phoneNo: string;
+	email: string;
+	role: "user" | "admin";
+	credit: number;
+	status: "incomplete" | "complete";
 }
 
-export interface SmsInterface {
+export interface MessagesList {
 	id: string;
 	from: string;
 	to: string;
@@ -41,6 +39,17 @@ export interface SmsInterface {
 	cost: number;
 	status: "success" | "failed" | "pending";
 	createdAt: string;
+}
+export interface SmsInterface {
+	data: MessagesList[];
+	hasNextPage: boolean;
+	hasPreviousPage: boolean;
+	nextPageUrl: string | null;
+	page: number;
+	pageSize: number;
+	previousPageUrl: string | null;
+	total: number;
+	totalPages: number;
 }
 
 export interface PlansInterface {
@@ -55,4 +64,9 @@ export interface PaymentHistoryInterface {
 	id: string;
 	pack: string;
 	status: "En attente" | "Succès" | "Échoué";
+}
+
+export interface StatsInterface {
+	type: "credit" | "message";
+	value: number;
 }

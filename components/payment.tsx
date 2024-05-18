@@ -1,7 +1,7 @@
 "use client";
 
 import useAuth from "@/contexts/auth/hook";
-import { getPlanById } from "@/services/queries/plans";
+import { getPlanById } from "@/services/plans/queries";
 import { useQuery } from "@tanstack/react-query";
 import { useKKiaPay } from "kkiapay-react";
 import { Loader2 } from "lucide-react";
@@ -26,7 +26,7 @@ export default function Payment({ planID }: { planID: string }) {
 				amount: data.price,
 				api_key: "520ac280d39811edb532ad421d393c9e",
 				sandbox: true,
-				email: user.user.email,
+				email: user.email,
 				phone: "97000000",
 			});
 		}

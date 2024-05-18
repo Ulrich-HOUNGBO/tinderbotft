@@ -1,16 +1,12 @@
 "use client";
 
-import { getAllPlans } from "@/services/queries/plans";
-import { useQuery } from "@tanstack/react-query";
+import { usePlans } from "@/services/plans/hooks";
 import { AlertCircle } from "lucide-react";
 import PlansListCard from "../cards/plans-list-card";
 import { Skeleton } from "../ui/skeleton";
 
 export default function CreditsListSection() {
-	const { isLoading, isError, data } = useQuery({
-		queryKey: ["plans-list"],
-		queryFn: () => getAllPlans(),
-	});
+	const { isLoading, isError, data } = usePlans();
 
 	isError && console.log("error");
 

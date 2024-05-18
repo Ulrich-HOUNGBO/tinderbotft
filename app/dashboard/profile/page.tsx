@@ -1,4 +1,5 @@
-import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
+import ProfileForm from "@/components/forms/profile-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,8 +9,9 @@ export const metadata: Metadata = {
 
 export default function ProfilePage() {
 	return (
-		<div>
+		<div className="space-y-5">
 			<Breadcrumbs segments={[{ title: "Profile" }]} />
+			<ProfileForm />
 		</div>
 	);
 }

@@ -20,7 +20,6 @@ type Credentials = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
 	const router = useRouter();
-	const [isPending, setIsPending] = React.useState(false);
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(loginSchema),
@@ -32,9 +31,6 @@ export default function LoginForm() {
 	});
 
 	const onSubmit = async (data: Credentials) => {
-		// console.log(data);
-		setIsPending(true);
-
 		const response = await signIn("credentials", {
 			email: data.email,
 			password: data.password,
@@ -43,7 +39,7 @@ export default function LoginForm() {
 		});
 
 		if (response?.error) {
-			console.log(response);
+			// console.log(response);
 			// TODO: change response error
 			response.status === 401 &&
 				toast({
@@ -56,16 +52,13 @@ export default function LoginForm() {
 					variant: "destructive",
 					title: "Erreur serveur, veuillez réessayer plus tard",
 				});
-
-			setIsPending(false);
 			return;
 		}
 
-		setIsPending(false);
 		toast({
 			title: "Connexion réussie",
 		});
-		router.push(routes.dashboard.home);
+		router.push(response?.url ?? routes.dashboard.home);
 	};
 
 	return (
@@ -108,8 +101,8 @@ export default function LoginForm() {
 					</Link>
 				</div>
 
-				<Button disabled={isPending || !form.formState.isDirty || !form.formState.isValid} size="lg">
-					{isPending && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
+				<Button disabled={form.formState.isSubmitting || !form.formState.isDirty || !form.formState.isValid} size="lg">
+					{form.formState.isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />}
 					Se connecter
 					<span className="sr-only">Se connecter</span>
 				</Button>

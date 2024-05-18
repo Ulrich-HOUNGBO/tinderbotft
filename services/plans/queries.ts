@@ -32,10 +32,10 @@ export interface createPlanCredentials {
 }
 
 /**
- * Query to create a plan
+ * Query to add a plan
  *  @param credentials - Plan data
  */
-export const createPlan = async (credentials: createPlanCredentials) => {
+export const addPlan = async (credentials: createPlanCredentials) => {
 	const response = await axios.post("/plans", credentials);
 	return response.data;
 };
@@ -52,10 +52,10 @@ export const updatePlan = async (id: string, credentials: createPlanCredentials)
 };
 
 /**
- * Query to delete a plan
+ * Query to remove a plan
  * @param id - Plan id
  */
-export const deletePlan = async (id: string) => {
+export const removePlan = async (id: string) => {
 	const response = await axios.delete(`/plans/${id}`);
 	return response.data;
 };
