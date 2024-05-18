@@ -10,6 +10,7 @@ import { useForgotPassword } from "@/services/accounts/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -17,6 +18,7 @@ type Credentials = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordForm() {
 	const { mutate, isPending } = useForgotPassword();
+	const router = useRouter();
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(forgotPasswordSchema),
@@ -27,12 +29,13 @@ export default function ForgotPasswordForm() {
 	});
 
 	const onSubmit = async (data: Credentials) => {
-		console.log(data);
+		// console.log(data);
 		mutate(data.email, {
-			onSuccess: (response: any) => {
-				toast({
+			onSuccess: async (response: any) => {
+				await toast({
 					title: response.message ?? "Nous vous avons envoyé un e-mail pour réinitialiser votre mot de passe",
 				});
+				router.push(routes.auth.login);
 				// console.log(response.message);
 			},
 			onError: (error: any) => {

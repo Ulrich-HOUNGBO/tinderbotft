@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
 						return data;
 					})
 					.catch((error) => {
-						console.log("ERROR =>", error);
+						// console.log("ERROR =>", error.response.data.message);
 						if (error.response.data.statusCode === 401) throw new Error(error.response.data.body);
 						if (error.response.data.statusCode === 400) throw new Error(error.response.data.body);
 						if (error.response.status === 500) throw new Error("Server Error !");

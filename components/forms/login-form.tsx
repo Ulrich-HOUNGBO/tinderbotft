@@ -39,7 +39,7 @@ export default function LoginForm() {
 		});
 
 		if (response?.error) {
-			console.log(response);
+			// console.log(response);
 			// TODO: change response error
 			response.status === 401 &&
 				toast({

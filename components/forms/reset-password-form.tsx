@@ -3,22 +3,23 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { routes } from "@/lib/routes";
 import { resetPasswordSchema } from "@/lib/validations/auth";
+import { useResetPassword } from "@/services/accounts/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { redirect, useSearchParams } from "next/navigation";
-import { useFormStatus } from "react-dom";
+import { Loader2, Router } from "lucide-react";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { PasswordInput } from "../password-input";
 import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 type Credentials = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordForm() {
-	const token = useSearchParams().get("token");
+	const token = useSearchParams().get("tid");
 	if (!token) redirect(routes.auth.login);
-
-	const { pending: isPending } = useFormStatus();
+	const router = useRouter();
+	const { isPending, mutate } = useResetPassword(token);
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(resetPasswordSchema),
@@ -30,7 +31,24 @@ export default function ResetPasswordForm() {
 	});
 
 	const onSubmit = async (data: Credentials) => {
-		console.log(data);
+		// console.log(data);
+
+		mutate(data.newPassword, {
+			onSuccess: async (response: any) => {
+				await toast({
+					title: response.message ?? "Votre mot de passe a été réinitialisé avec succès",
+				});
+				router.push(routes.auth.login);
+				// console.log(response.message);
+			},
+			onError: (error: any) => {
+				toast({
+					variant: "destructive",
+					title: error.response.data.message ?? "Une erreur s'est produite",
+				});
+				// console.log(error.response.data.message);
+			},
+		});
 	};
 
 	return (
