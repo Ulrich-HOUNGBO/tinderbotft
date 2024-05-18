@@ -50,7 +50,7 @@ export const createAccount = async (credentials: createAccountCredentials) => {
  * Query to get user stats
  * @returns {Promise<StatsInterface>} - Object containing user stats
  */
-export const getUserStats = async (): Promise<StatsInterface> => {
+export const getUserStats = async (): Promise<StatsInterface[]> => {
 	const response = await axios.get("/users/home/dashboard");
 	// console.log(response);
 	return response.data;

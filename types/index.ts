@@ -67,6 +67,6 @@ export interface PaymentHistoryInterface {
 }
 
 export interface StatsInterface {
-	messageCount: number;
-	userCredit: number;
+	type: "credit" | "message";
+	value: number;
 }

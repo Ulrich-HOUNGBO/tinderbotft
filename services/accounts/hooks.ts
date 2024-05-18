@@ -1,4 +1,4 @@
-import { confirmEmail, forgotPassword } from "@/services/accounts/queries";
+import { confirmEmail, forgotPassword, resetPassword } from "@/services/accounts/queries";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 // --------------- QUERY & MUTATION KEYS --------------- //
@@ -24,5 +24,12 @@ export const useForgotPassword = () => {
 	return useMutation({
 		mutationKey: accountsQueryKeys.forgotPasswordKey,
 		mutationFn: (email: string) => forgotPassword(email),
+	});
+};
+
+export const useResetPassword = (token: string) => {
+	return useMutation({
+		mutationKey: accountsQueryKeys.resetPasswordKey,
+		mutationFn: (newPassword: string) => resetPassword(token, newPassword),
 	});
 };

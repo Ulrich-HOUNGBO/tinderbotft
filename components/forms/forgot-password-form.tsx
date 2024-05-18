@@ -1,22 +1,22 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { routes } from "@/lib/routes";
 import { forgotPasswordSchema } from "@/lib/validations/auth";
+import { useForgotPassword } from "@/services/accounts/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import { useFormStatus } from "react-dom";
 
 type Credentials = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordForm() {
-	const { pending: isPending } = useFormStatus();
+	const { mutate, isPending } = useForgotPassword();
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(forgotPasswordSchema),
@@ -28,6 +28,21 @@ export default function ForgotPasswordForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		console.log(data);
+		mutate(data.email, {
+			onSuccess: (response: any) => {
+				toast({
+					title: response.message ?? "Nous vous avons envoyé un e-mail pour réinitialiser votre mot de passe",
+				});
+				// console.log(response.message);
+			},
+			onError: (error: any) => {
+				toast({
+					variant: "destructive",
+					title: error.response.data.message ?? "Une erreur s'est produite",
+				});
+				// console.log(error.response.data.message);
+			},
+		});
 	};
 
 	return (

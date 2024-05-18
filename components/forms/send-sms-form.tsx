@@ -57,7 +57,7 @@ export default function SendSmsForm() {
 					toast({
 						variant: "destructive",
 						title: "An error occurred",
-						description: error.response.statusText,
+						description: error.response.data,
 					});
 				},
 			}
