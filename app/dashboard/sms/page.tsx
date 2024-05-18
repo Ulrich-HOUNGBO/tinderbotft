@@ -6,6 +6,7 @@ import { routes } from "@/lib/routes";
 import { AlertCircle } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "Dashboard - Sms",
@@ -32,9 +33,9 @@ export default function SmsPage() {
 					<p className="text-sm">- Vos destinataires ne confirment pas la réception de vos SMS Pro ?</p>
 				</AlertDescription>
 			</Alert>
-			{/* <Suspense> */}
-			<SmsListSection />
-			{/* </Suspense> */}
+			<Suspense>
+				<SmsListSection />
+			</Suspense>
 		</div>
 	);
 }
