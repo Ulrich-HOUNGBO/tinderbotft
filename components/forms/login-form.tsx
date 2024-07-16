@@ -27,7 +27,7 @@ export default function LoginForm() {
 			email: "",
 			password: "",
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	const onSubmit = async (data: Credentials) => {

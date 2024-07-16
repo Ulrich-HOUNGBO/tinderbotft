@@ -8,9 +8,6 @@ export const smsSchema = z
 			})
 			.min(3, {
 				message: "Le nom de l'expéditeur doit comporter au moins 3 caractères",
-			})
-			.max(15, {
-				message: "Le nom de l'expéditeur doit comporter au plus 15 caractères",
 			}),
 		prefix: z.string().min(2, {
 			message: "Le préfixe doit comporter au moins 2 caractères",

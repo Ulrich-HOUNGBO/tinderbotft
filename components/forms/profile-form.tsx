@@ -23,7 +23,7 @@ export default function ProfileForm() {
 			email: user?.email ?? "",
 			phoneNo: user?.phoneNo ?? "",
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	useEffect(() => {

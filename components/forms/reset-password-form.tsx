@@ -27,7 +27,7 @@ export default function ResetPasswordForm() {
 			newPassword: "",
 			confirmPassword: "",
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	const onSubmit = async (data: Credentials) => {
