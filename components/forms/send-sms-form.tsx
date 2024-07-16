@@ -20,7 +20,7 @@ type Credentials = z.infer<typeof smsSchema>;
 
 export default function SendSmsForm() {
 	const router = useRouter();
-	const { mutate, isPending } = useSendMessage();
+	const { mutateAsync, isPending } = useSendMessage();
 
 	const form = useForm<Credentials>({
 		resolver: zodResolver(smsSchema),
@@ -31,7 +31,7 @@ export default function SendSmsForm() {
 			message: "",
 			pageNumber: "",
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	useEffect(() => {
@@ -40,14 +40,16 @@ export default function SendSmsForm() {
 
 	const onSubmit = async (data: Credentials) => {
 		// console.log(data);
-		mutate(
+		await mutateAsync(
 			{
-				...data,
+				from: data.from.trim(),
 				to: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.to.replace(/\s/g, "")}`,
+				message: data.message.trim(),
+				pageNumber: data.pageNumber,
 			},
 			{
 				onSuccess: async () => {
-					toast({
+					await toast({
 						title: "SMS envoyé avec succès",
 					});
 					router.push(routes.dashboard.sms.index);

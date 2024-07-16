@@ -25,7 +25,7 @@ export default function ForgotPasswordForm() {
 		defaultValues: {
 			email: "",
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	const onSubmit = async (data: Credentials) => {

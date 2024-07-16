@@ -30,7 +30,7 @@ export default function RegisterForm() {
 			password: "",
 			acceptTerms: undefined,
 		},
-		mode: "onChange",
+		mode: "all",
 	});
 
 	const onSubmit = async (data: Credentials) => {
