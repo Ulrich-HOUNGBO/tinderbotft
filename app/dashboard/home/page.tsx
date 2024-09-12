@@ -15,12 +15,6 @@ export default function DashboardHomePage() {
 			<Breadcrumbs segments={[{ title: "Dashboard" }]} />
 
 			<DashboardStats />
-
-			<Alert>
-				<Info className="size-4" />
-				<AlertTitle>Info!</AlertTitle>
-				<AlertDescription>Vérifiez votre numéro de téléphone et obtenez 10 crédits gratuits</AlertDescription>
-			</Alert>
 		</div>
 	);
 }

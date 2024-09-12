@@ -37,9 +37,9 @@ export default function LoginForm() {
 			callbackUrl: routes.dashboard.home,
 			redirect: false,
 		});
-
+		console.log(response);
 		if (response?.error) {
-			// console.log(response);
+			 //console.log(response);
 			// TODO: change response error
 			response.status === 401 &&
 				toast({

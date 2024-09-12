@@ -9,12 +9,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 				<Logo />
 				{children}
 				<p className="w-full text-center text-[10px] text-gray-400 md:text-xs">
-					© 2024 MarkSafeTo. Tous droits réservés.
+					© 2024 AutoDateSwiper. Tous droits réservés.
 				</p>
 			</div>
 			<div className="hidden h-screen overflow-hidden lg:block">
 				<Image
-					src="/images/img-layout.avif"
+					src="/images/image-layout-2.png"
 					alt="auth-layout"
 					height={1920}
 					width={1690}

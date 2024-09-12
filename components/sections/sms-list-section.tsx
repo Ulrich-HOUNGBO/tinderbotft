@@ -13,6 +13,7 @@ import { QueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import {useProxies} from "@/services/proxy/hooks";
 
 export default function SmsListSection() {
 	const { user } = useAuth();
@@ -32,7 +33,7 @@ export default function SmsListSection() {
 		[searchParams]
 	);
 
-	const { isLoading, isError, data, isPlaceholderData } = useMessages(user?.id!, pageCount.toString());
+	const { isLoading, isError, data, isPlaceholderData } = useProxies();
 
 	// console.log(data);
 
@@ -53,10 +54,10 @@ export default function SmsListSection() {
 		<div className="space-y-5">
 			<div className="flex items-center justify-between">
 				<div className="flex gap-x-1 font-heading">
-					Messages
+					Proxies
 					{data && (
 						<span className="flex size-6 items-center justify-center rounded bg-gray-700 text-background dark:text-foreground/90">
-							{data?.data?.length}
+							{data?.length}
 						</span>
 					)}
 				</div>
@@ -70,18 +71,17 @@ export default function SmsListSection() {
 				</div>
 			) : (
 				<>
-					{data && data?.data?.length > 0 ? (
+					{data && data?.length > 0 ? (
 						<div>
-							{data.data?.map((sms) => (
-								<MessageCard key={sms.id} sms={sms} />
+							{data?.map((proxy) => (
+								<MessageCard key={proxy.id} proxy={proxy} />
 							))}
 							<Paginations page={page} pageCount={pageCount} createQueryString={createQueryString} />
 						</div>
 					) : (
 						<div className="flex flex-col items-center gap-y-3">
-							<h3 className="font-medium text-gray-600 dark:text-foreground/90">Aucun message envoyé</h3>
 							<Button asChild className="w-fit font-heading">
-								<Link href={routes.dashboard.sms.send}>Envoyer un SMS</Link>
+								<Link href={routes.dashboard.sms.send}>Ajouter un Proxy</Link>
 							</Button>
 						</div>
 					)}

@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 export default function CreditsPage() {
 	return (
 		<div className="space-y-5">
-			<Breadcrumbs segments={[{ title: "Credits" }]} />
+			<Breadcrumbs segments={[{ title: "Bot" }]} />
 
 			<div className="space-y-6">
 				<CreditsListSection />
-				<PaymentHistory />
+				{/*<PaymentHistory />*/}
 			</div>
 		</div>
 	);

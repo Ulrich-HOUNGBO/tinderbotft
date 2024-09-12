@@ -13,12 +13,15 @@ export const routes = {
 		home: "/dashboard/home",
 		credits: {
 			index: "/dashboard/credits",
+			add: "/dashboard/credits/add-account",
+			update: (id: string) => `/dashboard/credits/update-account/${id}`,
 			buyCredits: (id: string) => `/dashboard/credits/buy-credit/${id}`,
 		},
 		sms: {
 			index: "/dashboard/sms",
 			send: "/dashboard/sms/send-sms",
 			viewSms: (id: string) => `/dashboard/sms/${id}`,
+			updateSms: (id: string) => `/dashboard/sms/update-sms/${id}`,
 		},
 		profile: "/dashboard/profile",
 	},

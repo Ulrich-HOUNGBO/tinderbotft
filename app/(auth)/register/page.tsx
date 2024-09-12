@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RegisterPage() {
 	return (
 		<div>
-			<AuthHeader title="Commencez avec MarkSafeTo" description="Créez votre compte" />
+			<AuthHeader title="Commencez avec AutoDate Swiper" description="Créez votre compte" />
 			<RegisterForm />
 			<div className="mt-5 flex items-center justify-center space-x-1 text-xs md:text-sm">
 				<p className="text-gray-700 dark:text-foreground/90">Vous avez déjà un compte ?</p>

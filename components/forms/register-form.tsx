@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import PhoneInput from "@/components/ui/phone-input";
 import { toast } from "@/components/ui/use-toast";
 import { registerSchema } from "@/lib/validations/auth";
 import { useCreateAccount } from "@/services/users/hooks";
@@ -25,8 +24,6 @@ export default function RegisterForm() {
 		defaultValues: {
 			username: "",
 			email: "",
-			phoneNo: "",
-			prefix: "BJ+229",
 			password: "",
 			acceptTerms: undefined,
 		},
@@ -36,10 +33,8 @@ export default function RegisterForm() {
 	const onSubmit = async (data: Credentials) => {
 		// console.log(data);
 		mutate(
-			{
-				...data,
-				phoneNo: `${data.prefix.substring(data.prefix.indexOf("+"))}${data.phoneNo?.replace(/\s/g, "")}`,
-			},
+			data,
+
 			{
 				onSuccess: () => {
 					toast({
@@ -91,29 +86,7 @@ export default function RegisterForm() {
 							</FormItem>
 						)}
 					/>
-					{/* PhoneNumber field */}
-					<FormField
-						control={form.control}
-						name="phoneNo"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Numéro de téléphone</FormLabel>
-								<FormControl>
-									<PhoneInput
-										inputProps={field}
-										eventProps={{
-											value: form.watch("prefix"),
-											onValueChange: (value) => {
-												// console.log(value);
-												form.setValue("prefix", value);
-											},
-										}}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+
 					{/* Password field */}
 					<FormField
 						control={form.control}

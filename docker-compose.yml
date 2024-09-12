@@ -1,11 +1,13 @@
 version: "3"
 
 services:
-  marksafeto:
-    image: marksafetoft
+  tinderbotft:
+    image: tinderbotft
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     command: npm start

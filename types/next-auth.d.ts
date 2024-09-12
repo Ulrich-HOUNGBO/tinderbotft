@@ -2,7 +2,7 @@ import { OfficeType, UsersRolesInterface } from "@/types";
 
 declare module "next-auth/jwt" {
 	interface JWT {
-		token: string;
+		access: string;
 	}
 }
 declare module "next-auth" {

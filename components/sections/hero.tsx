@@ -8,10 +8,10 @@ export default function Hero() {
 		<div className="grid items-center gap-8 lg:grid-cols-2 xl:gap-20">
 			<div className="space-y-5">
 				<h1 className="text-3xl leading-tight text-gray-700 dark:text-foreground/85 max-lg:text-center md:text-[2.6rem] xl:text-4xl">
-					Envoyez des SMS professionnels facilement, rapidement et de manière fiable
+					Automatisez vos swipe-up sur votre compte tinder
 				</h1>
 				<p className="text-gray-400 max-lg:text-center xl:text-xl">
-					Nous vous aidons à envoyer des SMS professionnels à vos clients et partenaires.
+					Nous vous aidons à planifier et à automatiser vos swipe sur votre compte.
 				</p>
 				<div className="flex gap-x-6 max-lg:justify-center">
 					<Button asChild>

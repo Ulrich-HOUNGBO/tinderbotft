@@ -34,19 +34,19 @@ export default function DashboardHeader() {
 			</div>
 
 			<div className="flex items-center gap-x-4">
-				{!user || isLoading ? (
-					<Skeleton className="hidden h-10 w-24 md:block" />
-				) : (
-					user && (
-						<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 dark:border-foreground/50 md:block">
-							<span className="text-gray-700 dark:text-foreground/90">{`${user?.credit} ${
-								user?.credit > 1 ? "Credits" : "Credit"
-							}`}</span>
-						</div>
-					)
-				)}
+				{/*{!user || isLoading ? (*/}
+				{/*	<Skeleton className="hidden h-10 w-24 md:block" />*/}
+				{/*) : (*/}
+				{/*	user && (*/}
+				{/*		<div className="hidden h-10 items-center justify-center rounded-md border px-4 py-2 dark:border-foreground/50 md:block">*/}
+				{/*			<span className="text-gray-700 dark:text-foreground/90">{`${user?.credit} ${*/}
+				{/*				user?.credit > 1 ? "Credits" : "Credit"*/}
+				{/*			}`}</span>*/}
+				{/*		</div>*/}
+				{/*	)*/}
+				{/*)}*/}
 				<Button asChild>
-					<Link href={routes.dashboard.credits.index}>Acheter du credits</Link>
+					<Link href={routes.dashboard.credits.add}>Ajouter un compte</Link>
 				</Button>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>

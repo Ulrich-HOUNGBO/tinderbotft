@@ -23,11 +23,7 @@ export type SidebarNavItem = NavItemWithChildren;
 export interface UserInterface {
 	id: string;
 	username: string;
-	phoneNo: string;
 	email: string;
-	role: "user" | "admin";
-	credit: number;
-	status: "incomplete" | "complete";
 }
 
 export interface MessagesList {
@@ -54,10 +50,9 @@ export interface SmsInterface {
 
 export interface PlansInterface {
 	id: string;
-	price: number;
-	credit: string;
-	recommended: boolean;
-	status: "active" | "inactive";
+	bot_name: number;
+	proxy: ProxyInterface | null;
+	status: string;
 }
 
 export interface PaymentHistoryInterface {
@@ -69,4 +64,30 @@ export interface PaymentHistoryInterface {
 export interface StatsInterface {
 	type: "credit" | "message";
 	value: number;
+}
+
+export interface BotsInterface {
+	id: string;
+	bot_name: string;
+	token: string;
+	swipe_times: number;
+	right_swipe_percentage: number;
+	status: string;
+	user: string;
+	proxy: string | null;
+}
+
+export interface ProxyInterface {
+	id: string;
+	name: string;
+	host: string;
+	password: string;
+	username: string;
+}
+
+export interface GlobalSettingInterface {
+	id: string;
+	name: string;
+	token: string;
+	status: boolean;
 }

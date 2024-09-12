@@ -1,7 +1,7 @@
 import { MainNavItem } from "@/types";
 
 export const siteConfig = {
-	name: "MarkSafeTo",
+	name: "Auto Date Swiper",
 	description: "Envoyez des SMS professionnels simplement, rapidement et de manière plus fiable",
 	url: "https://marksafeto.com",
 	mainNav: [

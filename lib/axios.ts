@@ -13,6 +13,8 @@ axios.interceptors.request.use(async (config) => {
 
 	if (session) config.headers.Authorization = `Bearer ${session?.accessToken}`;
 
+	console.log(session?.accessToken);
+
 	return config;
 });
 

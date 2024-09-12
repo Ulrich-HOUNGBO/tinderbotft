@@ -17,22 +17,12 @@ export default function SmsPage() {
 	return (
 		<div className="space-y-5">
 			<div className="flex items-center justify-between">
-				<Breadcrumbs segments={[{ title: "Sms" }]} />
+				<Breadcrumbs segments={[{ title: "Proxy" }]} />
 				<Button asChild className="w-fit font-heading">
-					<Link href={routes.dashboard.sms.send}>Envoyer un SMS</Link>
+					<Link href={routes.dashboard.sms.send}>Ajouter un proxy</Link>
 				</Button>
 			</div>
 
-			<Alert>
-				<AlertCircle className="size-5" />
-				<AlertTitle>Prix unitaire d&apos;un SMS : 10 crédits</AlertTitle>
-				<AlertDescription className="pt-2 text-gray-600 dark:text-foreground/90">
-					<p className="text-sm">
-						- Avez-vous acheter un pack SMS sans voir votre crédit SMS ajouté à votre solde automatiquement ?
-					</p>
-					<p className="text-sm">- Vos destinataires ne confirment pas la réception de vos SMS Pro ?</p>
-				</AlertDescription>
-			</Alert>
 			<Suspense>
 				<SmsListSection />
 			</Suspense>

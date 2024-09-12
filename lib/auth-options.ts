@@ -38,12 +38,12 @@ export const authOptions: NextAuthOptions = {
 				const { email, password } = credentials as { email: string; password: string };
 
 				const response = await axios
-					.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
+					.post(`${process.env.NEXT_PUBLIC_API_URL}/login/`, {
 						email,
 						password,
 					})
 					.then(({ data }) => {
-						// console.log("data =>", data);
+						console.log("data =>", data);
 						return data;
 					})
 					.catch((error) => {
@@ -63,9 +63,9 @@ export const authOptions: NextAuthOptions = {
 			return { ...token, ...user };
 		},
 		async session({ session, token }) {
-			session.accessToken = token.token;
+			session.accessToken = token.access;
 
-			//console.log(token)
+			//console.log(token.access);
 			return session;
 		},
 	},

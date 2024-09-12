@@ -27,21 +27,6 @@ export const registerSchema = z
 				message:
 					"Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
 			}),
-		prefix: z.string().min(2, {
-			message: "Le prefixe doit contenir au moins 2 caractères",
-		}),
-		phoneNo: z
-			.string()
-			.min(8, {
-				message: "Le numéro de téléphone doit contenir au moins 8 chiffres",
-			})
-			.max(15, {
-				message: "Le numéro de téléphone doit contenir au plus 15 chiffres",
-			})
-			.regex(/^[0-9]+$/, {
-				message: "Le numéro de téléphone doit contenir uniquement des chiffres",
-			})
-			.optional(),
 		acceptTerms: z.literal(true, {
 			errorMap: () => ({
 				message: "Vous devez accepter les conditions d'utilisation et la politique de confidentialité",

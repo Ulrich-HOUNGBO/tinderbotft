@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 		default: siteConfig.name,
 		template: `%s | ${siteConfig.name}`,
 	},
-	keywords: ["sms professionnel"],
+	keywords: ["auto-date-swiper", "auto", "date", "swiper", "auto-date-swiper.com", "tinder"],
 	openGraph: {
 		type: "website",
 		locale: "fr_FR",

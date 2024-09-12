@@ -6,7 +6,7 @@ import { StatsInterface, UserInterface } from "@/types";
  * @returns {Promise<UserInterface>} - Object containing user information:
  */
 export const getMe = async (): Promise<UserInterface> => {
-	const response = await axios.get("/users/profile").then((data) => data);
+	const response = await axios.get("/me/").then((data) => data);
 	// console.log(response);
 	return response.data;
 };
@@ -14,7 +14,6 @@ export const getMe = async (): Promise<UserInterface> => {
 export interface createAccountCredentials {
 	username: string;
 	email: string;
-	phoneNo?: string;
 	password: string;
 }
 
@@ -32,7 +31,6 @@ export const editProfile = async (id: string, credentials: createAccountCredenti
 export interface createAccountCredentials {
 	username: string;
 	email: string;
-	phoneNo?: string;
 	password: string;
 }
 
@@ -41,7 +39,7 @@ export interface createAccountCredentials {
  *  @param credentials - User data
  */
 export const createAccount = async (credentials: createAccountCredentials) => {
-	const response = await axios.post("/users/register", credentials);
+	const response = await axios.post("/register/", credentials);
 	// console.log(response);
 	return response.data;
 };

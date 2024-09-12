@@ -14,12 +14,10 @@ export default function DashboardStats() {
 	isSuccess && console.log(data);
 
 	return (
-		<>
-			<div className="mt-5 grid gap-6 md:grid-cols-2">
-				{stats.map((stat) => (
-					<StatsCard key={stat.type} props={stat} />
-				))}
-			</div>
-		</>
+		<div className="mt-5 grid gap-6 md:grid-cols-2">
+			{stats.map((stat) => (
+				<StatsCard key={stat.type} props={stat}/>
+			))}
+		</div>
 	);
 }

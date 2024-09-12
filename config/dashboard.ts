@@ -10,12 +10,12 @@ export const dashboardConfig = {
 			icon: LayoutGrid,
 		},
 		{
-			title: "Sms",
+			title: "Proxies",
 			href: routes.dashboard.sms.index,
 			icon: MessageCircleMore,
 		},
 		{
-			title: "Credits",
+			title: "Compte Tinder",
 			href: routes.dashboard.credits.index,
 			icon: CreditCard,
 		},
