@@ -35,7 +35,7 @@ export default function BuyCreditPage({ params }: BuyCreditPageProps) {
 				]}
 			/>
 			{/* <h1 className="my-6">Buy credit page</h1> */}
-			<Payment planID={params.id} />
+			{/*<Payment planID={params.id} />*/}
 		</div>
 	);
 }

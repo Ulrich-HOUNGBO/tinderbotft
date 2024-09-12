@@ -22,13 +22,13 @@ export default function Payment({ planID }: { planID: string }) {
 	function open() {
 		setPaymentIsPending(true);
 		if (user && data) {
-			openKkiapayWidget({
-				amount: data.price,
-				api_key: "520ac280d39811edb532ad421d393c9e",
-				sandbox: true,
-				email: user.email,
-				phone: "97000000",
-			});
+			// openKkiapayWidget({
+			// 	amount: data.price,
+			// 	api_key: "520ac280d39811edb532ad421d393c9e",
+			// 	sandbox: true,
+			// 	email: user.email,
+			// 	phone: "97000000",
+			// });
 		}
 	}
 
@@ -63,7 +63,7 @@ export default function Payment({ planID }: { planID: string }) {
 				) : (
 					<CreditCardIcon className="mr-2 dark:text-background" />
 				)}
-				Acheter du crédit pour {data?.price} FCFA
+				{/*Acheter du crédit pour {data?.price} FCFA*/}
 			</Button>
 		</div>
 	);
