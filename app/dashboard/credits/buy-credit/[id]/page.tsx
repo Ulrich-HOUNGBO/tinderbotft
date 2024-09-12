@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: BuyCreditPageProps) {
 		const planData = await getPlanById(params.id);
 		// console.log(planData);
 		return {
-			title: `Dashboard - Buy ${planData.credit} Credits`,
-			description: `Buy ${planData.credit} credits for ${planData.price}`,
+			title: `Dashboard - Buy  Credits`,
+			description: `Buy  credits for`,
 		};
 	} catch (error) {
 		return {

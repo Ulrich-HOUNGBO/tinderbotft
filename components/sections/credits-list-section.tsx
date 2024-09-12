@@ -5,6 +5,7 @@ import { AlertCircle } from "lucide-react";
 import PlansListCard from "../cards/plans-list-card";
 import { Skeleton } from "../ui/skeleton";
 import {useBots} from "@/services/bot/hooks";
+import {BotsInterface} from "@/types";
 
 export default function CreditsListSection() {
 	const { isLoading, isError, data } = useBots();
@@ -25,7 +26,7 @@ export default function CreditsListSection() {
 						))}
 					</>
 				) : data ? (
-					data.length > 0 && data.map((bot) => <PlansListCard key={bot.id} props={bot} />)
+					data.length > 0 && data.map((bot) => <PlansListCard key={bot.id} props={bot as BotsInterface} />)
 				) : (
 					<div className="col-span-3 flex items-center gap-3 rounded-lg border border-blue-400 p-4">
 						<AlertCircle size={24} className="text-blue-400" />

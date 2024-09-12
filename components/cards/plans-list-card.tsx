@@ -1,5 +1,5 @@
 import { routes } from "@/lib/routes";
-import { PlansInterface } from "@/types";
+import {BotsInterface, PlansInterface} from "@/types";
 import Link from "next/link";
 import {startBot, stopBot} from "@/services/bot/queries";
 import { Button } from "../ui/button";
@@ -7,7 +7,7 @@ import {toast} from "@/components/ui/use-toast";
 import {useStartBot, useStopBot} from "@/services/bot/hooks";
 import {getProxyById} from "@/services/proxy/queries";
 
-export default function PlansListCard({ props }: { props: PlansInterface }) {
+export default function PlansListCard({ props }: { props: BotsInterface }) {
 	const { mutateAsync: startBotMutateAsync } = useStartBot();
 	const { mutateAsync: stopBotMutateAsync } = useStopBot();
 

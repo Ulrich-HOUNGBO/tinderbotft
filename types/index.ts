@@ -74,7 +74,7 @@ export interface BotsInterface {
 	right_swipe_percentage: number;
 	status: string;
 	user: string;
-	proxy: string | null;
+	proxy: ProxyInterface | null;
 }
 
 export interface ProxyInterface {

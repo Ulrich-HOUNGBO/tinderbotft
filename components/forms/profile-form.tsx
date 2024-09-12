@@ -21,7 +21,6 @@ export default function ProfileForm() {
 		defaultValues: {
 			username: user?.username ?? "",
 			email: user?.email ?? "",
-			phoneNo: user?.phoneNo ?? "",
 		},
 		mode: "all",
 	});
@@ -31,7 +30,6 @@ export default function ProfileForm() {
 			await form.reset({
 				username: user?.username ?? "",
 				email: user?.email ?? "",
-				phoneNo: user?.phoneNo ?? "",
 			});
 		};
 		fetchData();
@@ -87,21 +85,7 @@ export default function ProfileForm() {
 									</FormItem>
 								)}
 							/>
-
 							{/* PhoneNumber field */}
-							<FormField
-								control={form.control}
-								name="phoneNo"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Numéro de téléphone</FormLabel>
-										<FormControl>
-											<Input placeholder="+22912345678" {...field} readOnly />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
 						</div>
 					</div>
 
