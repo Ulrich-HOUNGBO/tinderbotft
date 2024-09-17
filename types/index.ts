@@ -81,8 +81,10 @@ export interface ProxyInterface {
 	id: string;
 	name: string;
 	host: string;
+	port: number;
 	password: string;
 	username: string;
+	rotation_link: string;
 }
 
 export interface GlobalSettingInterface {

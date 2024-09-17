@@ -15,8 +15,10 @@ export const getProxyById = async (id: string): Promise<ProxyInterface> => {
 export interface createProxyCredentials {
     name: string;
     host: string;
+    port: number;
     username: string;
     password: string;
+    rotation_link: string;
 }
 
 export const addProxy = async (credentials: createProxyCredentials) => {
