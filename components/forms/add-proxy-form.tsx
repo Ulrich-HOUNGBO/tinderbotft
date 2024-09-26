@@ -1,12 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useAddProxy } from "@/services/proxy/hooks";
-import { proxySchema } from "@/lib/validations/proxy";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,44 +14,72 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { proxySchema } from "@/lib/validations/proxy";
 import { createProxyCredentials } from "@/services/proxy/queries";
+import { useAddProxy, useUpdateProxy } from "@/services/proxy/hooks";
+import { routes } from "@/lib/routes";
+import { Loader2 } from "lucide-react";
+import { z } from "zod";
+import { ProxyInterface } from "@/types";
 
 type Credentials = z.infer<typeof proxySchema>;
 
-export default function AddProxyForm() {
+interface ProxyFormProps {
+  mode: "add" | "update";
+  initialData?: ProxyInterface;
+}
+
+export default function AddOrUpdateProxyForm({
+  mode,
+  initialData,
+}: ProxyFormProps) {
   const router = useRouter();
-  const { mutateAsync, isPending } = useAddProxy();
+  const addMutation = useAddProxy();
+  const updateMutation = useUpdateProxy(initialData?.id ?? "");
 
   const form = useForm<Credentials>({
     resolver: zodResolver(proxySchema),
     defaultValues: {
-      name: "",
-      host: "",
-      port: 0,
-      username: "",
-      password: "",
-      rotation_link: "",
+      name: initialData?.name ?? "",
+      host: initialData?.host ?? "",
+      port: initialData?.port ?? 0,
+      username: initialData?.username ?? "",
+      password: initialData?.password ?? "",
+      rotation_link: initialData?.rotation_link ?? "",
     },
     mode: "all",
   });
 
   const onSubmit = async (data: Credentials) => {
-    await mutateAsync(data as createProxyCredentials, {
-      onSuccess: async () => {
-        toast({
-          title:
-            "P\n" +
-            "        router.push(routes.dashboard.sms.index)roxy ajouté avec succès",
-        });
-      },
-      onError: (error: any) => {
-        toast({
-          variant: "destructive",
-          title: "Une erreur s'est produite",
-          description: error.response.data,
-        });
-      },
-    });
+    if (mode === "add") {
+      await addMutation.mutateAsync(data as createProxyCredentials, {
+        onSuccess: async () => {
+          toast({ title: "Proxy ajouté avec succès" });
+          router.push(routes.dashboard.proxy.index);
+        },
+        onError: (error: any) => {
+          toast({
+            variant: "destructive",
+            title: "Une erreur s'est produite",
+            description: error.response.data,
+          });
+        },
+      });
+    } else {
+      await updateMutation.mutateAsync(data as createProxyCredentials, {
+        onSuccess: async () => {
+          toast({ title: "Proxy mis à jour avec succès" });
+          router.push(routes.dashboard.proxy.index);
+        },
+        onError: (error: any) => {
+          toast({
+            variant: "destructive",
+            title: "Une erreur s'est produite",
+            description: error.response.data,
+          });
+        },
+      });
+    }
   };
 
   return (
@@ -117,7 +141,7 @@ export default function AddProxyForm() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nom utilisation</FormLabel>
+                <FormLabel>Nom d&apos;utilisateur</FormLabel>
                 <FormControl>
                   <Input placeholder="Nom d'utilisateur" {...field} />
                 </FormControl>
@@ -158,13 +182,17 @@ export default function AddProxyForm() {
             )}
           />
         </div>
-
-        <Button disabled={isPending} className="w-fit">
-          {isPending && (
+        <Button
+          disabled={addMutation.isPending || updateMutation.isPending}
+          className="w-fit"
+        >
+          {(addMutation.isPending || updateMutation.isPending) && (
             <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
           )}
-          Ajouter Proxy
-          <span className="sr-only">Ajouter Proxy</span>
+          {mode === "add" ? "Ajouter Proxy" : "Mettre à jour Proxy"}
+          <span className="sr-only">
+            {mode === "add" ? "Ajouter Proxy" : "Mettre à jour Proxy"}
+          </span>
         </Button>
       </form>
     </Form>

@@ -1,28 +1,30 @@
 import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
-import SmsListSection from "@/components/sections/sms-list-section";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import StrategyList from "@/components/tables/strategy-list";
 
 export const metadata: Metadata = {
-  title: "Dashboard - Proxies",
-  description: "Dashboard proxies page",
+  title: "Dashboard - Strategies",
+  description: "Dashboard strategies page",
 };
 
-export default function SmsPage() {
+export default function StrategiesPage() {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <Breadcrumbs segments={[{ title: "Proxies" }]} />
+        <Breadcrumbs segments={[{ title: "Strategies" }]} />
         <Button asChild className="w-fit font-heading">
-          <Link href={routes.dashboard.sms.send}>Ajouter un proxy</Link>
+          <Link href={routes.dashboard.strategy.add}>
+            Ajouter une stratégie
+          </Link>
         </Button>
       </div>
 
       <Suspense>
-        <SmsListSection />
+        <StrategyList />
       </Suspense>
     </div>
   );

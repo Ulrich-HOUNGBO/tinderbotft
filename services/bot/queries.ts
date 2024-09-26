@@ -1,6 +1,5 @@
 import axios from "@/lib/axios";
 import { BotsInterface } from "@/types";
-import { TimeValue } from "react-aria";
 
 export const getAllBots = async (): Promise<BotsInterface[]> => {
   const response = await axios.get("/get-settings/").then((data) => data);
@@ -13,16 +12,20 @@ export const getBotById = async (id: string): Promise<BotsInterface> => {
   return response.data;
 };
 
-export interface createBotCredentials {
-  bot_name: string;
-  token: string;
-  refresh_token: string | null;
-  proxy: string | null;
-  swipe_times: number | null;
-  right_swipe_percentage: number | null;
-  device_id: string | null;
-  schedule_time: TimeValue | undefined;
-}
+type BotSetting = {
+  min_swipe_times: number;
+  max_swipe_times: number;
+  min_right_swipe_percentage: number;
+  max_right_swipe_percentage: number;
+  scheduled_time: string; // This should match the format "HH:MM"
+  scheduled_time_2: string | undefined; // This should match the format "HH:MM"
+  related_day: number; // Day of the week (1-7)
+};
+
+export type createBotCredentials = {
+  strategy: string; // UUID for the strategy
+  bot_settings: BotSetting[]; // Array of bot settings objects
+};
 
 export const addBot = async (credentials: createBotCredentials) => {
   const response = await axios.post("/create-bot-settings/", credentials);

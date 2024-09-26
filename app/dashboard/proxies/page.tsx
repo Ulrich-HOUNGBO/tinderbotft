@@ -1,10 +1,10 @@
 import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
-import SmsListSection from "@/components/sections/sms-list-section";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import ProxyList from "@/components/tables/proxy-list";
 
 export const metadata: Metadata = {
   title: "Dashboard - Proxies",
@@ -17,12 +17,12 @@ export default function SmsPage() {
       <div className="flex items-center justify-between">
         <Breadcrumbs segments={[{ title: "Proxies" }]} />
         <Button asChild className="w-fit font-heading">
-          <Link href={routes.dashboard.sms.send}>Ajouter un proxy</Link>
+          <Link href={routes.dashboard.proxy.add}>Ajouter un proxy</Link>
         </Button>
       </div>
 
       <Suspense>
-        <SmsListSection />
+        <ProxyList />
       </Suspense>
     </div>
   );
