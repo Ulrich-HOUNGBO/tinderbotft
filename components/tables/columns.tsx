@@ -16,7 +16,11 @@ import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { routes } from "@/lib/routes";
-import { useRemoveStrategy, useStrategies } from "@/services/strategy/hooks";
+import {
+  useRemoveStrategy,
+  useStrategies,
+  useUpdateStrategy,
+} from "@/services/strategy/hooks";
 import { useProxies, useRemoveProxy } from "@/services/proxy/hooks";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +33,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ProxyCell = ({ proxyId }: { proxyId: string | undefined }) => {
   const { data: proxies = [] } = useProxies();
@@ -242,6 +253,44 @@ export const paymentHistoryColumns: ColumnDef<PaymentHistoryInterface>[] = [
   },
 ];
 
+const EditableProxyCell = ({
+  row,
+}: {
+  row: { original: StrategyInterface };
+}) => {
+  const { data: proxies = [] } = useProxies();
+  const updateMutation = useUpdateStrategy(row.original.id);
+
+  const handleProxyChange = (newProxyId: string) => {
+    updateMutation.mutate({ proxy: newProxyId });
+  };
+
+  const selectedProxyId = row.original.proxy
+    ? typeof row.original.proxy === "object"
+      ? row.original.proxy.id
+      : row.original.proxy
+    : undefined;
+
+  return (
+    <Select
+      value={selectedProxyId?.toString() || ""}
+      onValueChange={handleProxyChange}
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Select Proxy" />
+      </SelectTrigger>
+      <SelectContent>
+        {proxies.map((proxy) => (
+          <SelectItem key={proxy.id} value={proxy.id}>
+            {proxy.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
+// Modification de la colonne "Proxy" dans `strategyListColumns`
 export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
   {
     accessorKey: "name",
@@ -258,13 +307,7 @@ export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
   {
     accessorKey: "proxy",
     header: "Proxy",
-    cell: ({ row }) => {
-      const proxyId =
-        typeof row.original.proxy === "object"
-          ? row.original.proxy?.id
-          : row.original.proxy;
-      return <ProxyCell proxyId={proxyId} />;
-    },
+    cell: ({ row }) => <EditableProxyCell row={row} />, // Utilisation de la cellule modifiable
   },
   {
     accessorKey: "actions",

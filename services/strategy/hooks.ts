@@ -51,7 +51,7 @@ export const useUpdateStrategy = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (credentials: createStrategyCredentials) =>
+    mutationFn: (credentials: Partial<createStrategyCredentials>) =>
       updateStrategy(id, credentials),
     onSettled: () => {
       queryClient.invalidateQueries({

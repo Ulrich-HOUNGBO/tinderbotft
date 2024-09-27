@@ -27,7 +27,7 @@ export const addStrategy = async (credentials: createStrategyCredentials) => {
 
 export const updateStrategy = async (
   id: string,
-  credentials: createStrategyCredentials,
+  credentials: Partial<createStrategyCredentials>,
 ) => {
   const response = await axios.patch(`/update-strategy/${id}`, credentials);
   return response.data;
