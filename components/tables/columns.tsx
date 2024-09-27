@@ -12,7 +12,7 @@ import {
   StrategyInterface,
 } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
+import { PencilLine, Play, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { routes } from "@/lib/routes";
@@ -29,6 +29,167 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+
+const ProxyCell = ({ proxyId }: { proxyId: string | undefined }) => {
+  const { data: proxies = [] } = useProxies();
+  const proxy = proxies.find((proxy) => proxy.id === proxyId);
+  return <div>{proxy ? proxy.name : ""}</div>;
+};
+
+const ProxyActionsCell = ({ row }: { row: { original: ProxyInterface } }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const deleteMutation = useRemoveProxy(row.original.id);
+
+  const handleDelete = () => {
+    deleteMutation.mutate();
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <Link
+        href={routes.dashboard.proxy.update(row.original.id)}
+        className="btn btn-primary"
+      >
+        <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
+      </Link>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <button className="btn btn-secondary">
+            <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmation</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this proxy?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+            <Button onClick={handleDelete} variant="destructive">
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
+
+const StrategyCell = ({ row }: { row: { original: any } }) => {
+  const { data: strategies = [] } = useStrategies();
+  const strategyId =
+    typeof row.original.strategy === "object"
+      ? row.original.strategy?.id
+      : row.original.strategy;
+  const strategy = strategies.find((strategy) => strategy.id === strategyId);
+  return <div>{strategy ? strategy.name : ""}</div>;
+};
+
+const StrategyActionsCell = ({
+  row,
+}: {
+  row: { original: StrategyInterface };
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const deleteMutation = useRemoveProxy(row.original.id);
+
+  const handleDelete = () => {
+    deleteMutation.mutate();
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <Link
+        href={routes.dashboard.strategy.update(row.original.id)}
+        className="btn btn-primary"
+      >
+        <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
+      </Link>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <button className="btn btn-secondary">
+            <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmation</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this strategy?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+            <Button onClick={handleDelete} variant="destructive">
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
+
+const AccountActionsCell = ({
+  row,
+}: {
+  row: { original: BotAccountInterface };
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const deleteMutation = useRemoveBotAccount(row.original.id);
+
+  const handleDelete = () => {
+    deleteMutation.mutate();
+    setIsModalOpen(false);
+  };
+
+  const startMutation = useStartBotAccount(row.original.id);
+  const handleStart = () => {
+    startMutation.mutate();
+  };
+
+  return (
+    <div className="flex items-center gap-2">
+      <button className="btn btn-primary" onClick={handleStart}>
+        <Play size={20} color="#065c00" strokeWidth={1.25} />
+      </button>
+      <Link
+        href={routes.dashboard.account.update(row.original.id)}
+        className="btn btn-primary"
+      >
+        <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
+      </Link>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <button className="btn btn-secondary">
+            <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmation</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this account?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+            <Button onClick={handleDelete} variant="destructive">
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
 
 export const paymentHistoryColumns: ColumnDef<PaymentHistoryInterface>[] = [
   {
@@ -92,70 +253,17 @@ export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
     accessorKey: "proxy",
     header: "Proxy",
     cell: ({ row }) => {
-      const { data: proxies = [] } = useProxies();
       const proxyId =
         typeof row.original.proxy === "object"
           ? row.original.proxy?.id
           : row.original.proxy;
-      const proxy = proxies.find((proxy) => proxy.id === proxyId);
-      return <div>{proxy ? proxy.name : ""}</div>;
+      return <ProxyCell proxyId={proxyId} />;
     },
   },
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }) => {
-      const [isModalOpen, setIsModalOpen] = useState(false);
-      const proxyId = row.original.proxy?.id;
-
-      const deleteMutation = useRemoveProxy(proxyId ?? "");
-
-      const handleDelete = () => {
-        if (proxyId) {
-          deleteMutation.mutate();
-          setIsModalOpen(false);
-        }
-      };
-
-      return (
-        <div className="flex items-center gap-2">
-          <Link
-            href={routes.dashboard.strategy.config(row.original.id)}
-            className="btn btn-secondary"
-          >
-            <Cog size={20} color="#afc856" strokeWidth={1.25} />
-          </Link>
-          <Link
-            href={routes.dashboard.strategy.update(row.original.id)}
-            className="btn btn-primary"
-          >
-            <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
-          </Link>
-
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger asChild>
-              <button className="btn btn-secondary">
-                <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Confirmation</DialogTitle>
-                <DialogDescription>
-                  Are you sure you want to delete this proxy?
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-                <Button onClick={handleDelete} variant="destructive">
-                  Delete
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
-      );
-    },
+    cell: ({ row }) => <StrategyActionsCell row={row} />,
   },
 ];
 
@@ -183,48 +291,7 @@ export const proxyListColumns: ColumnDef<ProxyInterface>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }) => {
-      const [isModalOpen, setIsModalOpen] = useState(false);
-      const deleteMutation = useRemoveProxy(row.original.id);
-
-      const handleDelete = () => {
-        deleteMutation.mutate();
-        setIsModalOpen(false);
-      };
-
-      return (
-        <div className="flex items-center gap-2">
-          <Link
-            href={routes.dashboard.proxy.update(row.original.id)}
-            className="btn btn-primary"
-          >
-            <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
-          </Link>
-
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger asChild>
-              <button className="btn btn-secondary">
-                <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Confirmation</DialogTitle>
-                <DialogDescription>
-                  Are you sure you want to delete this proxy?
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-                <Button onClick={handleDelete} variant="destructive">
-                  Delete
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
-      );
-    },
+    cell: ({ row }) => <ProxyActionsCell row={row} />,
   },
 ];
 
@@ -259,70 +326,11 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
   {
     accessorKey: "strategy",
     header: "Strategy",
-    cell: ({ row }) => {
-      const { data: strategies = [] } = useStrategies();
-      const strategyId =
-        typeof row.original.strategy === "object"
-          ? row.original.strategy?.id
-          : row.original.strategy;
-      const strategy = strategies.find(
-        (strategy) => strategy.id === strategyId,
-      );
-      return <div>{strategy ? strategy.name : ""}</div>;
-    },
+    cell: ({ row }) => <StrategyCell row={row} />,
   },
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }) => {
-      const [isModalOpen, setIsModalOpen] = useState(false);
-      const deleteMutation = useRemoveBotAccount(row.original.id);
-
-      const handleDelete = () => {
-        deleteMutation.mutate();
-        setIsModalOpen(false);
-      };
-
-      const startMutation = useStartBotAccount(row.original.id);
-      const handleStart = () => {
-        startMutation.mutate();
-      };
-
-      return (
-        <div className="flex items-center gap-2">
-          <button className="btn btn-primary" onClick={handleStart}>
-            <Play size={20} color="#065c00" strokeWidth={1.25} />
-          </button>
-          <Link
-            href={routes.dashboard.account.update(row.original.id)}
-            className="btn btn-primary"
-          >
-            <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
-          </Link>
-
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogTrigger asChild>
-              <button className="btn btn-secondary">
-                <Trash2 size={20} color="#ff0000" strokeWidth={1.25} />
-              </button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Confirmation</DialogTitle>
-                <DialogDescription>
-                  Are you sure you want to delete this account?
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-                <Button onClick={handleDelete} variant="destructive">
-                  Delete
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
-      );
-    },
+    cell: ({ row }) => <AccountActionsCell row={row} />,
   },
 ];
