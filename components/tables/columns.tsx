@@ -12,7 +12,7 @@ import {
   StrategyInterface,
 } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { PencilLine, Play, Trash2 } from "lucide-react";
+import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { routes } from "@/lib/routes";
@@ -104,6 +104,12 @@ const StrategyActionsCell = ({
 
   return (
     <div className="flex items-center gap-2">
+      <Link
+        href={routes.dashboard.strategy.config(row.original.id)}
+        className="btn btn-primary"
+      >
+        <Cog size={20} strokeWidth={1.25} />
+      </Link>
       <Link
         href={routes.dashboard.strategy.update(row.original.id)}
         className="btn btn-primary"
