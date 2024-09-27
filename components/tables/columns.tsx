@@ -287,14 +287,6 @@ export const proxyListColumns: ColumnDef<ProxyInterface>[] = [
     header: "Port",
   },
   {
-    accessorKey: "username",
-    header: "Username",
-  },
-  {
-    accessorKey: "password",
-    header: "Password",
-  },
-  {
     accessorKey: "actions",
     header: "Actions",
     cell: ({ row }) => <ProxyActionsCell row={row} />,
