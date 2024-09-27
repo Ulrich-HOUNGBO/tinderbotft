@@ -34,6 +34,6 @@ export const updateStrategy = async (
 };
 
 export const removeStrategy = async (id: string) => {
-  const response = await axios.delete(`/delete-strategy/${id}/`);
+  const response = await axios.delete(`/delete-strategy/${id}`);
   return response.data;
 };
