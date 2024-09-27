@@ -163,7 +163,11 @@ export default function AddOrUpdateAccountForm({
               <FormItem>
                 <FormLabel>Refresh Token</FormLabel>
                 <FormControl>
-                  <Input placeholder="Refresh Token du compte" {...field} />
+                  <Input
+                    placeholder="Refresh Token"
+                    {...field}
+                    value={field.value ?? ""}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
