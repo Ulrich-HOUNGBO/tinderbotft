@@ -39,27 +39,36 @@ export const paymentHistoryColumns: ColumnDef<PaymentHistoryInterface>[] = [
     accessorKey: "status",
     header: "Statut",
     cell: ({ row }) => {
+      const status = row.original.status;
+      let badgeClass = "";
+
+      switch (status) {
+        case "Succès":
+          badgeClass = "bg-green-100 dark:bg-green-500/20 text-green-500";
+          break;
+        case "Échoué":
+          badgeClass =
+            "bg-destructive/10 dark:bg-red-500/20 text-destructive dark:text-red-500/80";
+          break;
+        case "En attente":
+          badgeClass = "bg-blue-100 dark:bg-blue-500/20 text-blue-500";
+          break;
+        default:
+          badgeClass = "bg-gray-100 dark:bg-gray-500/20 text-gray-500";
+      }
+
       return (
         <div
-          className={`flex w-fit items-center gap-x-1 rounded-full px-2 py-1 text-xs font-medium ${
-            row.original.status === "Succès"
-              ? "bg-green-100 dark:bg-green-500/20 text-green-500"
-              : row.original.status === "Échoué"
-                ? "bg-destructive/10 dark:bg-red-500/20 text-destructive dark:text-red-500/80"
-                : row.original.status === "En attente"
-                  ? "bg-blue-100 bg-blue-500/20 text-blue-500"
-                  : ""
-          }`}
+          className={`flex w-fit items-center gap-x-1 rounded-full px-2 py-1 text-xs font-medium ${badgeClass}`}
         >
           <div
             className={cn("size-2 rounded-full", {
-              "bg-green-500": row.original.status === "Succès",
-              "bg-destructive dark:bg-red-500/80":
-                row.original.status === "Échoué",
-              "bg-blue-600": row.original.status === "En attente",
+              "bg-green-500": status === "Succès",
+              "bg-destructive dark:bg-red-500/80": status === "Échoué",
+              "bg-blue-600": status === "En attente",
             })}
           ></div>
-          {row.original.status}
+          {status}
         </div>
       );
     },
