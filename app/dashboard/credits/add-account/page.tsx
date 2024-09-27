@@ -1,7 +1,7 @@
 import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
 import { routes } from "@/lib/routes";
 import { Metadata } from "next";
-import AddAccountForm from "@/components/forms/add-account-form";
+import AddOrUpdateAccountForm from "@/components/forms/add-account-form";
 
 export const metadata: Metadata = {
   title: "Dashboard - Ajouter un compte",
@@ -18,7 +18,7 @@ export default function SendSmsPage() {
         ]}
       />
       <div className="w-full">
-        <AddAccountForm />
+        <AddOrUpdateAccountForm mode={"add"} />
       </div>
     </div>
   );
