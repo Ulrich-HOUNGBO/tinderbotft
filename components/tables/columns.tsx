@@ -16,7 +16,7 @@ import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { routes } from "@/lib/routes";
-import { useStrategies } from "@/services/strategy/hooks";
+import { useRemoveStrategy, useStrategies } from "@/services/strategy/hooks";
 import { useProxies, useRemoveProxy } from "@/services/proxy/hooks";
 import { Button } from "@/components/ui/button";
 import {
@@ -95,7 +95,7 @@ const StrategyActionsCell = ({
   row: { original: StrategyInterface };
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const deleteMutation = useRemoveProxy(row.original.id);
+  const deleteMutation = useRemoveStrategy(row.original.id);
 
   const handleDelete = () => {
     deleteMutation.mutate();
