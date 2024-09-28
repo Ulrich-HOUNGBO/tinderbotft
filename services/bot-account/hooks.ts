@@ -53,7 +53,7 @@ export const useUpdateBotaccount = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (credentials: createBotAccountCredentials) =>
+    mutationFn: (credentials: Partial<createBotAccountCredentials>) =>
       updateAccount(id, credentials),
     onSettled: () => {
       queryClient.invalidateQueries({

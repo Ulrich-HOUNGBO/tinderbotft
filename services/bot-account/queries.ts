@@ -26,7 +26,7 @@ export const addAccount = async (credentials: createBotAccountCredentials) => {
 
 export const updateAccount = async (
   id: string,
-  credentials: createBotAccountCredentials,
+  credentials: Partial<createBotAccountCredentials>,
 ) => {
   const response = await axios.patch(`/update-account/${id}`, credentials);
   return response.data;

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   useRemoveBotAccount,
   useStartBotAccount,
+  useUpdateBotaccount,
 } from "@/services/bot-account/hooks";
 import {
   BotAccountInterface,
@@ -290,6 +291,43 @@ const EditableProxyCell = ({
   );
 };
 
+const EditableStrategyCell = ({
+  row,
+}: {
+  row: { original: BotAccountInterface };
+}) => {
+  const { data: strategies = [] } = useStrategies();
+  const updateMutation = useUpdateBotaccount(row.original.id);
+
+  const handleStrategyChange = (newStrategyId: string) => {
+    updateMutation.mutate({ strategy: newStrategyId });
+  };
+
+  const selectedStrategyId = row.original.strategy
+    ? typeof row.original.strategy === "object"
+      ? row.original.strategy.id
+      : row.original.strategy
+    : undefined;
+
+  return (
+    <Select
+      value={selectedStrategyId?.toString() || ""}
+      onValueChange={handleStrategyChange}
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Select Strategy" />
+      </SelectTrigger>
+      <SelectContent>
+        {strategies.map((strategy) => (
+          <SelectItem key={strategy.id} value={strategy.id}>
+            {strategy.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
 // Modification de la colonne "Proxy" dans `strategyListColumns`
 export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
   {
@@ -367,7 +405,7 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
   {
     accessorKey: "strategy",
     header: "Strategy",
-    cell: ({ row }) => <StrategyCell row={row} />,
+    cell: ({ row }) => <EditableStrategyCell row={row} />, // Use EditableStrategyCell
   },
   {
     accessorKey: "actions",
