@@ -1,13 +1,6 @@
 import * as z from "zod";
 
-export const proxySchema: z.ZodType<{
-  name: string;
-  host: string;
-  username: string;
-  password: string;
-  port: number;
-  rotation_link: string;
-}> = z.object({
+export const proxySchema = z.object({
   name: z.string({
     required_error: "Proxy name is required",
   }),
@@ -23,7 +16,7 @@ export const proxySchema: z.ZodType<{
   password: z.string({
     required_error: "Proxy password is required",
   }),
-  rotation_link: z.string({
-    required_error: "Proxy rotation link is required",
-  }),
+  rotation_link: z.string().optional(),
 });
+
+export type ProxySchemaType = z.infer<typeof proxySchema>;

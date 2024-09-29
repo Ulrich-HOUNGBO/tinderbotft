@@ -17,7 +17,7 @@ export interface createProxyCredentials {
   port: number;
   username: string;
   password: string;
-  rotation_link: string;
+  rotation_link: string | undefined;
 }
 
 export const addProxy = async (credentials: createProxyCredentials) => {

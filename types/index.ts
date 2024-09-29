@@ -83,7 +83,7 @@ export interface ProxyInterface {
   port: number;
   password: string;
   username: string;
-  rotation_link: string;
+  rotation_link: string | undefined;
 }
 
 export interface BotAccountInterface {

@@ -53,7 +53,7 @@ export default function AddOrUpdateProxyForm({
   const onSubmit = async (data: Credentials) => {
     const payload = {
       ...data,
-      port: Number(data.port), // Ensure port is a number
+      port: Number(data.port),
     };
 
     if (mode === "add") {
