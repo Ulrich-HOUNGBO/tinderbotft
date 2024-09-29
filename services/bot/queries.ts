@@ -2,8 +2,17 @@ import axios from "@/lib/axios";
 import { BotsInterface } from "@/types";
 
 export const getAllBots = async (): Promise<BotsInterface[]> => {
-  const response = await axios.get("/get-settings/").then((data) => data);
+  const response = await axios.get("/get-settings").then((data) => data);
   console.log(response.data);
+  return response.data;
+};
+
+export const getAllBotByStrategy = async (
+  strategy: string,
+): Promise<BotsInterface[]> => {
+  const response = await axios
+    .get(`/get-settings-strategy/${strategy}`)
+    .then((data) => data);
   return response.data;
 };
 

@@ -42,7 +42,7 @@ export default function AddOrUpdateProxyForm({
     defaultValues: {
       name: initialData?.name ?? "",
       host: initialData?.host ?? "",
-      port: initialData?.port ?? 0,
+      port: initialData?.port ? Number(initialData.port) : 0, // Convert port to number
       username: initialData?.username ?? "",
       password: initialData?.password ?? "",
       rotation_link: initialData?.rotation_link ?? "",
@@ -51,8 +51,13 @@ export default function AddOrUpdateProxyForm({
   });
 
   const onSubmit = async (data: Credentials) => {
+    const payload = {
+      ...data,
+      port: Number(data.port), // Ensure port is a number
+    };
+
     if (mode === "add") {
-      await addMutation.mutateAsync(data as createProxyCredentials, {
+      await addMutation.mutateAsync(payload as createProxyCredentials, {
         onSuccess: async () => {
           toast({ title: "Proxy ajouté avec succès" });
           router.push(routes.dashboard.proxy.index);
@@ -66,7 +71,7 @@ export default function AddOrUpdateProxyForm({
         },
       });
     } else {
-      await updateMutation.mutateAsync(data as createProxyCredentials, {
+      await updateMutation.mutateAsync(payload as createProxyCredentials, {
         onSuccess: async () => {
           toast({ title: "Proxy mis à jour avec succès" });
           router.push(routes.dashboard.proxy.index);
@@ -167,21 +172,19 @@ export default function AddOrUpdateProxyForm({
             )}
           />
         </div>
-        <div className="grid grid-cols-1 gap-4 md:gap-7">
-          <FormField
-            control={form.control}
-            name="rotation_link"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Lien de rotation</FormLabel>
-                <FormControl>
-                  <Input placeholder="Lien de rotation" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="rotation_link"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Lien de rotation</FormLabel>
+              <FormControl>
+                <Input placeholder="Lien de rotation" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button
           disabled={addMutation.isPending || updateMutation.isPending}
           className="w-fit"

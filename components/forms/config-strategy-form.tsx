@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Form,
   FormControl,
@@ -7,8 +8,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import * as z from "zod";
-import { Slider } from "@/components/ui/slider";
-import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { botSchema } from "@/lib/validations/bot";
@@ -26,18 +25,19 @@ import { useAddBot } from "@/services/bot/hooks";
 import { createBotCredentials } from "@/services/bot/queries";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
+import { DualSlider } from "@/components/ui/dual-slider";
 
 type Credentials = z.infer<typeof botSchema>;
 
 const fieldSchema = (daysNumber: number) =>
   z.object({
-    min_swipe_times: z.number().min(0).max(500),
-    max_swipe_times: z.number().min(0).max(500),
+    min_swipe_times: z.number().min(0).max(1000),
+    max_swipe_times: z.number().min(0).max(1000),
     min_right_swipe_percentage: z.number().min(0).max(100),
     max_right_swipe_percentage: z.number().min(0).max(100),
     refresh_token: z.string().optional(),
-    scheduled_time: z.string().default("00:00"), // Ensure it's always a string
-    scheduled_time_2: z.string().default("00:00"), // Ensure it's always a string
+    scheduled_time: z.string().default("00:00"),
+    scheduled_time_2: z.string().default("00:00"),
     related_day: z.number().min(1).max(daysNumber),
   });
 
@@ -45,47 +45,6 @@ const formSchema = (daysNumber: number) =>
   z.object({
     bot_settings: z.array(fieldSchema(daysNumber)),
   });
-
-const DualSlider = ({
-  minField,
-  maxField,
-  label,
-  min,
-  max,
-}: {
-  minField: any;
-  maxField: any;
-  label: string;
-  min: number;
-  max: number;
-}) => {
-  const values = [minField.value, maxField.value];
-
-  const handleChange = (newValues: number[]) => {
-    minField.onChange(newValues[0]);
-    maxField.onChange(newValues[1]);
-    console.log(`Min Value: ${newValues[0]}, Max Value: ${newValues[1]}`);
-  };
-
-  return (
-    <FormItem>
-      <FormLabel>{label}</FormLabel>
-      <FormControl>
-        <Slider
-          min={min}
-          max={max}
-          value={values}
-          onValueChange={handleChange}
-        />
-      </FormControl>
-      <div className="mt-2 flex justify-between">
-        <span>{values[0]}</span>
-        <span>{values[1]}</span>
-      </div>
-      <FormMessage />
-    </FormItem>
-  );
-};
 
 interface ConfigStrategyFormProps {
   daysNumber: number;
@@ -104,7 +63,7 @@ export default function ConfigStrategyForm({
       bot_settings: [
         {
           min_swipe_times: 0,
-          max_swipe_times: 500,
+          max_swipe_times: 1000,
           min_right_swipe_percentage: 0,
           max_right_swipe_percentage: 100,
           refresh_token: "",
@@ -160,7 +119,7 @@ export default function ConfigStrategyForm({
         refresh_token: "",
         scheduled_time: "00:00",
         scheduled_time_2: "00:00",
-        related_day: fields.length + 1, // Increment related_days
+        related_day: fields.length + 1,
       });
     } else {
       toast({
@@ -169,6 +128,22 @@ export default function ConfigStrategyForm({
         description: `Vous ne pouvez pas ajouter plus de ${daysNumber} ensembles.`,
       });
     }
+  };
+
+  const handleCopyField = (index: number) => {
+    // Get the latest values of all form fields
+    const allFields = form.getValues("bot_settings");
+
+    // Copy the field using the latest values from the form state
+    const fieldToCopy = allFields[index];
+    console.log("Field to copy:", fieldToCopy);
+    console.log("index:", index);
+    const copiedField = {
+      ...fieldToCopy,
+      related_day: fields.length + 1, // Set the correct day for the new field
+    };
+
+    append(copiedField);
   };
 
   return (
@@ -181,13 +156,23 @@ export default function ConfigStrategyForm({
           <div key={field.id} className="mb-4 rounded-md border p-4 shadow-sm">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-lg font-medium">Day {index + 1}</h3>
-              <Button
-                variant="destructive"
-                onClick={() => remove(index)}
-                type="button"
-              >
-                Delete
-              </Button>
+              <div>
+                <Button
+                  variant="destructive"
+                  onClick={() => remove(index)}
+                  type="button"
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => handleCopyField(index)}
+                  type="button"
+                  className="ml-2"
+                >
+                  Copy
+                </Button>
+              </div>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
               <FormField
@@ -203,7 +188,7 @@ export default function ConfigStrategyForm({
                         maxField={maxField}
                         label="Swipe number (min et max)"
                         min={0}
-                        max={500}
+                        max={1000}
                       />
                     )}
                   />
