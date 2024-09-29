@@ -8,7 +8,7 @@ export default function StrategyList() {
   const { data: strategies = [], isLoading, isError } = useStrategies();
   return (
     <div className="space-y-3">
-      <h1 className="font-heading">Liste des stratégies</h1>
+      <h1 className="font-heading">Strategy list</h1>
       <DataTable columns={strategyListColumns} data={strategies ?? []} />
     </div>
   );

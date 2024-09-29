@@ -57,7 +57,7 @@ export default function AddOrUpdateStrategyForm({
       proxy:
         typeof initialData?.proxy === "object"
           ? initialData?.proxy?.id
-          : initialData?.proxy ?? "",
+          : initialData?.proxy ?? undefined,
     },
     mode: "all",
   });

@@ -32,7 +32,7 @@ export default function DashboardHeader() {
           {!user || isLoading ? (
             <Skeleton className="h-10 w-48" />
           ) : (
-            user && `Bienvenue ${user?.username}`
+            user && `Welcome ${user?.username}`
           )}
         </h3>
       </div>
@@ -50,7 +50,7 @@ export default function DashboardHeader() {
         {/*	)*/}
         {/*)}*/}
         <Button asChild>
-          <Link href={routes.dashboard.account.add}>Ajouter un compte</Link>
+          <Link href={routes.dashboard.account.add}>Add new account</Link>
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

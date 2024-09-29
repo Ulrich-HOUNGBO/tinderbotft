@@ -17,9 +17,9 @@ export default function UpdateAccountPage() {
     <div className="space-y-5">
       <Breadcrumbs
         segments={[
-          { title: "Compte", href: routes.dashboard.account.index },
+          { title: "Account", href: routes.dashboard.account.index },
           {
-            title: "Mise à jour du compte",
+            title: "Account Update",
             href: routes.dashboard.account.update(accountId),
           },
         ]}

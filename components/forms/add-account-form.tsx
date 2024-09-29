@@ -61,15 +61,23 @@ export default function AddOrUpdateAccountForm({
       strategy:
         typeof initialData?.strategy === "object"
           ? initialData?.strategy?.id
-          : initialData?.strategy ?? "",
+          : initialData?.strategy ?? undefined,
     },
     mode: "all",
   });
 
   const onSubmit = async (data: Credentials) => {
+    // Create a copy of the form data
+    const payload = { ...data };
+
+    // Remove the strategy field if it is not a valid UUID
+    if (!data.strategy) {
+      payload.strategy = undefined; // Ensure strategy is not sent as null or empty
+    }
+
     if (mode === "add") {
       await addMutation.mutateAsync(
-        data as unknown as createBotAccountCredentials,
+        payload as unknown as createBotAccountCredentials,
         {
           onSuccess: async () => {
             toast({
@@ -88,7 +96,7 @@ export default function AddOrUpdateAccountForm({
       );
     } else {
       await updateMutation.mutateAsync(
-        data as unknown as createBotAccountCredentials,
+        payload as unknown as createBotAccountCredentials,
         {
           onSuccess: async () => {
             toast({

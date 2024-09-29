@@ -92,8 +92,9 @@ export interface BotAccountInterface {
   modele: string;
   token: string;
   refresh_token: string | null;
-  strategy: string | StrategyInterface | null;
+  strategy: string | StrategyInterface | undefined;
   status: string;
+  progress: number | undefined;
 }
 
 export interface StrategyInterface {
@@ -101,5 +102,5 @@ export interface StrategyInterface {
   name: string;
   description: string;
   days_number: number;
-  proxy: ProxyInterface | null;
+  proxy: ProxyInterface | undefined;
 }

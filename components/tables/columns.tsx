@@ -15,7 +15,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { routes } from "@/lib/routes";
 import {
   useRemoveStrategy,
@@ -328,11 +328,64 @@ const EditableStrategyCell = ({
   );
 };
 
+const EditableProgressCell = ({
+  row,
+}: {
+  row: { original: BotAccountInterface };
+}) => {
+  const { data: strategies = [] } = useStrategies();
+  const updateMutation = useUpdateBotaccount(row.original.id);
+  const [daysNumber, setDaysNumber] = useState<number[]>([]);
+
+  useEffect(() => {
+    const strategyId = row.original.strategy
+      ? typeof row.original.strategy === "object"
+        ? row.original.strategy.id
+        : row.original.strategy
+      : undefined;
+
+    const strategy = strategies.find((strategy) => strategy.id === strategyId);
+    if (strategy) {
+      setDaysNumber(
+        Array.from({ length: strategy.days_number }, (_, i) => i + 1),
+      );
+    } else {
+      setDaysNumber([]);
+    }
+  }, [row.original.strategy, strategies]);
+
+  const handleProgressChange = (newProgress: string) => {
+    updateMutation.mutate({ progress: parseInt(newProgress, 10) });
+  };
+
+  if (daysNumber.length === 0) {
+    return <div>{row.original.progress}</div>;
+  }
+
+  return (
+    <Select
+      value={row.original.progress?.toString() || ""}
+      onValueChange={handleProgressChange}
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Select Progress" />
+      </SelectTrigger>
+      <SelectContent>
+        {daysNumber.map((day) => (
+          <SelectItem key={day} value={day.toString()}>
+            {day}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
 // Modification de la colonne "Proxy" dans `strategyListColumns`
 export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
   {
     accessorKey: "name",
-    header: "Nom",
+    header: "Name",
   },
   {
     accessorKey: "description",
@@ -340,7 +393,7 @@ export const strategyListColumns: ColumnDef<StrategyInterface>[] = [
   },
   {
     accessorKey: "days_number",
-    header: "Nombre de jours",
+    header: "Days Number",
   },
   {
     accessorKey: "proxy",
@@ -400,12 +453,13 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
   },
   {
     accessorKey: "progress",
-    header: "Progress",
+    header: "Day Progress",
+    cell: ({ row }) => <EditableProgressCell row={row} />,
   },
   {
     accessorKey: "strategy",
     header: "Strategy",
-    cell: ({ row }) => <EditableStrategyCell row={row} />, // Use EditableStrategyCell
+    cell: ({ row }) => <EditableStrategyCell row={row} />,
   },
   {
     accessorKey: "actions",

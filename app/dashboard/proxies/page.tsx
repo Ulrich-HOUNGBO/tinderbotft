@@ -17,7 +17,7 @@ export default function SmsPage() {
       <div className="flex items-center justify-between">
         <Breadcrumbs segments={[{ title: "Proxies" }]} />
         <Button asChild className="w-fit font-heading">
-          <Link href={routes.dashboard.proxy.add}>Ajouter un proxy</Link>
+          <Link href={routes.dashboard.proxy.add}>Add new proxy</Link>
         </Button>
       </div>
 

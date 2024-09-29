@@ -17,9 +17,7 @@ export default function StrategiesPage() {
       <div className="flex items-center justify-between">
         <Breadcrumbs segments={[{ title: "Strategies" }]} />
         <Button asChild className="w-fit font-heading">
-          <Link href={routes.dashboard.strategy.add}>
-            Ajouter une stratégie
-          </Link>
+          <Link href={routes.dashboard.strategy.add}>Add new strategy</Link>
         </Button>
       </div>
 

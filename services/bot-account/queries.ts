@@ -17,6 +17,9 @@ export interface createBotAccountCredentials {
   title: string;
   model: string;
   strategy: string | null;
+  token: string;
+  refresh_token: string | null;
+  progress: number | undefined;
 }
 
 export const addAccount = async (credentials: createBotAccountCredentials) => {

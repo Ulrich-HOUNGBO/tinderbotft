@@ -9,21 +9,21 @@ export const proxySchema: z.ZodType<{
   rotation_link: string;
 }> = z.object({
   name: z.string({
-    required_error: "Nom du proxy requis",
+    required_error: "Proxy name is required",
   }),
   host: z.string({
-    required_error: "L'adresse du proxy est requise",
+    required_error: "Proxy host is required",
   }),
   port: z.number({
-    required_error: "Le port du proxy est requis",
+    required_error: "Proxy port is required",
   }),
   username: z.string({
-    required_error: "Le nom d'utilisateur du proxy est requis",
+    required_error: "Proxy username is required",
   }),
   password: z.string({
-    required_error: "Le mot de passe du proxy est requis",
+    required_error: "Proxy password is required",
   }),
   rotation_link: z.string({
-    required_error: "Le lien de rotation est requis",
+    required_error: "Proxy rotation link is required",
   }),
 });

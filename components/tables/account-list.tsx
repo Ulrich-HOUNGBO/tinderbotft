@@ -9,7 +9,7 @@ export default function AccountList() {
 
   return (
     <div className="space-y-3">
-      <h1 className="font-heading">Liste des comptes</h1>
+      <h1 className="font-heading">Accounts List</h1>
       <DataTable columns={accountListColumns} data={data ?? []} />
     </div>
   );
