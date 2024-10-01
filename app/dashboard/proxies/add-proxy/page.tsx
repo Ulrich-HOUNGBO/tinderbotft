@@ -4,7 +4,7 @@ import { routes } from "@/lib/routes";
 import AddOrUpdateProxyForm from "@/components/forms/add-proxy-form";
 
 export const metadata: Metadata = {
-  title: "Dashboard - Ajouter un proxy",
+  title: "Dashboard - Add new proxy",
   description: "Dashboard add proxy page",
 };
 
@@ -14,7 +14,7 @@ export default function AddAccountPage() {
       <Breadcrumbs
         segments={[
           { title: "Proxy", href: routes.dashboard.proxy.index },
-          { title: "Ajouter un proxy", href: routes.dashboard.proxy.add },
+          { title: "Add new proxy", href: routes.dashboard.proxy.add },
         ]}
       />
       <div className="w-full">

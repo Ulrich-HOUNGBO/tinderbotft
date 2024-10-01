@@ -99,9 +99,9 @@ export default function AddOrUpdateProxyForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nom</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nom du proxy" {...field} />
+                  <Input placeholder="proxy name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -114,9 +114,9 @@ export default function AddOrUpdateProxyForm({
             name="host"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Hôte</FormLabel>
+                <FormLabel>Host</FormLabel>
                 <FormControl>
-                  <Input placeholder="Adresse de l'hôte" {...field} />
+                  <Input placeholder="host" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -146,9 +146,9 @@ export default function AddOrUpdateProxyForm({
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nom d&apos;utilisateur</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nom d'utilisateur" {...field} />
+                  <Input placeholder="username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -159,13 +159,9 @@ export default function AddOrUpdateProxyForm({
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Mot de passe</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Mot de passe"
-                    {...field}
-                  />
+                  <Input type="password" placeholder="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -177,9 +173,9 @@ export default function AddOrUpdateProxyForm({
           name="rotation_link"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Lien de rotation</FormLabel>
+              <FormLabel>Rotation Link</FormLabel>
               <FormControl>
-                <Input placeholder="Lien de rotation" {...field} />
+                <Input placeholder="rotation link" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -192,9 +188,9 @@ export default function AddOrUpdateProxyForm({
           {(addMutation.isPending || updateMutation.isPending) && (
             <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
           )}
-          {mode === "add" ? "Ajouter Proxy" : "Mettre à jour Proxy"}
+          {mode === "add" ? "Add Proxy" : "Update Proxy"}
           <span className="sr-only">
-            {mode === "add" ? "Ajouter Proxy" : "Mettre à jour Proxy"}
+            {mode === "add" ? "Add Proxy" : "Update Proxy"}
           </span>
         </Button>
       </form>

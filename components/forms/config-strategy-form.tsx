@@ -13,19 +13,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { botSchema } from "@/lib/validations/bot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { useAddBot } from "@/services/bot/hooks";
 import { createBotCredentials } from "@/services/bot/queries";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
 import { DualSlider } from "@/components/ui/dual-slider";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
 
 type Credentials = z.infer<typeof botSchema>;
 
@@ -253,25 +261,54 @@ export default function ConfigStrategyForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Associated day</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={(value) =>
-                          field.onChange(parseInt(value))
-                        }
-                        value={field.value.toString()}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select associated day" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {[...Array(daysNumber)].map((_, i) => (
-                            <SelectItem key={i} value={(i + 1).toString()}>
-                              {i + 1}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            className={cn(
+                              "w-full justify-between h-11 md:h-12",
+                              !field.value && "text-muted-foreground",
+                            )}
+                          >
+                            {field.value
+                              ? `Day ${field.value}`
+                              : "Select associated day"}
+                            <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-full p-0">
+                        <Command>
+                          <CommandInput placeholder="Search day..." />
+                          <CommandList>
+                            <CommandEmpty>No days found.</CommandEmpty>
+                            <CommandGroup>
+                              {[...Array(daysNumber)].map((_, i) => (
+                                <CommandItem
+                                  key={i}
+                                  value={(i + 1).toString()}
+                                  onSelect={() => {
+                                    field.onChange(i + 1);
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      "mr-2 h-4 w-4",
+                                      field.value === i + 1
+                                        ? "opacity-100"
+                                        : "opacity-0",
+                                    )}
+                                  />
+                                  {i + 1}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}

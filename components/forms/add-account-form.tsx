@@ -20,21 +20,26 @@ import {
   useAddBotaccount,
   useUpdateBotaccount,
 } from "@/services/bot-account/hooks";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import React from "react";
 import { useStrategies } from "@/services/strategy/hooks";
-import { Loader2 } from "lucide-react";
+import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { BotAccountInterface } from "@/types";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 type Credentials = z.infer<typeof accountSchema>;
 interface AddOrUpdateAccountFormProps {
@@ -186,28 +191,58 @@ export default function AddOrUpdateAccountForm({
           control={form.control}
           name="strategy"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Stratégie</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value as string}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selectionner une strategie" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Strategy</SelectLabel>
-                      {strategies.map((strategy) => (
-                        <SelectItem key={strategy.id} value={strategy.id}>
-                          {strategy.name}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+            <FormItem className="mt-0 ">
+              <FormLabel>Strategy</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "w-full justify-between h-11 md:h-12",
+                        !field.value && "text-muted-foreground",
+                      )}
+                    >
+                      {field.value
+                        ? strategies.find(
+                            (strategy) => strategy.id === field.value,
+                          )?.name
+                        : "Select strategy"}
+                      <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0">
+                  <Command>
+                    <CommandInput placeholder="Search proxy..." />
+                    <CommandList>
+                      <CommandEmpty>No strategy found.</CommandEmpty>
+                      <CommandGroup>
+                        {strategies.map((strategy) => (
+                          <CommandItem
+                            value={strategy.name}
+                            key={strategy.id}
+                            onSelect={() => {
+                              form.setValue("strategy", strategy.id);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                strategy.id === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0",
+                              )}
+                            />
+                            {strategy.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <FormMessage />
             </FormItem>
           )}

@@ -13,7 +13,14 @@ import {
   StrategyInterface,
 } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Cog, PencilLine, Play, Trash2 } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  Cog,
+  PencilLine,
+  Play,
+  Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { routes } from "@/lib/routes";
@@ -35,12 +42,18 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { VisuallyHidden } from "react-aria";
 
 const ProxyCell = ({ proxyId }: { proxyId: string | undefined }) => {
   const { data: proxies = [] } = useProxies();
@@ -73,12 +86,12 @@ const ProxyActionsCell = ({ row }: { row: { original: ProxyInterface } }) => {
           </button>
         </DialogTrigger>
         <DialogContent>
-          <DialogHeader>
+          <VisuallyHidden>
             <DialogTitle>Confirmation</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete this proxy?
-            </DialogDescription>
-          </DialogHeader>
+          </VisuallyHidden>
+          <DialogDescription>
+            Are you sure you want to delete this proxy?
+          </DialogDescription>
           <DialogFooter>
             <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
             <Button onClick={handleDelete} variant="destructive">
@@ -273,21 +286,39 @@ const EditableProxyCell = ({
     : undefined;
 
   return (
-    <Select
-      value={selectedProxyId?.toString() || ""}
-      onValueChange={handleProxyChange}
-    >
-      <SelectTrigger>
-        <SelectValue placeholder="Select Proxy" />
-      </SelectTrigger>
-      <SelectContent>
-        {proxies.map((proxy) => (
-          <SelectItem key={proxy.id} value={proxy.id}>
-            {proxy.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" className="w-full justify-between">
+          {selectedProxyId
+            ? proxies.find((proxy) => proxy.id === selectedProxyId)?.name
+            : "Select Proxy"}
+          <ChevronsUpDown className="ml-2 size-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput placeholder="Search proxy..." />
+          <CommandList>
+            <CommandEmpty>No proxies found.</CommandEmpty>
+            {proxies.map((proxy) => (
+              <CommandItem
+                key={proxy.id}
+                value={proxy.name}
+                onSelect={() => handleProxyChange(proxy.id)}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    proxy.id === selectedProxyId ? "opacity-100" : "opacity-0",
+                  )}
+                />
+                {proxy.name}
+              </CommandItem>
+            ))}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
 
@@ -310,24 +341,44 @@ const EditableStrategyCell = ({
     : undefined;
 
   return (
-    <Select
-      value={selectedStrategyId?.toString() || ""}
-      onValueChange={handleStrategyChange}
-    >
-      <SelectTrigger>
-        <SelectValue placeholder="Select Strategy" />
-      </SelectTrigger>
-      <SelectContent>
-        {strategies.map((strategy) => (
-          <SelectItem key={strategy.id} value={strategy.id}>
-            {strategy.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" className="w-full justify-between">
+          {selectedStrategyId
+            ? strategies.find((strategy) => strategy.id === selectedStrategyId)
+                ?.name
+            : "Select Strategy"}
+          <ChevronsUpDown className="ml-2 size-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput placeholder="Search strategy..." />
+          <CommandList>
+            <CommandEmpty>No strategies found.</CommandEmpty>
+            {strategies.map((strategy) => (
+              <CommandItem
+                key={strategy.id}
+                value={strategy.name}
+                onSelect={() => handleStrategyChange(strategy.id)}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    strategy.id === selectedStrategyId
+                      ? "opacity-100"
+                      : "opacity-0",
+                  )}
+                />
+                {strategy.name}
+              </CommandItem>
+            ))}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
-
 const EditableProgressCell = ({
   row,
 }: {
@@ -363,21 +414,39 @@ const EditableProgressCell = ({
   }
 
   return (
-    <Select
-      value={row.original.progress?.toString() || ""}
-      onValueChange={handleProgressChange}
-    >
-      <SelectTrigger>
-        <SelectValue placeholder="Select Progress" />
-      </SelectTrigger>
-      <SelectContent>
-        {daysNumber.map((day) => (
-          <SelectItem key={day} value={day.toString()}>
-            {day}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" className="w-full justify-between">
+          {row.original.progress
+            ? `Day ${row.original.progress}`
+            : "Select Progress"}
+          <ChevronsUpDown className="ml-2 size-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput placeholder="Search progress day..." />
+          <CommandList>
+            <CommandEmpty>No days found.</CommandEmpty>
+            {daysNumber.map((day) => (
+              <CommandItem
+                key={day}
+                value={day.toString()}
+                onSelect={() => handleProgressChange(day.toString())}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    row.original.progress === day ? "opacity-100" : "opacity-0",
+                  )}
+                />
+                {day}
+              </CommandItem>
+            ))}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
 

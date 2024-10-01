@@ -16,21 +16,26 @@ import {
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { useAddStrategy, useUpdateStrategy } from "@/services/strategy/hooks";
-import { Loader2 } from "lucide-react";
+import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { strategySchema } from "@/lib/validations/strategy";
 import { createStrategyCredentials } from "@/services/strategy/queries";
 import { StrategyInterface } from "@/types";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { useProxies } from "@/services/proxy/hooks";
 
 type Credentials = z.infer<typeof strategySchema>;
@@ -156,28 +161,57 @@ export default function AddOrUpdateStrategyForm({
             control={form.control}
             name="proxy"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="mt-0 ">
                 <FormLabel>Proxy</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value as string}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selectionner un proxy" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Proxy</SelectLabel>
-                        {proxies.map((proxy) => (
-                          <SelectItem key={proxy.id} value={proxy.id}>
-                            {proxy.name}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          "w-full justify-between h-11 md:h-12",
+                          !field.value && "text-muted-foreground",
+                        )}
+                      >
+                        {field.value
+                          ? proxies.find((proxy) => proxy.id === field.value)
+                              ?.name
+                          : "Select proxy"}
+                        <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-full p-0">
+                    <Command>
+                      <CommandInput placeholder="Search proxy..." />
+                      <CommandList>
+                        <CommandEmpty>No proxy found.</CommandEmpty>
+                        <CommandGroup>
+                          {proxies.map((proxy) => (
+                            <CommandItem
+                              value={proxy.name}
+                              key={proxy.id}
+                              onSelect={() => {
+                                form.setValue("proxy", proxy.id);
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  "mr-2 h-4 w-4",
+                                  proxy.id === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0",
+                                )}
+                              />
+                              {proxy.name}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}
