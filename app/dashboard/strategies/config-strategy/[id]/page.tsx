@@ -5,11 +5,13 @@ import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
 import { routes } from "@/lib/routes";
 import { useStrategy } from "@/services/strategy/hooks";
 import ConfigStrategyForm from "@/components/forms/config-strategy-form";
+import {useBotsByStrategy} from "@/services/bot/hooks";
 
 export default function ConfigStrategyPage() {
   const { id } = useParams();
   const strategyId = Array.isArray(id) ? id[0] : id;
-  const { data: strategy, isLoading } = useStrategy(strategyId as string);
+  const { data: strategy } = useStrategy(strategyId as string);
+  const { data: strategy_bots } = useBotsByStrategy(strategyId as string);
 
   return (
     <div className="space-y-5">
@@ -27,6 +29,7 @@ export default function ConfigStrategyPage() {
           <ConfigStrategyForm
             daysNumber={strategy.days_number}
             strategyId={strategy.id}
+            strategyBots={strategy_bots}
           />
         )}
       </div>

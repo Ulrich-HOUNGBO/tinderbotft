@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
+import {BotsInterface} from "@/types";
 
 type Credentials = z.infer<typeof botSchema>;
 
@@ -57,11 +58,13 @@ const formSchema = (daysNumber: number) =>
 interface ConfigStrategyFormProps {
   daysNumber: number;
   strategyId: string;
+  strategyBots: BotsInterface[] | undefined;
 }
 
 export default function ConfigStrategyForm({
   daysNumber,
   strategyId,
+  strategyBots
 }: Readonly<ConfigStrategyFormProps>) {
   const router = useRouter();
   const addMutation = useAddBot();
@@ -138,7 +141,7 @@ export default function ConfigStrategyForm({
     if (fields.length < daysNumber) {
       append({
         min_swipe_times: 0,
-        max_swipe_times: 500,
+        max_swipe_times: 1000,
         min_right_swipe_percentage: 0,
         max_right_swipe_percentage: 100,
         refresh_token: "",
