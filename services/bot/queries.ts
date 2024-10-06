@@ -37,7 +37,7 @@ export type createBotCredentials = {
 };
 
 export const addBot = async (credentials: createBotCredentials) => {
-  const response = await axios.post("/create-bot-settings/", credentials);
+  const response = await axios.patch("/create-bot-settings/", credentials);
   return response.data;
 };
 
