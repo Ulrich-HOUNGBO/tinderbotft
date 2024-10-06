@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import { botSchema } from "@/lib/validations/bot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { useAddBot } from "@/services/bot/hooks";
+import { useAddBot, useBotsByStrategy } from "@/services/bot/hooks";
 import { createBotCredentials } from "@/services/bot/queries";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
@@ -65,6 +65,7 @@ export default function ConfigStrategyForm({
 }: Readonly<ConfigStrategyFormProps>) {
   const router = useRouter();
   const addMutation = useAddBot();
+  const { data: bots, isLoading } = useBotsByStrategy(strategyId);
   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema(daysNumber)),
     defaultValues: {
@@ -88,6 +89,22 @@ export default function ConfigStrategyForm({
     control: form.control,
     name: "bot_settings",
   });
+
+  useEffect(() => {
+    if (bots && bots.length > 0) {
+      form.reset({
+        bot_settings: bots.map((bot) => ({
+          min_swipe_times: bot.min_swipe_times,
+          max_swipe_times: bot.max_swipe_times,
+          min_right_swipe_percentage: bot.min_right_swipe_percentage,
+          max_right_swipe_percentage: bot.max_right_swipe_percentage,
+          scheduled_time: bot.scheduled_time,
+          scheduled_time_2: bot.scheduled_time_2,
+          related_day: bot.related_day,
+        })),
+      });
+    }
+  }, [bots, form]);
 
   const onSubmit = async (data: z.infer<ReturnType<typeof formSchema>>) => {
     const payload: createBotCredentials = {
@@ -139,20 +156,19 @@ export default function ConfigStrategyForm({
   };
 
   const handleCopyField = (index: number) => {
-    // Get the latest values of all form fields
     const allFields = form.getValues("bot_settings");
-
-    // Copy the field using the latest values from the form state
     const fieldToCopy = allFields[index];
-    console.log("Field to copy:", fieldToCopy);
-    console.log("index:", index);
     const copiedField = {
       ...fieldToCopy,
-      related_day: fields.length + 1, // Set the correct day for the new field
+      related_day: fields.length + 1,
     };
 
     append(copiedField);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Form {...form}>

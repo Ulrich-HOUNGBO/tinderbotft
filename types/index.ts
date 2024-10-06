@@ -73,6 +73,9 @@ export interface BotsInterface {
   min_right_swipe_percentage: number;
   max_right_swipe_percentage: number;
   status: string;
+  scheduled_time: string;
+    scheduled_time_2: string | undefined;
+    related_day: number;
   user: string;
 }
 
