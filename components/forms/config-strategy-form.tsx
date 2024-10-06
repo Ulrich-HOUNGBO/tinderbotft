@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import { botSchema } from "@/lib/validations/bot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { useAddBot, useBotsByStrategy } from "@/services/bot/hooks";
+import { useAddBot } from "@/services/bot/hooks";
 import { createBotCredentials } from "@/services/bot/queries";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
-import {BotsInterface} from "@/types";
+import { BotsInterface } from "@/types";
 
 type Credentials = z.infer<typeof botSchema>;
 
@@ -64,15 +64,22 @@ interface ConfigStrategyFormProps {
 export default function ConfigStrategyForm({
   daysNumber,
   strategyId,
-  strategyBots
+  strategyBots,
 }: Readonly<ConfigStrategyFormProps>) {
   const router = useRouter();
   const addMutation = useAddBot();
-  const { data: bots, isLoading } = useBotsByStrategy(strategyId);
   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema(daysNumber)),
     defaultValues: {
-      bot_settings: [
+      bot_settings: strategyBots?.map((bot) => ({
+        min_swipe_times: bot.min_swipe_times,
+        max_swipe_times: bot.max_swipe_times,
+        min_right_swipe_percentage: bot.min_right_swipe_percentage,
+        max_right_swipe_percentage: bot.max_right_swipe_percentage,
+        scheduled_time: bot.scheduled_time,
+        scheduled_time_2: bot.scheduled_time_2,
+        related_day: bot.related_day,
+      })) || [
         {
           min_swipe_times: 0,
           max_swipe_times: 1000,
@@ -92,22 +99,6 @@ export default function ConfigStrategyForm({
     control: form.control,
     name: "bot_settings",
   });
-
-  useEffect(() => {
-    if (bots && bots.length > 0) {
-      form.reset({
-        bot_settings: bots.map((bot) => ({
-          min_swipe_times: bot.min_swipe_times,
-          max_swipe_times: bot.max_swipe_times,
-          min_right_swipe_percentage: bot.min_right_swipe_percentage,
-          max_right_swipe_percentage: bot.max_right_swipe_percentage,
-          scheduled_time: bot.scheduled_time,
-          scheduled_time_2: bot.scheduled_time_2,
-          related_day: bot.related_day,
-        })),
-      });
-    }
-  }, [bots, form]);
 
   const onSubmit = async (data: z.infer<ReturnType<typeof formSchema>>) => {
     const payload: createBotCredentials = {
@@ -168,10 +159,6 @@ export default function ConfigStrategyForm({
 
     append(copiedField);
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Form {...form}>
