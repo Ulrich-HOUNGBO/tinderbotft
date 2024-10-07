@@ -1,4 +1,3 @@
-// ----------QUERY & MUTATION KEYS---------- //
 import {
   addBot,
   createBotCredentials,
@@ -10,8 +9,6 @@ import {
   updateBot,
 } from "@/services/bot/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {mockProviders} from "next-auth/client/__tests__/helpers/mocks";
-import credentials = mockProviders.credentials;
 
 export const botQueryKeys = {
   botsKey: ["bots-list"],
@@ -53,12 +50,12 @@ export const useAddBot = () => {
   return useMutation({
     mutationKey: botQueryKeys.addBotKey,
     mutationFn: (credentials: createBotCredentials) => addBot(credentials),
-    onSettled: () => {
+    onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({
         queryKey: botQueryKeys.botsKey,
       });
       queryClient.invalidateQueries({
-        queryKey: botQueryKeys.botStrategyKey(credentials.strategy),
+        queryKey: botQueryKeys.botStrategyKey(variables.strategy),
       });
     },
   });
@@ -70,12 +67,15 @@ export const useUpdateBot = (id: string) => {
   return useMutation({
     mutationFn: (credentials: createBotCredentials) =>
       updateBot(id, credentials),
-    onSettled: () => {
+    onSettled: (data, error, variables) => {
       queryClient.invalidateQueries({
         queryKey: botQueryKeys.botsKey,
       });
       queryClient.invalidateQueries({
         queryKey: botQueryKeys.botKey(id),
+      });
+      queryClient.invalidateQueries({
+        queryKey: botQueryKeys.botStrategyKey(variables.strategy),
       });
     },
   });
