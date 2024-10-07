@@ -71,26 +71,28 @@ export default function ConfigStrategyForm({
   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema(daysNumber)),
     defaultValues: {
-      bot_settings: strategyBots?.map((bot) => ({
-        min_swipe_times: bot.min_swipe_times,
-        max_swipe_times: bot.max_swipe_times,
-        min_right_swipe_percentage: bot.min_right_swipe_percentage,
-        max_right_swipe_percentage: bot.max_right_swipe_percentage,
-        scheduled_time: bot.scheduled_time,
-        scheduled_time_2: bot.scheduled_time_2,
-        related_day: bot.related_day,
-      })) || [
-        {
-          min_swipe_times: 0,
-          max_swipe_times: 1000,
-          min_right_swipe_percentage: 0,
-          max_right_swipe_percentage: 100,
-          refresh_token: "",
-          scheduled_time: "00:00",
-          scheduled_time_2: "00:00",
-          related_day: 1,
-        },
-      ],
+      bot_settings: strategyBots?.length
+        ? strategyBots.map((bot) => ({
+            min_swipe_times: bot.min_swipe_times,
+            max_swipe_times: bot.max_swipe_times,
+            min_right_swipe_percentage: bot.min_right_swipe_percentage,
+            max_right_swipe_percentage: bot.max_right_swipe_percentage,
+            scheduled_time: bot.scheduled_time,
+            scheduled_time_2: bot.scheduled_time_2,
+            related_day: bot.related_day,
+          }))
+        : [
+            {
+              min_swipe_times: 0,
+              max_swipe_times: 1000,
+              min_right_swipe_percentage: 0,
+              max_right_swipe_percentage: 100,
+              refresh_token: "",
+              scheduled_time: "00:00",
+              scheduled_time_2: "00:00",
+              related_day: 1,
+            },
+          ],
     },
     mode: "all",
   });
