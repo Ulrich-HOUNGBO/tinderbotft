@@ -44,7 +44,6 @@ const fieldSchema = (daysNumber: number) =>
     max_swipe_times: z.number().min(0).max(1000),
     min_right_swipe_percentage: z.number().min(0).max(100),
     max_right_swipe_percentage: z.number().min(0).max(100),
-    refresh_token: z.string().optional(),
     scheduled_time: z.string().default("00:00"),
     scheduled_time_2: z.string().default("00:00"),
     related_day: z.number().min(1).max(daysNumber),
@@ -71,7 +70,7 @@ export default function ConfigStrategyForm({
   const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
     resolver: zodResolver(formSchema(daysNumber)),
     defaultValues: {
-      bot_settings: strategyBots?.length
+      bot_settings: strategyBots && strategyBots.length > 0
         ? strategyBots.map((bot) => ({
             min_swipe_times: bot.min_swipe_times,
             max_swipe_times: bot.max_swipe_times,
@@ -87,7 +86,6 @@ export default function ConfigStrategyForm({
               max_swipe_times: 1000,
               min_right_swipe_percentage: 0,
               max_right_swipe_percentage: 100,
-              refresh_token: "",
               scheduled_time: "00:00",
               scheduled_time_2: "00:00",
               related_day: 1,
@@ -137,7 +135,6 @@ export default function ConfigStrategyForm({
         max_swipe_times: 1000,
         min_right_swipe_percentage: 0,
         max_right_swipe_percentage: 100,
-        refresh_token: "",
         scheduled_time: "00:00",
         scheduled_time_2: "00:00",
         related_day: fields.length + 1,
@@ -276,14 +273,14 @@ export default function ConfigStrategyForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "w-full justify-between h-11 md:h-12",
-                              !field.value && "text-muted-foreground",
+                              "w-full justify-between",
+                              !field.value && "text-muted-foreground"
                             )}
                           >
                             {field.value
                               ? `Day ${field.value}`
-                              : "Select associated day"}
-                            <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+                              : "Select day"}
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
@@ -291,25 +288,27 @@ export default function ConfigStrategyForm({
                         <Command>
                           <CommandInput placeholder="Search day..." />
                           <CommandList>
-                            <CommandEmpty>No days found.</CommandEmpty>
+                            <CommandEmpty>No day found.</CommandEmpty>
                             <CommandGroup>
-                              {[...Array(daysNumber)].map((_, i) => (
+                              {[...Array(daysNumber)].map((_, dayIndex) => (
                                 <CommandItem
-                                  key={i}
-                                  value={(i + 1).toString()}
-                                  onSelect={() => {
-                                    field.onChange(i + 1);
-                                  }}
+                                  key={dayIndex}
+                                  onSelect={() =>
+                                    form.setValue(
+                                      `bot_settings.${index}.related_day`,
+                                      dayIndex + 1
+                                    )
+                                  }
                                 >
                                   <Check
                                     className={cn(
                                       "mr-2 h-4 w-4",
-                                      field.value === i + 1
+                                      field.value === dayIndex + 1
                                         ? "opacity-100"
-                                        : "opacity-0",
+                                        : "opacity-0"
                                     )}
                                   />
-                                  {i + 1}
+                                  Day {dayIndex + 1}
                                 </CommandItem>
                               ))}
                             </CommandGroup>
