@@ -10,6 +10,8 @@ import {
   updateBot,
 } from "@/services/bot/queries";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {mockProviders} from "next-auth/client/__tests__/helpers/mocks";
+import credentials = mockProviders.credentials;
 
 export const botQueryKeys = {
   botsKey: ["bots-list"],
@@ -54,6 +56,9 @@ export const useAddBot = () => {
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: botQueryKeys.botsKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: botQueryKeys.botStrategyKey(credentials.strategy),
       });
     },
   });
