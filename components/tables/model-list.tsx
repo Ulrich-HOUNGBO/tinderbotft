@@ -1,6 +1,5 @@
 "use client";
 
-import {Breadcrumbs} from "@/components/pagers/breadcrumbs";
 import {useModels} from "@/services/models/hooks";
 import {modelListColumns} from "@/components/tables/columns";
 import {DataTable} from "@/components/ui/data-table";
@@ -11,7 +10,7 @@ export default function ModelList() {
     console.log("models", models)
     return (
         <div className="space-y-5">
-            <Breadcrumbs segments={[{title: "Models"}]}/>
+            <h1 className="font-heading">Models list</h1>
 
             <div className="space-y-6">
                 <DataTable columns={modelListColumns} data={models ?? []}/>
