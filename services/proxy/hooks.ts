@@ -3,11 +3,11 @@
 
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {
-    addProxy, checkProxyUsage,
+    addProxy,
     createProxyCredentials,
     getAllProxies,
     getProxyById,
-    removeProxy,
+    removeProxy, test_proxy,
     updateProxy
 } from "@/services/proxy/queries";
 
@@ -17,7 +17,7 @@ export const proxyQueryKeys = {
     addProxyKey: ["add-proxy"],
     updateProxyKey: (id: string) => ["update-proxy", id],
     removeProxyKey: (id: string) => ["remove-proxy", id],
-    checkProxyUsageKey: (id: string) => ["check-proxy-usage", id],
+    testProxy: (id: string) => ["test-proxy", id],
 }
 
 // --------------- QUERIES HOOKS --------------- //
@@ -80,9 +80,14 @@ export const useRemoveProxy = (id: string) => {
     });
 };
 
-export const useCheckProxyUsage = (id: string) => {
-    return useQuery({
-        queryKey: proxyQueryKeys.checkProxyUsageKey(id),
-        queryFn: () => checkProxyUsage(id),
+export const useTestProxy = (id: string) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => test_proxy(id),
+        onSettled: () => {
+            queryClient.invalidateQueries({
+                queryKey: proxyQueryKeys.proxiesKey,
+            });
+        },
     });
 }

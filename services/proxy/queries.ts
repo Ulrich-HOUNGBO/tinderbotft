@@ -18,6 +18,7 @@ export interface createProxyCredentials {
   username: string;
   password: string;
   rotation_link: string | undefined;
+  type: string;
 }
 
 export const addProxy = async (credentials: createProxyCredentials) => {
@@ -38,7 +39,7 @@ export const removeProxy = async (id: string) => {
   return response.data;
 };
 
-export const checkProxyUsage = async (id: string) => {
-  const response = await axios.get(`/check-proxy-usage/${id}/`);
+export const test_proxy = async (id: string) => {
+  const response = await axios.get(`/test_proxy/${id}/`);
   return response.data;
 };
