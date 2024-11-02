@@ -1,66 +1,72 @@
 import React from "react";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import * as z from "zod";
 import {useFieldArray, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {botSchema} from "@/lib/validations/bot";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {toast} from "@/components/ui/use-toast";
-import {useAddBot} from "@/services/bot/hooks";
-import {createBotCredentials} from "@/services/bot/queries";
+import {useAddAction} from "@/services/actions/hooks";
+import {createActionCredentials} from "@/services/actions/queries";
 import {useRouter} from "next/navigation";
 import {routes} from "@/lib/routes";
 import {DualSlider} from "@/components/ui/dual-slider";
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from "@/components/ui/command";
-import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {cn} from "@/lib/utils";
 import {Check, ChevronsUpDown} from "lucide-react";
-import {BotsInterface} from "@/types";
-
-type Credentials = z.infer<typeof botSchema>;
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+import {Textarea} from "@/components/ui/textarea";
+import {Badge} from "@/components/ui/badge"
 
 const fieldSchema = (daysNumber: number) =>
     z.object({
-        min_swipe_times: z.number().min(0).max(1000),
-        max_swipe_times: z.number().min(0).max(1000),
-        min_right_swipe_percentage: z.number().min(0).max(100),
-        max_right_swipe_percentage: z.number().min(0).max(100),
+        min_swipe_times: z.number().min(0).max(1000).optional(),
+        max_swipe_times: z.number().min(0).max(1000).optional(),
+        min_right_swipe_percentage: z.number().min(0).max(100).optional(),
+        max_right_swipe_percentage: z.number().min(0).max(100).optional(),
         scheduled_time: z.string().default("00:00"),
-        scheduled_time_2: z.string().default("00:00"),
+        scheduled_time_2: z.string().default("00:00").optional(),
         related_day: z.number().min(1).max(daysNumber),
+        insta_list: z.string().optional(),
+        bio_list: z.string().optional(),
+        type: z.string(),
     });
 
 const formSchema = (daysNumber: number) =>
     z.object({
-        bot_settings: z.array(fieldSchema(daysNumber)),
+        actions: z.array(fieldSchema(daysNumber)),
     });
 
 interface ConfigStrategyFormProps {
     daysNumber: number;
     strategyId: string;
-    strategyBots: BotsInterface[] | undefined;
+    strategyActions: any[] | undefined;
 }
 
 export default function ConfigStrategyForm({
-                                               daysNumber,
-                                               strategyId,
-                                               strategyBots,
-                                           }: Readonly<ConfigStrategyFormProps>) {
+    daysNumber,
+    strategyId,
+    strategyActions,
+}: Readonly<ConfigStrategyFormProps>) {
     const router = useRouter();
-    const addMutation = useAddBot();
+    const addMutation = useAddAction();
     const form = useForm<z.infer<ReturnType<typeof formSchema>>>({
         resolver: zodResolver(formSchema(daysNumber)),
         defaultValues: {
-            bot_settings: strategyBots && strategyBots.length > 0
-                ? strategyBots.map((bot) => ({
-                    min_swipe_times: bot.min_swipe_times,
-                    max_swipe_times: bot.max_swipe_times,
-                    min_right_swipe_percentage: bot.min_right_swipe_percentage,
-                    max_right_swipe_percentage: bot.max_right_swipe_percentage,
-                    scheduled_time: bot.scheduled_time,
-                    scheduled_time_2: bot.scheduled_time_2,
-                    related_day: bot.related_day,
+            //@ts-ignore
+            actions: strategyActions && strategyActions.length > 0
+                ? strategyActions.map((action) => ({
+                    min_swipe_times: action.min_swipe_times ?? undefined,
+                    max_swipe_times: action.max_swipe_times ?? undefined,
+                    min_right_swipe_percentage: action.min_right_swipe_percentage ?? undefined,
+                    max_right_swipe_percentage: action.max_right_swipe_percentage ?? undefined,
+                    scheduled_time: action.scheduled_time ?? "00:00",
+                    scheduled_time_2: action.scheduled_time_2 ?? undefined,
+                    related_day: action.related_day,
+                    insta_list: action.insta_list ?? "",
+                    bio_list: action.bio_list ?? "",
+                    type: action.type,
                 }))
                 : [
                     {
@@ -69,23 +75,26 @@ export default function ConfigStrategyForm({
                         min_right_swipe_percentage: 0,
                         max_right_swipe_percentage: 100,
                         scheduled_time: "00:00",
-                        scheduled_time_2: "00:00",
+                        scheduled_time_2: null,
                         related_day: 1,
+                        type: "swiping",
                     },
                 ],
         },
         mode: "all",
     });
 
-    const {fields, append, remove} = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control: form.control,
-        name: "bot_settings",
+        name: "actions",
     });
 
     const onSubmit = async (data: z.infer<ReturnType<typeof formSchema>>) => {
-        const payload: createBotCredentials = {
+
+        const payload: createActionCredentials = {
             strategy: strategyId,
-            bot_settings: data.bot_settings,
+            //@ts-ignore
+            actions: data.actions,
         };
 
         try {
@@ -99,7 +108,7 @@ export default function ConfigStrategyForm({
                 onError: (error: any) => {
                     toast({
                         variant: "destructive",
-                        title: "Une erreur s'est produite",
+                        title: "error submitting data",
                         description: error.response.data.error,
                     });
                 },
@@ -109,28 +118,52 @@ export default function ConfigStrategyForm({
         }
     };
 
-    const handleAddField = () => {
-        if (fields.length < daysNumber) {
+    // Count the number of fields with type "swiping" and "add-bio"
+    const swipingFieldsCount = fields.filter(field => field.type === "swiping").length;
+    const addBioFieldsCount = fields.filter(field => field.type === "add-bio").length;
+
+    const handleAddBioField = () => {
+        if (addBioFieldsCount < daysNumber) {
+            append({
+                insta_list: "",
+                bio_list: "",
+                scheduled_time: "00:00",
+                scheduled_time_2: undefined,
+                related_day: addBioFieldsCount + 1,
+                type: "add-bio",
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Limite atteinte",
+                description: `You cannot add more than ${daysNumber} add-bio action.`,
+            });
+        }
+    };
+
+    const handleAddSwipingField = () => {
+        if (swipingFieldsCount < daysNumber) {
             append({
                 min_swipe_times: 0,
                 max_swipe_times: 1000,
                 min_right_swipe_percentage: 0,
                 max_right_swipe_percentage: 100,
                 scheduled_time: "00:00",
-                scheduled_time_2: "00:00",
-                related_day: fields.length + 1,
+                scheduled_time_2: undefined,
+                related_day: swipingFieldsCount + 1,
+                type: "swiping",
             });
         } else {
             toast({
                 variant: "destructive",
                 title: "Limite atteinte",
-                description: `Vous ne pouvez pas ajouter plus de ${daysNumber} ensembles.`,
+                description: `You cannot add more than ${daysNumber} swiping action.`,
             });
         }
     };
 
     const handleCopyField = (index: number) => {
-        const allFields = form.getValues("bot_settings");
+        const allFields = form.getValues("actions");
         const fieldToCopy = allFields[index];
         const copiedField = {
             ...fieldToCopy,
@@ -139,6 +172,7 @@ export default function ConfigStrategyForm({
 
         append(copiedField);
     };
+
 
     return (
         <Form {...form}>
@@ -149,7 +183,14 @@ export default function ConfigStrategyForm({
                 {fields.map((field, index) => (
                     <div key={field.id} className="mb-4 rounded-md border p-4 shadow-sm">
                         <div className="mb-4 flex items-center justify-between">
-                            <h3 className="text-lg font-medium">Day {index + 1}</h3>
+                            <h3 className="text-lg font-medium">Action {index + 1}</h3>
+                            <Badge className={
+                                field.type === "swiping"
+                                    ? "bg-blue-500"
+                                    : "bg-green-500"
+                            }
+
+                            >{field.type} </Badge>
                             <div>
                                 <Button
                                     variant="destructive"
@@ -169,48 +210,89 @@ export default function ConfigStrategyForm({
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
-                            <FormField
-                                control={form.control}
-                                name={`bot_settings.${index}.min_swipe_times`}
-                                render={({field: minField}) => (
+                            {field.type === "swiping" && (
+                                <>
                                     <FormField
                                         control={form.control}
-                                        name={`bot_settings.${index}.max_swipe_times`}
-                                        render={({field: maxField}) => (
-                                            <DualSlider
-                                                minField={minField}
-                                                maxField={maxField}
-                                                label="Swipe number (min et max)"
-                                                min={0}
-                                                max={1000}
+                                        name={`actions.${index}.min_swipe_times`}
+                                        render={({ field: minField }) => (
+                                            <FormField
+                                                control={form.control}
+                                                name={`actions.${index}.max_swipe_times`}
+                                                render={({ field: maxField }) => (
+                                                    <DualSlider
+                                                        minField={minField}
+                                                        maxField={maxField}
+                                                        label="Swipe number (min et max)"
+                                                        min={0}
+                                                        max={1000}
+                                                    />
+                                                )}
                                             />
                                         )}
                                     />
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name={`bot_settings.${index}.min_right_swipe_percentage`}
-                                render={({field: minField}) => (
                                     <FormField
                                         control={form.control}
-                                        name={`bot_settings.${index}.max_right_swipe_percentage`}
-                                        render={({field: maxField}) => (
-                                            <DualSlider
-                                                minField={minField}
-                                                maxField={maxField}
-                                                label="Like percentage (min et max)"
-                                                min={0}
-                                                max={100}
+                                        name={`actions.${index}.min_right_swipe_percentage`}
+                                        render={({ field: minField }) => (
+                                            <FormField
+                                                control={form.control}
+                                                name={`actions.${index}.max_right_swipe_percentage`}
+                                                render={({ field: maxField }) => (
+                                                    <DualSlider
+                                                        minField={minField}
+                                                        maxField={maxField}
+                                                        label="Like percentage (min et max)"
+                                                        min={0}
+                                                        max={100}
+                                                    />
+                                                )}
                                             />
                                         )}
                                     />
-                                )}
-                            />
+                                </>
+                            )}
+                            {field.type === "add-bio" && (
+                                <>
+                                    <FormField
+                                        control={form.control}
+                                        name={`actions.${index}.insta_list`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Instagram usernames list</FormLabel>
+                                                <FormControl>
+                                                    <Textarea
+                                                        placeholder="Instagram usernames"
+                                                        {...field}
+
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name={`actions.${index}.bio_list`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Bio List</FormLabel>
+                                                <FormControl>
+                                                    <Textarea
+                                                        placeholder="Bios"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </>
+                            )}
                             <FormField
                                 control={form.control}
-                                name={`bot_settings.${index}.scheduled_time`}
-                                render={({field}) => (
+                                name={`actions.${index}.scheduled_time`}
+                                render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Schedule time</FormLabel>
                                         <FormControl>
@@ -220,14 +302,14 @@ export default function ConfigStrategyForm({
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage/>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
                             <FormField
                                 control={form.control}
-                                name={`bot_settings.${index}.scheduled_time_2`}
-                                render={({field}) => (
+                                name={`actions.${index}.scheduled_time_2`}
+                                render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Schedule time 2 (Optional)</FormLabel>
                                         <FormControl>
@@ -235,16 +317,17 @@ export default function ConfigStrategyForm({
                                                 type="time"
                                                 placeholder="Schedule time 2"
                                                 {...field}
+                                                value={field.value ?? ""}
                                             />
                                         </FormControl>
-                                        <FormMessage/>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
                             <FormField
                                 control={form.control}
-                                name={`bot_settings.${index}.related_day`}
-                                render={({field}) => (
+                                name={`actions.${index}.related_day`}
+                                render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Associated day</FormLabel>
                                         <Popover>
@@ -261,13 +344,13 @@ export default function ConfigStrategyForm({
                                                         {field.value
                                                             ? `Day ${field.value}`
                                                             : "Select day"}
-                                                        <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50"/>
+                                                        <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                                                     </Button>
                                                 </FormControl>
                                             </PopoverTrigger>
                                             <PopoverContent className="w-full p-0">
                                                 <Command>
-                                                    <CommandInput placeholder="Search day..."/>
+                                                    <CommandInput placeholder="Search day..." />
                                                     <CommandList>
                                                         <CommandEmpty>No day found.</CommandEmpty>
                                                         <CommandGroup>
@@ -276,7 +359,7 @@ export default function ConfigStrategyForm({
                                                                     key={dayIndex}
                                                                     onSelect={() =>
                                                                         form.setValue(
-                                                                            `bot_settings.${index}.related_day`,
+                                                                            `actions.${index}.related_day`,
                                                                             dayIndex + 1
                                                                         )
                                                                     }
@@ -297,7 +380,7 @@ export default function ConfigStrategyForm({
                                                 </Command>
                                             </PopoverContent>
                                         </Popover>
-                                        <FormMessage/>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -305,19 +388,30 @@ export default function ConfigStrategyForm({
                     </div>
                 ))}
                 <div className="flex justify-between">
-                    <Button
-                        type="button"
-                        onClick={handleAddField}
-                        className="w-fit bg-blue-500 hover:bg-blue-600"
-                        disabled={fields.length >= daysNumber}
-                    >
-                        Add new action
-                    </Button>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button
+                                type="button"
+                                className="w-fit bg-blue-500 hover:bg-blue-600"
+                                disabled={ swipingFieldsCount >= daysNumber && addBioFieldsCount >= daysNumber}
+                            >
+                                Add new action
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem onClick={handleAddSwipingField} disabled={swipingFieldsCount >= daysNumber}>
+                                Swiping
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleAddBioField} disabled={addBioFieldsCount >= daysNumber}>
+                                Add-bio
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                     <Button
                         type="submit"
                         className="w-fit bg-green-500 hover:bg-green-600"
                     >
-                        Add
+                        config strategy
                     </Button>
                 </div>
             </form>

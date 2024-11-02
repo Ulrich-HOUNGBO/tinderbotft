@@ -80,6 +80,21 @@ export interface BotsInterface {
     user: string;
 }
 
+export interface ActionsInterface {
+    id: string;
+    min_swipe_times: number | undefined;
+    max_swipe_times: number | undefined;
+    min_right_swipe_percentage: number | undefined;
+    max_right_swipe_percentage: number | undefined;
+    status: string;
+    scheduled_time: string;
+    scheduled_time_2: string | undefined;
+    related_day: number;
+    type: string;
+    insta_list: string | undefined;
+    bio_list: string | undefined;
+}
+
 export interface ProxyInterface {
     id: string;
     name: string;

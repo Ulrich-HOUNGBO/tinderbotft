@@ -1,21 +1,21 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { Breadcrumbs } from "@/components/pagers/breadcrumbs";
-import { routes } from "@/lib/routes";
-import { useStrategy } from "@/services/strategy/hooks";
+import {useParams} from "next/navigation";
+import {Breadcrumbs} from "@/components/pagers/breadcrumbs";
+import {routes} from "@/lib/routes";
+import {useStrategy} from "@/services/strategy/hooks";
 import ConfigStrategyForm from "@/components/forms/config-strategy-form";
-import { useBotsByStrategy } from "@/services/bot/hooks";
+import {useActionsByStrategy} from "@/services/actions/hooks";
 
 export default function ConfigStrategyPage() {
   const { id } = useParams();
   const strategyId = Array.isArray(id) ? id[0] : id;
   const { data: strategy, isLoading: strategyLoading } = useStrategy(strategyId as string);
-  const { data: strategy_bots, isLoading: botsLoading, error: botsError } = useBotsByStrategy(strategyId as string);
+  const { data: strategy_actions, isLoading: botsLoading, error: botsError } = useActionsByStrategy(strategyId as string);
 
   console.log("Strategy ID:", strategyId);
   console.log("Strategy Data:", strategy);
-  console.log("Strategy Bots Data:", strategy_bots);
+  console.log("Strategy Bots Data:", strategy_actions);
   console.log("Bots Loading:", botsLoading);
   console.log("Bots Error:", botsError);
 
@@ -43,7 +43,7 @@ export default function ConfigStrategyPage() {
           <ConfigStrategyForm
             daysNumber={strategy.days_number}
             strategyId={strategy.id}
-            strategyBots={strategy_bots}
+            strategyActions={strategy_actions}
           />
         )}
       </div>
