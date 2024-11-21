@@ -1,5 +1,5 @@
 import axios from "@/lib/axios";
-import { BotAccountInterface } from "@/types";
+import {BotAccountInterface} from "@/types";
 
 export const getAllAccounts = async (): Promise<BotAccountInterface[]> => {
   const response = await axios.get("/get-accounts/").then((data) => data);
@@ -20,6 +20,7 @@ export interface createBotAccountCredentials {
   token: string;
   refresh_token: string | null;
   progress: number | undefined;
+  device_id: string | undefined;
 }
 
 export const addAccount = async (credentials: createBotAccountCredentials) => {

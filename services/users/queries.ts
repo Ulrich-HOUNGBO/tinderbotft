@@ -6,15 +6,15 @@ import { StatsInterface, UserInterface } from "@/types";
  * @returns {Promise<UserInterface>} - Object containing user information:
  */
 export const getMe = async (): Promise<UserInterface> => {
-	const response = await axios.get("/me/").then((data) => data);
-	// console.log(response);
-	return response.data;
+  const response = await axios.get("/me/").then((data) => data);
+  // console.log(response);
+  return response.data;
 };
 
 export interface createAccountCredentials {
-	username: string;
-	email: string;
-	password: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 /**
@@ -23,15 +23,20 @@ export interface createAccountCredentials {
  * @param credentials - User data
  * @returns {Promise<UserInterface>} - Object containing user information:
  */
-export const editProfile = async (id: string, credentials: createAccountCredentials): Promise<UserInterface> => {
-	const response = await axios.put(`/users${id}`, credentials).then((data) => data);
-	return response.data;
+export const editProfile = async (
+  id: string,
+  credentials: createAccountCredentials,
+): Promise<UserInterface> => {
+  const response = await axios
+    .put(`/users${id}`, credentials)
+    .then((data) => data);
+  return response.data;
 };
 
 export interface createAccountCredentials {
-	username: string;
-	email: string;
-	password: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 /**
@@ -39,9 +44,9 @@ export interface createAccountCredentials {
  *  @param credentials - User data
  */
 export const createAccount = async (credentials: createAccountCredentials) => {
-	const response = await axios.post("/register/", credentials);
-	// console.log(response);
-	return response.data;
+  const response = await axios.post("/register/", credentials);
+  // console.log(response);
+  return response.data;
 };
 
 /**
@@ -49,7 +54,17 @@ export const createAccount = async (credentials: createAccountCredentials) => {
  * @returns {Promise<StatsInterface>} - Object containing user stats
  */
 export const getUserStats = async (): Promise<StatsInterface[]> => {
-	const response = await axios.get("/users/home/dashboard");
-	// console.log(response);
-	return response.data;
+  const response = await axios.get("/users/home/dashboard");
+  // console.log(response);
+  return response.data;
+};
+
+export const allowUser = async (id: string) => {
+  const response = await axios.patch(`/allow-access/${id}/`);
+  return response.data;
+};
+
+export const getAllUsers = async () => {
+  const response = await axios.get("/get-all-users/");
+  return response.data;
 };

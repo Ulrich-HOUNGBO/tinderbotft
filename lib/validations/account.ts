@@ -5,17 +5,18 @@ export const accountSchema = z.object({
     .string({
       required_error: "A title is required",
     })
-    .min(1, "Account name is required"), // Vérifie que le champ n'est pas vide
+    .min(1, "Account name is required"),
   modele: z
     .string({
       required_error: "A modele is required",
     })
-    .min(1, "Model name is required"), // Vérifie que le champ n'est pas vide
+    .min(1, "Model name is required"),
   token: z
     .string({
       required_error: "A token is required",
     })
-    .min(1, "Token is required"), // Vérifie que le champ n'est pas vide
+    .min(1, "Token is required"),
   refresh_token: z.string().nullable(),
   strategy: z.string().optional(),
+  device_id: z.string().optional(),
 });
