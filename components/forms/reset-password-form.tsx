@@ -41,24 +41,30 @@ export default function ResetPasswordForm() {
   const onSubmit = async (data: Credentials) => {
     // console.log(data);
 
-    mutate(data.newPassword, {
-      onSuccess: async (response: any) => {
-        await toast({
-          title:
-            response.message ??
-            "Votre mot de passe a été réinitialisé avec succès",
-        });
-        router.push(routes.auth.login);
-        // console.log(response.message);
+    mutate(
+      {
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
       },
-      onError: (error: any) => {
-        toast({
-          variant: "destructive",
-          title: error.response.data.message ?? "Une erreur s'est produite",
-        });
-        // console.log(error.response.data.message);
+      {
+        onSuccess: async (response: any) => {
+          await toast({
+            title:
+              response.message ??
+              "Votre mot de passe a été réinitialisé avec succès",
+          });
+          router.push(routes.auth.login);
+          // console.log(response.message);
+        },
+        onError: (error: any) => {
+          toast({
+            variant: "destructive",
+            title: error.response.data.message ?? "Une erreur s'est produite",
+          });
+          // console.log(error.response.data.message);
+        },
       },
-    });
+    );
   };
 
   return (
