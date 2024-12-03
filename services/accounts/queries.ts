@@ -24,14 +24,17 @@ export const forgotPassword = async (email: string) => {
  * @param token - User token
  * @param newPassword
  * @param confirmPassword
+ * @param uid
  */
 export const resetPassword = async (
   token: string,
+  uid: string,
   newPassword: string,
   confirmPassword: string,
 ) => {
   const response = await axios.post(`/reset-password/`, {
     token,
+    uid,
     newPassword,
     confirmPassword,
   });

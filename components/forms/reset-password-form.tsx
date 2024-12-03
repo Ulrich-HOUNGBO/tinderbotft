@@ -27,13 +27,18 @@ export default function ResetPasswordForm() {
   const uid = useSearchParams().get("uid");
   if (!token || !uid) redirect(routes.auth.login);
   const router = useRouter();
-  const { isPending, mutate } = useResetPassword(token as string);
+  const { isPending, mutate } = useResetPassword(
+    token as string,
+    uid as string,
+  );
 
   const form = useForm<Credentials>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
+      token: "",
+      uid: "",
     },
     mode: "all",
   });

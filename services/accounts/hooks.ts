@@ -31,7 +31,7 @@ export const useForgotPassword = () => {
   });
 };
 
-export const useResetPassword = (token: string) => {
+export const useResetPassword = (token: string, uid: string) => {
   return useMutation({
     mutationKey: accountsQueryKeys.resetPasswordKey,
     mutationFn: ({
@@ -40,6 +40,6 @@ export const useResetPassword = (token: string) => {
     }: {
       newPassword: string;
       confirmPassword: string;
-    }) => resetPassword(token, newPassword, confirmPassword),
+    }) => resetPassword(token, uid, newPassword, confirmPassword),
   });
 };
