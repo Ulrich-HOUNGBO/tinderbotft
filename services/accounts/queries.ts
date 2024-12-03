@@ -32,9 +32,11 @@ export const resetPassword = async (
   newPassword: string,
   confirmPassword: string,
 ) => {
-  const response = await axios.post(`/reset-password/${token}&${uid}/`, {
+  const response = await axios.post(`/reset-password/`, {
     newPassword,
     confirmPassword,
+    token,
+    uid,
   });
   return response.data;
 };
