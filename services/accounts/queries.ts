@@ -5,8 +5,8 @@ import axios from "@/lib/axios";
  * @param token - User token
  */
 export const confirmEmail = async (token: string) => {
-	const response = await axios.get(`/users/confirmation/${token}`);
-	return response.data;
+  const response = await axios.get(`/users/confirmation/${token}`);
+  return response.data;
 };
 
 /**
@@ -15,16 +15,19 @@ export const confirmEmail = async (token: string) => {
  */
 
 export const forgotPassword = async (email: string) => {
-	const response = await axios.post("/users/forgot-password", { email });
-	return response.data;
+  const response = await axios.post("/send-mail-reset-password/", { email });
+  return response.data;
 };
 
 /**
  * Query to reset user password
  * @param token - User token
- * @param password - New password
+ * @param newPassword
  */
 export const resetPassword = async (token: string, newPassword: string) => {
-	const response = await axios.post(`/users/reset-password`, { token, newPassword });
-	return response.data;
+  const response = await axios.post(`/reset-password/`, {
+    token,
+    newPassword,
+  });
+  return response.data;
 };
