@@ -57,8 +57,6 @@ export const resetPasswordSchema = z
     confirmPassword: z.string().min(8, {
       message: "Le mot de passe doit contenir au moins 8 caractères",
     }),
-    token: z.string(),
-    uid: z.string(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",

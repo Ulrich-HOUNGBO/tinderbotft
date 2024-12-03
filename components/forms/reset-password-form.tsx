@@ -37,8 +37,6 @@ export default function ResetPasswordForm() {
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
-      token: "",
-      uid: "",
     },
     mode: "all",
   });
