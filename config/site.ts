@@ -1,7 +1,7 @@
-import { MainNavItem } from "@/types";
+import {MainNavItem} from "@/types";
 
 export const siteConfig = {
-  name: "Auto Date Swiper",
+  name: "Auto Date Swiper by Diamond Factory",
   description: "Automatically swipe on Tinder for you and manage your strategy",
   url: "https://autodateswiper.com/",
   mainNav: [
