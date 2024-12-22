@@ -187,6 +187,66 @@ export default function AddOrUpdateAccountForm({
                         )}
                     />
                 </div>
+
+                {mode === "update" && (
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-7">
+                        <FormField
+                            control={form.control}
+                            name="min_age"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Min Age</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Min Age"
+                                            {...field}
+                                            type="number"
+                                            onChange={(e) => field.onChange(Number(e.target.value))}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="max_age"
+                            render={({field}) => (
+                                <FormItem>
+                                    <FormLabel>Max Age</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Max Age"
+                                            {...field}
+                                            type="number"
+                                            onChange={(e) => field.onChange(Number(e.target.value))}
+                                        />
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="distance"
+                            render={({field}) => (
+                                <FormItem>
+                                    <FormLabel>Distance</FormLabel>
+                                    <FormControl>
+                                        <Input 
+                                            placeholder="Distance"
+                                            {...field}
+                                            type="number"
+                                            onChange={(e) => field.onChange(Number(e.target.value))}
+                                        />
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                )}
+
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
                     <FormField
                         control={form.control}
@@ -290,9 +350,9 @@ export default function AddOrUpdateAccountForm({
                                 aria-hidden="true"
                             />
                         )}
-                        {mode === "add" ? "Ajouter un compte" : "Mettre à jour le compte"}
+                        {mode === "add" ? "Add account" : "Update account"}
                         <span className="sr-only">
-              {mode === "add" ? "Ajouter un compte" : "Mettre à jour le compte"}
+              {mode === "add" ? "Add account" : "Update account"}
             </span>
                     </Button>
                 </div>

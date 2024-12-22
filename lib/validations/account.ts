@@ -19,4 +19,7 @@ export const accountSchema = z.object({
   refresh_token: z.string().nullable(),
   strategy: z.string().optional(),
   device_id: z.string().optional(),
+  min_age: z.number().optional(),
+  max_age: z.number().optional(),
+  distance: z.number().optional(),
 });

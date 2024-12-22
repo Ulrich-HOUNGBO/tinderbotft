@@ -8,7 +8,7 @@ import {useModels} from "@/services/models/hooks";
 import {Input} from "@/components/ui/input";
 
 export default function AccountList() {
-    const {isLoading, isError, data} = useBotaccounts();
+    const {data} = useBotaccounts();
     const {data: models = []} = useModels();
     const [accountFilter, setAccountFilter] = useState("");
     const [modelFilter, setModelFilter] = useState("");
