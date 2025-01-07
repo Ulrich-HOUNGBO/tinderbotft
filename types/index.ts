@@ -119,6 +119,9 @@ export interface BotAccountInterface {
   status: string;
   progress: number | undefined;
   device_id: string | undefined;
+  min_age: number | undefined;
+  max_age: number | undefined;
+  distance: number | undefined;
 }
 
 export interface StrategyInterface {

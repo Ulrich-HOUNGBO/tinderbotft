@@ -15,7 +15,7 @@ export const confirmEmail = async (token: string) => {
  */
 
 export const forgotPassword = async (email: string) => {
-  const response = await axios.post("/send-mail-reset-password/", { email });
+  const response = await axios.patch("/send-mail-reset-password/", { email });
   return response.data;
 };
 

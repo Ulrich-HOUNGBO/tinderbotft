@@ -52,6 +52,10 @@ export default function AddOrUpdateAccountForm({
                 typeof initialData?.strategy === "object"
                     ? initialData?.strategy?.id
                     : initialData?.strategy ?? undefined,
+            device_id: initialData?.device_id ?? "",
+            min_age: initialData?.min_age ?? undefined,
+            max_age: initialData?.max_age ?? undefined,
+            distance: initialData?.distance ?? undefined,
         },
         mode: "all",
     });
@@ -233,7 +237,7 @@ export default function AddOrUpdateAccountForm({
                                 <FormItem>
                                     <FormLabel>Distance</FormLabel>
                                     <FormControl>
-                                        <Input 
+                                        <Input
                                             placeholder="Distance"
                                             {...field}
                                             type="number"
