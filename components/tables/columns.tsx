@@ -1,11 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import {
-  useRemoveBotAccount,
-  useStartBotAccount,
-  useUpdateBotaccount,
-} from "@/services/bot-account/hooks";
+import {cn} from "@/lib/utils";
+import {useRemoveBotAccount, useStartBotAccount, useUpdateBotaccount,} from "@/services/bot-account/hooks";
 import {
   AllModelsInterface,
   BotAccountInterface,
@@ -14,25 +10,14 @@ import {
   StrategyInterface,
   UserInterface,
 } from "@/types";
-import { ColumnDef } from "@tanstack/react-table";
-import {
-  Check,
-  ChevronsUpDown,
-  Cog,
-  PencilLine,
-  Play,
-  Trash2,
-} from "lucide-react";
+import {ColumnDef} from "@tanstack/react-table";
+import {Check, ChevronsUpDown, Cog, PencilLine, Play, Trash2,} from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { routes } from "@/lib/routes";
-import {
-  useRemoveStrategy,
-  useStrategies,
-  useUpdateStrategy,
-} from "@/services/strategy/hooks";
-import { useProxies, useRemoveProxy } from "@/services/proxy/hooks";
-import { Button } from "@/components/ui/button";
+import {useEffect, useState} from "react";
+import {routes} from "@/lib/routes";
+import {useRemoveStrategy, useStrategies, useUpdateStrategy,} from "@/services/strategy/hooks";
+import {useProxies, useRemoveProxy} from "@/services/proxy/hooks";
+import {Button} from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -42,23 +27,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { VisuallyHidden } from "react-aria";
-import { useModels, useRemoveModel } from "@/services/models/hooks";
-import { Switch } from "@/components/ui/switch";
-import { useAllowAccess } from "@/services/users/hooks";
+import {Badge} from "@/components/ui/badge";
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover";
+import {Command, CommandEmpty, CommandInput, CommandItem, CommandList,} from "@/components/ui/command";
+import {VisuallyHidden} from "react-aria";
+import {useModels, useRemoveModel} from "@/services/models/hooks";
+import {Switch} from "@/components/ui/switch";
+import {useAllowAccess} from "@/services/users/hooks";
 
 const ProxyCell = ({ proxyId }: { proxyId: string | undefined }) => {
   const { data: proxies = [] } = useProxies();
@@ -262,7 +237,7 @@ export const paymentHistoryColumns: ColumnDef<PaymentHistoryInterface>[] = [
             className={cn("size-2 rounded-full", {
               "bg-green-500": status === "Succès",
               "bg-destructive dark:bg-red-500/80": status === "Échoué",
-              "bg-blue-600": status === "En attente",
+              "bg-blue-600": status === "En attente"
             })}
           ></div>
           {status}
@@ -531,6 +506,10 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
         return <Badge variant="destructive">Ban</Badge>;
       } else if (row.original.status === "standby") {
         return <Badge className="bg-blue-800">Inactive</Badge>;
+      } else if ( row.original.status === "working") {
+        return <Badge className="bg-purple-700">Expired</Badge>;
+      } else {
+        return <Badge className="bg-gray-800">{row.original.status}</Badge>;
       }
     },
   },
