@@ -507,7 +507,7 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
       } else if (row.original.status === "standby") {
         return <Badge className="bg-blue-800">Inactive</Badge>;
       } else if ( row.original.status === "working") {
-        return <Badge className="bg-purple-700">Expired</Badge>;
+        return <Badge className="bg-purple-700">Working</Badge>;
       } else {
         return <Badge className="bg-gray-800">{row.original.status}</Badge>;
       }
