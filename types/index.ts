@@ -122,6 +122,7 @@ export interface BotAccountInterface {
   min_age: number | undefined;
   max_age: number | undefined;
   distance: number | undefined;
+  timezone_field: string;
 }
 
 export interface StrategyInterface {

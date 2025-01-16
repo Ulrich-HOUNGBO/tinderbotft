@@ -20,6 +20,7 @@ import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover"
 import {cn} from "@/lib/utils";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,} from "@/components/ui/command";
 import {useModels} from "@/services/models/hooks";
+import {timezones} from "@/lib/timezone";
 
 type Credentials = z.infer<typeof accountSchema>;
 
@@ -56,6 +57,7 @@ export default function AddOrUpdateAccountForm({
             min_age: initialData?.min_age ?? undefined,
             max_age: initialData?.max_age ?? undefined,
             distance: initialData?.distance ?? undefined,
+            timezone_field: initialData?.timezone_field ?? "",
         },
         mode: "all",
     });
@@ -197,7 +199,7 @@ export default function AddOrUpdateAccountForm({
                         <FormField
                             control={form.control}
                             name="min_age"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Min Age</FormLabel>
                                     <FormControl>
@@ -208,7 +210,7 @@ export default function AddOrUpdateAccountForm({
                                             onChange={(e) => field.onChange(Number(e.target.value))}
                                         />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
@@ -283,84 +285,146 @@ export default function AddOrUpdateAccountForm({
                         )}
                     />
                 </div>
-                <FormField
-                    control={form.control}
-                    name="strategy"
-                    render={({field}) => (
-                        <FormItem className="mt-0 ">
-                            <FormLabel>Strategy</FormLabel>
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <FormControl>
-                                        <Button
-                                            variant="outline"
-                                            role="combobox"
-                                            className={cn(
-                                                "w-full justify-between h-11 md:h-12",
-                                                !field.value && "text-muted-foreground",
-                                            )}
-                                        >
-                                            {field.value
-                                                ? strategies.find(
-                                                    (strategy) => strategy.id === field.value,
-                                                )?.name
-                                                : "Select strategy"}
-                                            <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50"/>
-                                        </Button>
-                                    </FormControl>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-full p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Search proxy..."/>
-                                        <CommandList>
-                                            <CommandEmpty>No strategy found.</CommandEmpty>
-                                            <CommandGroup>
-                                                {strategies.map((strategy) => (
-                                                    <CommandItem
-                                                        value={strategy.name}
-                                                        key={strategy.id}
-                                                        onSelect={() => {
-                                                            form.setValue("strategy", strategy.id);
-                                                        }}
-                                                    >
-                                                        <Check
-                                                            className={cn(
-                                                                "mr-2 h-4 w-4",
-                                                                strategy.id === field.value
-                                                                    ? "opacity-100"
-                                                                    : "opacity-0",
-                                                            )}
-                                                        />
-                                                        {strategy.name}
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
-                            <FormMessage/>
-                        </FormItem>
-                    )}
-                />
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
-                    <Button
-                        disabled={addMutation.isPending || updateMutation.isPending}
-                        className="w-fit"
-                    >
-                        {(addMutation.isPending || updateMutation.isPending) && (
-                            <Loader2
-                                className="mr-2 size-4 animate-spin"
-                                aria-hidden="true"
-                            />
+                    <FormField
+                        control={form.control}
+                        name="strategy"
+                        render={({field}) => (
+                            <FormItem className="mt-0 ">
+                                <FormLabel>Strategy</FormLabel>
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <FormControl>
+                                            <Button
+                                                variant="outline"
+                                                role="combobox"
+                                                className={cn(
+                                                    "w-full justify-between h-11 md:h-12",
+                                                    !field.value && "text-muted-foreground",
+                                                )}
+                                            >
+                                                {field.value
+                                                    ? strategies.find(
+                                                        (strategy) => strategy.id === field.value,
+                                                    )?.name
+                                                    : "Select strategy"}
+                                                <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50"/>
+                                            </Button>
+                                        </FormControl>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-full p-0">
+                                        <Command>
+                                            <CommandInput placeholder="Search proxy..."/>
+                                            <CommandList>
+                                                <CommandEmpty>No strategy found.</CommandEmpty>
+                                                <CommandGroup>
+                                                    {strategies.map((strategy) => (
+                                                        <CommandItem
+                                                            value={strategy.name}
+                                                            key={strategy.id}
+                                                            onSelect={() => {
+                                                                form.setValue("strategy", strategy.id);
+                                                            }}
+                                                        >
+                                                            <Check
+                                                                className={cn(
+                                                                    "mr-2 h-4 w-4",
+                                                                    strategy.id === field.value
+                                                                        ? "opacity-100"
+                                                                        : "opacity-0",
+                                                                )}
+                                                            />
+                                                            {strategy.name}
+                                                        </CommandItem>
+                                                    ))}
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
+                                <FormMessage/>
+                            </FormItem>
                         )}
-                        {mode === "add" ? "Add account" : "Update account"}
-                        <span className="sr-only">
+                    />
+                    <FormField
+                        control={form.control}
+                        name="timezone_field"
+                        render={({field}) => (
+                            <FormItem className="mt-0 ">
+                                <FormLabel>Timezone</FormLabel>
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <FormControl>
+                                            <Button
+                                                variant="outline"
+                                                role="combobox"
+                                                className={cn(
+                                                    "w-full justify-between h-11 md:h-12",
+                                                    !field.value && "text-muted-foreground",
+                                                )}
+                                            >
+                                                {field.value
+                                                    ? timezones.find(
+                                                        (timezone) => timezone.zoneName === field.value,
+                                                    )?.zoneName
+                                                    : "Select timezone"}
+                                                <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50"/>
+                                            </Button>
+                                        </FormControl>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-full p-0">
+                                        <Command>
+                                            <CommandInput placeholder="Search timezone..."/>
+                                            <CommandList>
+                                                <CommandEmpty>No timezone found.</CommandEmpty>
+                                                <CommandGroup>
+                                                    {timezones.map((timezone) => (
+                                                        <CommandItem
+                                                            value={timezone.zoneName}
+                                                            key={timezone.zoneName}
+                                                            onSelect={() => {
+                                                                form.setValue("timezone_field", timezone.zoneName);
+                                                            }}
+                                                        >
+                                                            <Check
+                                                                className={cn(
+                                                                    "mr-2 h-4 w-4",
+                                                                    timezone.zoneName === field.value
+                                                                        ? "opacity-100"
+                                                                        : "opacity-0",
+                                                                )}
+                                                            />
+                                                            {timezone.zoneName}
+                                                        </CommandItem>
+                                                    ))}
+                                                </CommandGroup>
+                                            </CommandList>
+                                        </Command>
+                                    </PopoverContent>
+                                </Popover>
+                                <FormMessage/>
+                            </FormItem>
+                        )}
+                    />
+                </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
+                        <Button
+                            disabled={addMutation.isPending || updateMutation.isPending}
+                            className="w-fit"
+                        >
+                            {(addMutation.isPending || updateMutation.isPending) && (
+                                <Loader2
+                                    className="mr-2 size-4 animate-spin"
+                                    aria-hidden="true"
+                                />
+                            )}
+                            {mode === "add" ? "Add account" : "Update account"}
+                            <span className="sr-only">
               {mode === "add" ? "Add account" : "Update account"}
             </span>
-                    </Button>
-                </div>
+                        </Button>
+                    </div>
             </form>
         </Form>
-    );
+);
 }

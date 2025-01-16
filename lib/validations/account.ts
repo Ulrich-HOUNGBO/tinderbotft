@@ -22,4 +22,7 @@ export const accountSchema = z.object({
   min_age: z.number().optional(),
   max_age: z.number().optional(),
   distance: z.number().optional(),
+  timezone_field: z.string({
+    required_error: "A timezone is required",
+  }),
 });

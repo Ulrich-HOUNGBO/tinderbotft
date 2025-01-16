@@ -21,6 +21,7 @@ export interface createBotAccountCredentials {
   refresh_token: string | null;
   progress: number | undefined;
   device_id: string | undefined;
+  timezone_field: string;
 }
 
 export const addAccount = async (credentials: createBotAccountCredentials) => {
