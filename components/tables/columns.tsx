@@ -534,7 +534,7 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
   {
     accessorKey: "tinder_bio",
     header: "Tinder Bio",
-    size: "md",
+    size: 30,
   },
   {
     accessorKey: "strategy",
