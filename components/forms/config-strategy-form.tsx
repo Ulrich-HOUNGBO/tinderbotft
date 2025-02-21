@@ -335,7 +335,7 @@ export default function ConfigStrategyForm({
                                         <Checkbox
                                             checked={isScheduledTime2Enabled}
                                                 onCheckedChange={(checked) => setIsScheduledTime2Enabled(checked === true)}
-/>                                        />
+                                       />
                                         <FormLabel>Enable Schedule time 2</FormLabel>
                                     </FormControl>
                                 </FormItem>
