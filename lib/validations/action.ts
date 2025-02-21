@@ -20,7 +20,7 @@ export const swipingActionSchema = z.object({
     device_id: z.string().optional(),
     refresh_token: z.string().nullable(),
     schedule_time: timeStringSchema.optional(),
-    schedule_time_2: timeStringSchema.optional(),
+    schedule_time_2: timeStringSchema.optional().nullable(),
     related_days: z.number().optional(),
     insta_list: z.array(z.string()).optional(),
     bio_list: z.array(z.string()).optional(),

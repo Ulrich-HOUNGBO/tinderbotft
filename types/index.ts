@@ -122,6 +122,8 @@ export interface BotAccountInterface {
   min_age: number | undefined;
   max_age: number | undefined;
   distance: number | undefined;
+  tinder_bio : string | undefined;
+  profile_url: string | undefined;
   timezone_field: string;
 }
 

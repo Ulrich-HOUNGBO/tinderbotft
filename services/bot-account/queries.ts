@@ -22,6 +22,7 @@ export interface createBotAccountCredentials {
   progress: number | undefined;
   device_id: string | undefined;
   timezone_field: string;
+  tinder_bio: string | undefined;
 }
 
 export const addAccount = async (credentials: createBotAccountCredentials) => {

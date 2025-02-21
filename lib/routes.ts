@@ -51,5 +51,10 @@ export const routes = {
       update: (id: string) => `/dashboard/admin/update-admin/${id}`,
       add: "/dashboard/admin/add-admin",
     },
+    insta: {
+      index: "/dashboard/insta",
+      connect: "/dashboard/insta/connect",
+      setup: "/dashboard/insta/setup",
+    }
   },
 };

@@ -1,12 +1,6 @@
-import { routes } from "@/lib/routes";
-import { MainNavItem } from "@/types";
-import {
-  Cable,
-  LayoutGrid,
-  NotebookTabs,
-  UserRound,
-  Waypoints,
-} from "lucide-react";
+import {routes} from "@/lib/routes";
+import {MainNavItem} from "@/types";
+import {Cable, Instagram, LayoutGrid, NotebookTabs, UserRound, Waypoints,} from "lucide-react";
 
 // Function to generate the dashboard configuration based on user info
 export const dashboardConfig = (user: { super_user: boolean }) => ({
@@ -40,11 +34,17 @@ export const dashboardConfig = (user: { super_user: boolean }) => ({
     ...(user.super_user
       ? [
           {
+            title: "Insta",
+            href: routes.dashboard.insta.index,
+            icon: Instagram,
+          },
+          {
             title: "Admin",
             href: routes.dashboard.admin.index,
             icon: LayoutGrid,
           },
         ]
       : []),
+
   ] satisfies MainNavItem[],
 });

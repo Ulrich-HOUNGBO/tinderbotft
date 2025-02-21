@@ -34,6 +34,7 @@ import {VisuallyHidden} from "react-aria";
 import {useModels, useRemoveModel} from "@/services/models/hooks";
 import {Switch} from "@/components/ui/switch";
 import {useAllowAccess} from "@/services/users/hooks";
+import Image from "next/image";
 
 const ProxyCell = ({ proxyId }: { proxyId: string | undefined }) => {
   const { data: proxies = [] } = useProxies();
@@ -486,6 +487,18 @@ const ModelCell = ({ row }: { row: { original: BotAccountInterface } }) => {
 
 export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
   {
+    accessorKey: "profile_url",
+    header:"",
+    cell: ({ row }) => {
+        return (
+            <Image
+                src={row.original.profile_url ?? "/public/images/landscape-placeholder.svg"} width={40} height={40}
+                alt="profile"
+            />
+        );
+    }
+  },
+  {
     accessorKey: "title",
     header: "Title",
   },
@@ -517,6 +530,11 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
     accessorKey: "progress",
     header: "Day Progress",
     cell: ({ row }) => <EditableProgressCell row={row} />,
+  },
+  {
+    accessorKey: "tinder_bio",
+    header: "Tinder Bio",
+    size: "md",
   },
   {
     accessorKey: "strategy",

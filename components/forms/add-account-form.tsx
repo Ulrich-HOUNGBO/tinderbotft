@@ -116,8 +116,9 @@ export default function AddOrUpdateAccountForm({
         <Form {...form}>
             <form
                 onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
-                className="grid max-w-2xl gap-4 md:gap-7"
+                className= "grid max-w-2xl gap-4 md:gap-7"
             >
+                
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-7">
                     <FormField
                         control={form.control}
