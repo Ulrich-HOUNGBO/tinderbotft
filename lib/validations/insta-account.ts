@@ -1,12 +1,10 @@
 import * as z from "zod";
 
-export const createInstaAccountSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  fullName: z.string().optional(),
-  externalUrl: z.string().url().optional(),
-  biography: z.string().optional(),
-  profilePicture: z.string().optional(),
-  settingsFile: z.string().optional(),
-  status: z.string().min(1, "Status is required"),
-  modeleId: z.string().optional(),
+export const connectInstaSchema = z.object({
+  data: z.string().refine((value) => {
+    const lines = value.split("\n");
+    return lines.every(line => /^[a-z0-9+_.-]+@[a-z0-9.-]+$/.test(line) || /^[a-z0-9]+$/.test(line));
+  }, {
+    message: "Each line must be a valid email or alphanumeric string",
+  }),
 });
