@@ -96,6 +96,7 @@ const fieldSchema = (daysNumber: number) =>
 
                 const payload: createActionCredentials = {
                     strategy: strategyId,
+                    //@ts-ignore
                     actions: data.actions.map(action => ({
                         ...action,
                         insta_list: action.insta_list || undefined,
