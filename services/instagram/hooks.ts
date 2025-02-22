@@ -1,4 +1,4 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {connectMultipleAccount, getAllConnectedAccounts} from "@/services/instagram/queries";
 
 
@@ -7,11 +7,12 @@ export const InstaQueryKeys = {
     getConnectedAccountsKey: ["getConnectedAccounts"],
 }
 
-export const useGetConnectedAccounts = () => {
-    return useMutation({
-        mutationFn: () => getAllConnectedAccounts(),
+export const useInstaAccount = () => {
+    return useQuery({
+        queryKey: InstaQueryKeys.getConnectedAccountsKey,
+        queryFn: () => getAllConnectedAccounts(),
     });
-}
+};
 
 export const useConnectMultipleAccount = () => {
     const queryClient = useQueryClient();

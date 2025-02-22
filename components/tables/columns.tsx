@@ -1,7 +1,12 @@
 "use client";
 
 import {cn} from "@/lib/utils";
-import {useRemoveBotAccount, useStartBotAccount, useUpdateBotaccount,} from "@/services/bot-account/hooks";
+import {
+  useRemoveBotAccount,
+  useStartBotAccount,
+  useUpdateBotaccount,
+  useUpdateBotAccountContent,
+} from "@/services/bot-account/hooks";
 import {
   AllModelsInterface,
   BotAccountInterface,
@@ -11,7 +16,7 @@ import {
   UserInterface,
 } from "@/types";
 import {ColumnDef} from "@tanstack/react-table";
-import {Check, ChevronsUpDown, Cog, PencilLine, Play, Trash2,} from "lucide-react";
+import {Check, ChevronsUpDown, Cog, FileText, PencilLine, Play, Trash2,} from "lucide-react";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {routes} from "@/lib/routes";
@@ -166,10 +171,18 @@ const AccountActionsCell = ({
     startMutation.mutate();
   };
 
+  const updateContentMutation = useUpdateBotAccountContent(row.original.id);
+  const handleUpdateContent = () => {
+    updateContentMutation.mutate();
+  }
+
   return (
     <div className="flex items-center gap-2">
       <button className="btn btn-primary" onClick={handleStart}>
         <Play size={20} color="#065c00" strokeWidth={1.25} />
+      </button>
+      <button className="btn btn-primary" onClick={handleUpdateContent}>
+        <FileText size={20} color="#ff6190" strokeWidth={1.25} />
       </button>
       <Link
         href={routes.dashboard.account.update(row.original.id)}
@@ -515,7 +528,7 @@ export const accountListColumns: ColumnDef<BotAccountInterface>[] = [
         return <Badge className="bg-green-800">Active</Badge>;
       } else if (row.original.status === "failed") {
         return <Badge className="bg-amber-800">Token Expired</Badge>;
-      } else if (row.original.status === "shadowBan") {
+      } else if (row.original.status === "shadowBan" || row.original.status === "banned") {
         return <Badge variant="destructive">Ban</Badge>;
       } else if (row.original.status === "standby") {
         return <Badge className="bg-blue-800">Inactive</Badge>;
@@ -649,4 +662,29 @@ export const usersListColumns: ColumnDef<UserInterface>[] = [
     header: "Active",
     cell: ActionsCell,
   },
+];
+
+export const instaListColumns: ColumnDef<any>[] = [
+    {
+        accessorKey: "username",
+        header: "Username",
+    },
+    {
+        accessorKey: "password",
+        header: "Password",
+    },
+    {
+        accessorKey: "actions",
+        header: "Actions",
+        cell: ({ row }) => {
+            return (
+                <Link
+                    href={routes.dashboard.insta.setup}
+                    className="btn btn-primary"
+                >
+                    <PencilLine size={20} color="#2b00ff" strokeWidth={1.25} />
+                </Link>
+            );
+        },
+    },
 ];

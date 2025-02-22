@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {routes} from "@/lib/routes";
 import {Suspense} from "react";
+import InstaList from "@/components/tables/insta-list";
 
 export const metadata: Metadata = {
     title: "Dashboard - Insta",
@@ -21,7 +22,7 @@ export default function InstaPage() {
             </div>
 
             <Suspense>
-                <p>Insta page</p>
+                <InstaList />
             </Suspense>
         </div>
     );

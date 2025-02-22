@@ -27,6 +27,7 @@ type Action = {
     scheduled_time: string; // This should match the format "HH:MM"
     scheduled_time_2: string | undefined; // This should match the format "HH:MM"
     related_day: number;
+
 }
 
 export interface createActionCredentials{

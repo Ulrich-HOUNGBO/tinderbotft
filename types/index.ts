@@ -93,8 +93,8 @@ export interface ActionsInterface {
   scheduled_time_2: string | undefined;
   related_day: number;
   type: string;
-  insta_list: string | undefined;
-  bio_list: string | undefined;
+  insta_list?: string;
+  bio_list?: string;
 }
 
 export interface ProxyInterface {

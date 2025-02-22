@@ -7,6 +7,6 @@ export const connectMultipleAccount = async (credentials: any) => {
 }
 
 export const getAllConnectedAccounts = async () => {
-    const response = await axios.get("/get-connected-accounts/");
+    const response = await axios.get("/get-insta-accounts/");
     return response.data;
 }

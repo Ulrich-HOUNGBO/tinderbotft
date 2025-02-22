@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React from "react";
 import {useFieldArray, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "@/components/ui/button";
@@ -11,7 +11,6 @@ import {useRouter} from "next/navigation";
 import {cn} from "@/lib/utils";
 import {Check, ChevronsUpDown} from "lucide-react";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {Checkbox} from "@/components/ui/checkbox";
 import {DualSlider} from "@/components/ui/dual-slider";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
@@ -30,7 +29,7 @@ const fieldSchema = (daysNumber: number) =>
                 min_right_swipe_percentage: z.number().min(0).max(100).optional(),
                 max_right_swipe_percentage: z.number().min(0).max(100).optional(),
                 scheduled_time: z.string().default("00:00"),
-                scheduled_time_2: z.string().default("00:00").optional(),
+                scheduled_time_2: z.string().nullable().optional(),
                 related_day: z.number().min(1).max(daysNumber),
                 insta_list: z.string().optional(),
                 bio_list: z.string().optional(),
@@ -97,8 +96,12 @@ const fieldSchema = (daysNumber: number) =>
 
                 const payload: createActionCredentials = {
                     strategy: strategyId,
-                    //@ts-ignore
-                    actions: data.actions,
+                    actions: data.actions.map(action => ({
+                        ...action,
+                        insta_list: action.insta_list || undefined,
+                        bio_list: action.bio_list || undefined,
+                        scheduled_time_2: action.scheduled_time_2 === "" ? undefined : action.scheduled_time_2,
+                    })),
                 };
 
                 try {
@@ -185,7 +188,7 @@ const fieldSchema = (daysNumber: number) =>
                     >
                         {fields.map((field, index) => {
                             // eslint-disable-next-line react-hooks/rules-of-hooks
-                            const [isScheduledTime2Enabled, setIsScheduledTime2Enabled] = useState(!!field.scheduled_time_2);
+
 
                             return (
                                 <div key={field.id} className="mb-4 rounded-md border p-4 shadow-sm">
@@ -325,23 +328,14 @@ const fieldSchema = (daysNumber: number) =>
                                                             placeholder="Schedule time 2"
                                                             {...field}
                                                             value={field.value ?? ""}
-                                                            onChange={(e) => field.onChange(e.target.value || null)}
-                                                            disabled={!isScheduledTime2Enabled}
+
                                                         />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
                                             )}
                                         />
-                                        <FormItem>
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={isScheduledTime2Enabled}
-                                                    onCheckedChange={(checked) => setIsScheduledTime2Enabled(checked === true)}
-                                                />
-                                            </FormControl>
-                                            <FormLabel>Enable Schedule time 2</FormLabel>
-                                        </FormItem>
+
                                         <FormField
                                             control={form.control}
                                             name={`actions.${index}.related_day`}

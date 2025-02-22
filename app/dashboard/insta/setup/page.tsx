@@ -15,7 +15,7 @@ export default function SetupPage() {
             </div>
 
             <Suspense>
-                <p>connect  page</p>
+                <p>setup  page</p>
             </Suspense>
         </div>
     );

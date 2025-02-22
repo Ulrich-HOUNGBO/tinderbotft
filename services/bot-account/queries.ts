@@ -47,3 +47,8 @@ export const startAccount = async (id: string) => {
   const response = await axios.patch(`/start-process/${id}`);
   return response.data;
 };
+
+export const updateAccountContent = async (id: string) => {
+    const response = await axios.patch(`/update-account-content/${id}/`);
+    return response.data;
+};
